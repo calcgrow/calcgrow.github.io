@@ -66,76 +66,116 @@ function calculateAge() {
 // 👇 YAHAN APNI KEY DAALNI HAI 👇
 const apiKey = 'AIzaSyB3e5jwd1Y-5fTWH2w4u62eO-_wVqYDJx0'; 
 // --- 1. API DATA FETCHING (Fix kiya hua code) ---
+// --- 1. API DATA FETCHING (Photo & Title Support) ---
 async function fetchYoutubeData() {
     let input = document.getElementById('ytInput').value;
+    const profileSection = document.getElementById('profileSection');
+    const channelImg = document.getElementById('channelImg');
+    const channelName = document.getElementById('channelName');
+    const videoTitle = document.getElementById('videoTitle');
     
-    // Button par "Checking..." animation
+    // Button Animation
     const btn = document.querySelector('button[onclick="fetchYoutubeData()"]');
-    const originalText = btn ? btn.innerText : 'Check';
-    if(btn) btn.innerText = "Checking...";
+    const originalText = btn ? btn.innerText : 'GO';
+    if(btn) btn.innerText = "⏳...";
 
-    if (!input) { alert("Link paste karein!"); if(btn) btn.innerText = originalText; return; }
-    
+    if (!input) { alert("Please paste a Link or Handle!"); if(btn) btn.innerText = originalText; return; }
     input = input.trim(); 
 
     try {
         let apiUrl = '';
         let videoId = '';
+        let isVideo = false;
 
-        // ID nikalna
-        if (input.includes('youtu.be/')) {
-            videoId = input.split('youtu.be/')[1];
-        } else if (input.includes('v=')) {
-            videoId = input.split('v=')[1];
-        }
-
-        // Clean ID
-        if (videoId) {
+        // A. Video Link Check
+        if (input.includes('youtu.be/') || input.includes('v=')) {
+            if (input.includes('youtu.be/')) videoId = input.split('youtu.be/')[1];
+            else videoId = input.split('v=')[1];
+            
+            // Clean ID
             if (videoId.indexOf('?') !== -1) videoId = videoId.split('?')[0];
             if (videoId.indexOf('&') !== -1) videoId = videoId.split('&')[0];
-            apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${apiKey}`;
+            
+            // API: Snippet (Photo/Title) + Statistics (Views)
+            apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${apiKey}`;
+            isVideo = true;
         } 
+        // B. Handle/Channel Check
         else if (input.includes('@')) {
             const handle = input.split('@')[1].split('/')[0];
-            apiUrl = `https://www.googleapis.com/youtube/v3/channels?part=statistics&forHandle=@${handle}&key=${apiKey}`;
+            apiUrl = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&forHandle=@${handle}&key=${apiKey}`;
         } else {
-            alert("Sirf Video ya Channel link dalein.");
-            if(btn) btn.innerText = originalText;
-            return;
+            // Default fallback to channel search if not clear
+             apiUrl = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&forHandle=@${input.replace('@','')}&key=${apiKey}`;
         }
 
-        // API Call
+        // Fetch Data
         const response = await fetch(apiUrl);
         const data = await response.json();
 
         if (data.items && data.items.length > 0) {
-            let viewCount = data.items[0].statistics.viewCount;
+            const item = data.items[0];
+            const stats = item.statistics;
+            const snippet = item.snippet;
+
+            // 1. Update Profile UI (Photo & Name)
+            profileSection.style.display = 'flex';
             
-            // Sliders update karna
-            document.getElementById('slViews').value = viewCount;
-            updateMcCalc(); // Calculation start
+            if (isVideo) {
+                // Video Logic
+                channelImg.src = snippet.thumbnails.medium.url; // Video Thumbnail
+                channelName.innerText = snippet.channelTitle;   // Channel Name
+                videoTitle.innerText = snippet.title;           // Video Title
+                
+                // Update Sliders
+                document.getElementById('slViews').value = stats.viewCount;
+                // Auto Set CPM (Video ke liye standard)
+                document.getElementById('slCPM').value = 4.0; 
+            } else {
+                // Channel Logic
+                channelImg.src = snippet.thumbnails.medium.url; // Channel Logo
+                channelName.innerText = snippet.title;          // Channel Name
+                videoTitle.innerText = "Channel Analysis";
+                
+                // Note: Channel View Count lifetime hota hai, isliye hum slider ko 
+                // thoda adjust karte hain ya user ko set karne dete hain.
+                // Abhi ke liye hum Total Views dikha kar slider set karenge.
+                let dailyEst = Math.round(stats.viewCount / 1000); // Rough estimate
+                document.getElementById('slViews').value = stats.viewCount > 50000 ? 50000 : stats.viewCount; // Cap for daily slider
+                document.getElementById('slCPM').value = 2.0;
+            }
+
+            // Recalculate Earnings immediately
+            updateMcCalc(); 
             
-            if(btn) btn.innerText = "Done ✅";
+            if(btn) btn.innerText = "✔ Found";
             setTimeout(() => { if(btn) btn.innerText = originalText; }, 2000);
 
         } else {
-            alert("Data nahi mila. API Key ya Link check karein.");
+            alert("No Data Found! Check Link or Handle.");
+            profileSection.style.display = 'none';
             if(btn) btn.innerText = originalText;
         }
 
     } catch (error) {
         console.error(error);
-        alert("Error: " + error.message);
+        alert("Error: Something went wrong.");
         if(btn) btn.innerText = originalText;
     }
 }
 
-// --- 2. ADVANCED CALCULATOR LOGIC (MediaCube Style) ---
-let timeMultiplier = 1; // Default: Daily
+// --- 2. ADVANCED CALCULATOR LOGIC (Starts at 0) ---
+let timeMultiplier = 1;
 
 function setTimeScale(scale, element) {
-    document.querySelectorAll('.mc-tab').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.mc-tab').forEach(tab => {
+        tab.classList.remove('active');
+        tab.style.background = 'transparent';
+        tab.style.color = '#6b7280';
+    });
     element.classList.add('active');
+    element.style.background = '#4F46E5';
+    element.style.color = 'white';
 
     if(scale === 'daily') timeMultiplier = 1;
     if(scale === 'weekly') timeMultiplier = 7;
@@ -147,42 +187,38 @@ function setTimeScale(scale, element) {
 }
 
 function updateMcCalc() {
-    // Sliders se value lena
+    // Values uthana (Agar 0 hai to 0 hi rahega)
     const views = parseFloat(document.getElementById('slViews').value) || 0;
     const cpm = parseFloat(document.getElementById('slCPM').value) || 0;
     const playbackRate = parseFloat(document.getElementById('slPlayback').value) / 100;
-    const premShare = parseFloat(document.getElementById('slPremShare').value) / 100;
-    const premRPM = parseFloat(document.getElementById('slPremRPM').value) || 0;
 
-    // Text Update
+    // Display Numbers Update
     document.getElementById('valViews').innerText = parseInt(views).toLocaleString();
     document.getElementById('valCPM').innerText = "$" + cpm.toFixed(2);
     document.getElementById('valPlayback').innerText = (playbackRate * 100).toFixed(0) + "%";
-    document.getElementById('valPremShare').innerText = (premShare * 100).toFixed(0) + "%";
-    document.getElementById('valPremRPM').innerText = "$" + premRPM.toFixed(2);
 
-    // Math Logic
+    // --- Calculation ---
+    // Formula: (Views * Playback% * CPM) / 1000
     let adRevenue = (views * playbackRate * cpm) / 1000;
-    let premRevenue = (views * premShare * premRPM) / 1000;
+    
+    // Premium Estimate (Simple 10% extra add kar rahe hain complexity kam karne ke liye)
+    let premRevenue = adRevenue * 0.10; 
+
     let totalDaily = adRevenue + premRevenue;
 
-    // Final Numbers
+    // Time Multiplier
     let finalTotal = totalDaily * timeMultiplier;
     let finalAds = adRevenue * timeMultiplier;
     let finalPrem = premRevenue * timeMultiplier;
-    let effRPM = views > 0 ? (totalDaily / views) * 1000 : 0;
 
-    // Result Show
+    // Result Update
     document.getElementById('totalMoney').innerText = finalTotal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-    
-    // INR Conversion (Current approx rate: 84)
     document.getElementById('totalRupee').innerText = (finalTotal * 84).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
     
-    // Breakdown Update
-    document.getElementById('adIncome').innerText = finalAds.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-    document.getElementById('premIncome').innerText = finalPrem.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-    document.getElementById('effRPM').innerText = effRPM.toFixed(2);
+    document.getElementById('adIncome').innerText = finalAds.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+    document.getElementById('premIncome').innerText = finalPrem.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
 }
+
 
 // --- 3. INSTAGRAM RESTORED (Jo galti se delete ho gaya tha) ---
 function calculateInsta() {
