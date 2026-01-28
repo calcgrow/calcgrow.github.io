@@ -100,114 +100,105 @@
       <div id="ageResult"></div>
     </div>
   </section>
-<section id="youtube" class="container" style="display:none; max-width: 600px; margin: auto; font-family: 'Poppins', sans-serif;">
+<section id="youtube" class="container" style="display:none; max-width: 800px; margin: auto; font-family: 'Poppins', sans-serif;">
     
+    <button class="back-btn" onclick="goHome()" style="margin-bottom: 20px;">⬅ Back to Menu</button>
+
     <style>
-        .mc-card {
-            background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            padding: 30px;
-            text-align: left;
-        }
-        .mc-btn {
-            background: #4F46E5; /* MediaCube Blue */
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .mc-btn:hover { background: #4338ca; }
+        .mc-container { background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+        .mc-header { text-align: center; margin-bottom: 30px; }
+        .mc-input-group { background: #f9fafb; padding: 10px; border-radius: 12px; border: 1px solid #e5e7eb; display: flex; gap: 10px; }
+        .mc-btn { background: #4F46E5; color: white; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; width: 100%; }
         
-        /* Slider Design (Blue & Thick) */
-        input[type=range] {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 8px;
-            background: #e0e7ff;
-            border-radius: 5px;
-            outline: none;
-            margin: 15px 0;
-        }
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: #4F46E5;
-            cursor: pointer;
-            border: 4px solid white;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-        }
-        .stat-box {
-            display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;
-        }
+        /* Tabs Design */
+        .mc-tabs { display: flex; background: #f3f4f6; border-radius: 10px; padding: 5px; margin: 20px 0; }
+        .mc-tab { flex: 1; padding: 10px; text-align: center; cursor: pointer; border-radius: 8px; font-weight: 500; color: #6b7280; transition: 0.3s; }
+        .mc-tab.active { background: #4F46E5; color: white; shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+        /* Sliders */
+        .mc-slider-box { margin-bottom: 25px; }
+        .mc-label-row { display: flex; justify-content: space-between; font-weight: 600; color: #374151; margin-bottom: 10px; }
+        .mc-val { color: #4F46E5; font-weight: 700; }
+        input[type=range] { width: 100%; height: 6px; background: #e0e7ff; border-radius: 5px; -webkit-appearance: none; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; background: #4F46E5; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; }
+
+        /* Result Section */
+        .mc-result-box { background: #f8fafc; padding: 25px; border-radius: 15px; border: 1px solid #e2e8f0; margin-top: 30px; }
+        .mc-big-money { font-size: 36px; font-weight: 800; color: #4F46E5; margin: 10px 0; }
+        .mc-breakdown { display: flex; justify-content: space-between; margin-top: 15px; border-top: 1px solid #e5e7eb; padding-top: 15px; font-size: 14px; }
     </style>
 
-    <button class="back-btn" onclick="goHome()" style="margin-bottom: 20px;">⬅ Back</button>
-
-    <div class="mc-card">
-        
-        <h2 style="font-size: 24px; font-weight: 700; color: #1f2937; margin-top: 0;">YouTube Money Calculator</h2>
-        <p style="color: #6b7280; font-size: 14px; margin-bottom: 25px;">Paste a YouTube channel or video URL</p>
-
-        <div style="background: #f9fafb; padding: 10px; border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 20px;">
-            <input type="text" id="ytInput" placeholder="Enter YouTube URL here..." style="width: 100%; border: none; background: transparent; padding: 10px; outline: none; font-size: 15px;">
+    <div class="mc-container">
+        <div class="mc-header">
+            <h2 style="margin:0;">YouTube Revenue Calculator</h2>
+            <p style="color:#666; font-size:14px;">Advanced estimation based on RPM, Ads & Premium.</p>
         </div>
 
-        <button class="mc-btn" onclick="fetchYoutubeData()">Calculate Now</button>
-
-        <hr style="border: 0; border-top: 1px solid #f3f4f6; margin: 30px 0;">
-
-        <div style="margin-bottom: 30px;">
-            <div class="stat-box">
-                <span style="font-weight: 600; color: #374151;">Daily Views</span>
-                <span id="viewDisplay" style="color: #4F46E5; font-weight: 700; font-size: 18px;">10,000</span>
-            </div>
-            <input type="range" id="viewSlider" min="1000" max="5000000" step="1000" value="10000" oninput="updateSlider('views')">
-            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #9ca3af;">
-                <span>0</span>
-                <span>5M</span>
-            </div>
+        <div class="mc-input-group">
+            <input type="text" id="ytInput" placeholder="Paste YouTube Video or Channel URL" style="border:none; bg:transparent; flex:1; outline:none;">
+            <button onclick="fetchYoutubeData()" style="background:#4F46E5; color:white; border:none; padding:8px 20px; border-radius:8px;">Check</button>
         </div>
 
-        <div style="margin-bottom: 30px;">
-            <div class="stat-box">
-                <span style="font-weight: 600; color: #374151;">CPM / RPM (USD)</span>
-                <span id="rpmDisplay" style="color: #4F46E5; font-weight: 700; font-size: 18px;">$0.50</span>
-            </div>
-            <input type="range" id="rpmSlider" min="0.1" max="20" step="0.1" value="0.5" oninput="updateSlider('rpm')">
-            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #9ca3af;">
-                <span>$0</span>
-                <span>$20</span>
-            </div>
+        <div class="mc-tabs">
+            <div class="mc-tab active" onclick="setTimeScale('daily', this)">Daily</div>
+            <div class="mc-tab" onclick="setTimeScale('weekly', this)">Weekly</div>
+            <div class="mc-tab" onclick="setTimeScale('monthly', this)">Monthly</div>
+            <div class="mc-tab" onclick="setTimeScale('annual', this)">Annual</div>
         </div>
 
-        <div style="background: #e0e7ff; border-radius: 16px; padding: 25px; text-align: center;">
-            <p style="margin: 0; color: #4338ca; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Estimated Daily Earnings</p>
-            <h1 style="margin: 10px 0; color: #4F46E5; font-size: 42px; font-weight: 800;">
-                $<span id="dailyDollar">5.00</span>
-            </h1>
-            <p style="margin: 0; color: #6b7280; font-weight: 500;">
-                ≈ ₹<span id="dailyRupee">415.00</span> INR
-            </p>
+        <div class="mc-slider-box">
+            <div class="mc-label-row"><span>Views</span> <span id="valViews" class="mc-val">10,000</span></div>
+            <input type="range" id="slViews" min="1000" max="5000000" step="1000" value="10000" oninput="updateMcCalc()">
         </div>
 
-        <input type="hidden" id="ytViews" value="10000">
-        <input type="hidden" id="ytRPM" value="0.5">
+        <div class="mc-slider-box">
+            <div class="mc-label-row"><span>CPM (USD)</span> <span id="valCPM" class="mc-val">$5.00</span></div>
+            <input type="range" id="slCPM" min="0.5" max="50" step="0.5" value="5" oninput="updateMcCalc()">
+        </div>
 
-    </div>
-    </section>
+        <div class="mc-slider-box">
+            <div class="mc-label-row"><span>Monetized Playback Rate (%)</span> <span id="valPlayback" class="mc-val">90%</span></div>
+            <input type="range" id="slPlayback" min="0" max="100" value="90" oninput="updateMcCalc()">
+            <p style="font-size:11px; color:#999; margin:2px 0;">Percentage of views that show ads.</p>
+        </div>
 
+        <hr style="border:0; border-top:1px dashed #ddd; margin: 20px 0;">
 
-  <section id="insta" class="container" style="display:none;">
-    <button class="back-btn" onclick="goHome()">⬅ Back to Menu</button>
+        <div class="mc-slider-box">
+            <div class="mc-label-row"><span>Premium Watch Time Share (%)</span> <span id="valPremShare" class="mc-val">20%</span></div>
+            <input type="range" id="slPremShare" min="0" max="50" value="20" oninput="updateMcCalc()">
+        </div>
+
+        <div class="mc-slider-box">
+            <div class="mc-label-row"><span>Premium RPM (USD)</span> <span id="valPremRPM" class="mc-val">$10.00</span></div>
+            <input type="range" id="slPremRPM" min="1" max="50" value="10" oninput="updateMcCalc()">
+        </div>
+
+        <div class="mc-result-box">
+            <div style="text-align:center;">
+                <span id="timeLabel" style="text-transform:uppercase; font-size:12px; font-weight:bold; color:#888;">ESTIMATED DAILY EARNINGS</span>
+                <div class="mc-big-money">$<span id="totalMoney">0.00</span></div>
+                <div style="color:#666;">≈ ₹<span id="totalRupee">0.00</span> INR</div>
+            </div>
+
+            <div class="mc-breakdown">
+                <div>
+                    <div style="font-size:12px; color:#888;">Ads Income</div>
+                    <div style="font-weight:bold; color:#333;">$<span id="adIncome">0.00</span></div>
+                </div>
+                <div>
+                    <div style="font-size:12px; color:#888;">Premium Income</div>
+                    <div style="font-weight:bold; color:#333;">$<span id="premIncome">0.00</span></div>
+                </div>
+                <div>
+                    <div style="font-size:12px; color:#888;">Effective RPM</div>
+                    <div style="font-weight:bold; color:#333;">$<span id="effRPM">0.00</span></div>
+                </div>
+            </div>
+        </div>
+    </d
+      iv>
+</section>
     <h2>Instagram Earnings Calculator</h2>
     <div class="calculator">
       <input type="number" id="instaFollowers" placeholder="Number of Followers">
