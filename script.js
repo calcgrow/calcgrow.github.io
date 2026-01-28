@@ -1,20 +1,16 @@
 // Navigation Functions
 function openCalc(id) {
-  // Hide Menu
   document.getElementById('mainMenu').style.display = 'none';
-  // Show Selected Calculator
   document.getElementById(id).style.display = 'block';
 }
 
 function goHome() {
-  // Hide all sections
   let sections = document.querySelectorAll('.container');
   sections.forEach(sec => sec.style.display = 'none');
-  // Show Menu
   document.getElementById('mainMenu').style.display = 'grid';
 }
 
-// --- Calculator Logic Starts Below ---
+// --- Calculator Logic ---
 
 function calculatePercentage() {
   let val = document.getElementById("value").value;
@@ -65,16 +61,14 @@ function calculateAge() {
 
 // 👇 YAHAN APNI KEY DAALNI HAI 👇
 const apiKey = 'AIzaSyB3e5jwd1Y-5fTWH2w4u62eO-_wVqYDJx0'; 
-// --- 1. API DATA FETCHING (Fix kiya hua code) ---
-// --- 1. API DATA FETCHING (Photo & Title Support) ---
+
+// --- YouTube Logic (Original Color Logic) ---
 async function fetchYoutubeData() {
     let input = document.getElementById('ytInput').value;
     const profileSection = document.getElementById('profileSection');
     const channelImg = document.getElementById('channelImg');
     const channelName = document.getElementById('channelName');
     const videoTitle = document.getElementById('videoTitle');
-    
-    // Button Animation
     const btn = document.querySelector('button[onclick="fetchYoutubeData()"]');
     const originalText = btn ? btn.innerText : 'GO';
     if(btn) btn.innerText = "⏳...";
@@ -87,29 +81,20 @@ async function fetchYoutubeData() {
         let videoId = '';
         let isVideo = false;
 
-        // A. Video Link Check
         if (input.includes('youtu.be/') || input.includes('v=')) {
             if (input.includes('youtu.be/')) videoId = input.split('youtu.be/')[1];
             else videoId = input.split('v=')[1];
-            
-            // Clean ID
             if (videoId.indexOf('?') !== -1) videoId = videoId.split('?')[0];
             if (videoId.indexOf('&') !== -1) videoId = videoId.split('&')[0];
-            
-            // API: Snippet (Photo/Title) + Statistics (Views)
             apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${apiKey}`;
             isVideo = true;
-        } 
-        // B. Handle/Channel Check
-        else if (input.includes('@')) {
+        } else if (input.includes('@')) {
             const handle = input.split('@')[1].split('/')[0];
             apiUrl = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&forHandle=@${handle}&key=${apiKey}`;
         } else {
-            // Default fallback to channel search if not clear
              apiUrl = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&forHandle=@${input.replace('@','')}&key=${apiKey}`;
         }
 
-        // Fetch Data
         const response = await fetch(apiUrl);
         const data = await response.json();
 
@@ -118,54 +103,36 @@ async function fetchYoutubeData() {
             const stats = item.statistics;
             const snippet = item.snippet;
 
-            // 1. Update Profile UI (Photo & Name)
             profileSection.style.display = 'flex';
-            
             if (isVideo) {
-                // Video Logic
-                channelImg.src = snippet.thumbnails.medium.url; // Video Thumbnail
-                channelName.innerText = snippet.channelTitle;   // Channel Name
-                videoTitle.innerText = snippet.title;           // Video Title
-                
-                // Update Sliders
+                channelImg.src = snippet.thumbnails.medium.url;
+                channelName.innerText = snippet.channelTitle;
+                videoTitle.innerText = snippet.title;
                 document.getElementById('slViews').value = stats.viewCount;
-                // Auto Set CPM (Video ke liye standard)
                 document.getElementById('slCPM').value = 4.0; 
             } else {
-                // Channel Logic
-                channelImg.src = snippet.thumbnails.medium.url; // Channel Logo
-                channelName.innerText = snippet.title;          // Channel Name
+                channelImg.src = snippet.thumbnails.medium.url;
+                channelName.innerText = snippet.title;
                 videoTitle.innerText = "Channel Analysis";
-                
-                // Note: Channel View Count lifetime hota hai, isliye hum slider ko 
-                // thoda adjust karte hain ya user ko set karne dete hain.
-                // Abhi ke liye hum Total Views dikha kar slider set karenge.
-                let dailyBot = Math.round(stats.viewCount / 365); // Approx 1 year average
-              // Rough estimate
-                document.getElementById('slViews').value = stats.viewCount > 50000 ? 50000 : stats.viewCount; // Cap for daily slider
+                document.getElementById('slViews').value = stats.viewCount > 50000 ? 50000 : stats.viewCount; 
                 document.getElementById('slCPM').value = 2.0;
             }
-
-            // Recalculate Earnings immediately
             updateMcCalc(); 
-            
             if(btn) btn.innerText = "✔ Found";
             setTimeout(() => { if(btn) btn.innerText = originalText; }, 2000);
-
         } else {
-            alert("No Data Found! Check Link or Handle.");
+            alert("No Data Found!");
             profileSection.style.display = 'none';
             if(btn) btn.innerText = originalText;
         }
-
     } catch (error) {
         console.error(error);
-        alert("Error: Something went wrong.");
+        alert("Error!");
         if(btn) btn.innerText = originalText;
     }
 }
 
-// --- 2. ADVANCED CALCULATOR LOGIC (Starts at 0) ---
+// --- Layout Calculation Logic (Original Color Restored) ---
 let timeMultiplier = 1;
 
 function setTimeScale(scale, element) {
@@ -174,8 +141,10 @@ function setTimeScale(scale, element) {
         tab.style.background = 'transparent';
         tab.style.color = '#6b7280';
     });
+    
+    // Yahan pe original Indigo color (#4F46E5) wapas lagaya hai
     element.classList.add('active');
-    element.style.background = '#4F46E5';
+    element.style.background = '#4F46E5'; 
     element.style.color = 'white';
 
     if(scale === 'daily') timeMultiplier = 1;
@@ -188,40 +157,27 @@ function setTimeScale(scale, element) {
 }
 
 function updateMcCalc() {
-    // Values uthana (Agar 0 hai to 0 hi rahega)
     const views = parseFloat(document.getElementById('slViews').value) || 0;
     const cpm = parseFloat(document.getElementById('slCPM').value) || 0;
     const playbackRate = parseFloat(document.getElementById('slPlayback').value) / 100;
 
-    // Display Numbers Update
     document.getElementById('valViews').innerText = parseInt(views).toLocaleString();
     document.getElementById('valCPM').innerText = "$" + cpm.toFixed(2);
     document.getElementById('valPlayback').innerText = (playbackRate * 100).toFixed(0) + "%";
 
-    // --- Calculation ---
-    // Formula: (Views * Playback% * CPM) / 1000
     let adRevenue = (views * playbackRate * cpm) / 1000;
-    
-    // Premium Estimate (Simple 10% extra add kar rahe hain complexity kam karne ke liye)
     let premRevenue = adRevenue * 0.10; 
-
-    let totalDaily = adRevenue + premRevenue;
-
-    // Time Multiplier
-    let finalTotal = totalDaily * timeMultiplier;
+    let finalTotal = (adRevenue + premRevenue) * timeMultiplier;
     let finalAds = adRevenue * timeMultiplier;
     let finalPrem = premRevenue * timeMultiplier;
 
-    // Result Update
     document.getElementById('totalMoney').innerText = finalTotal.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
     document.getElementById('totalRupee').innerText = (finalTotal * 84).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-    
     document.getElementById('adIncome').innerText = finalAds.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
     document.getElementById('premIncome').innerText = finalPrem.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
 }
 
-
-// --- 3. INSTAGRAM RESTORED (Jo galti se delete ho gaya tha) ---
+// --- Other Calculators ---
 function calculateInsta() {
     let f = document.getElementById("instaFollowers").value;
     document.getElementById("instaResult").innerText = "Est. Earnings: $" + (f*0.01).toFixed(2);
@@ -243,7 +199,6 @@ function calculateSalary() {
 function calculateTax() {
   let inc = document.getElementById("income").value;
   let tax = 0;
-  if(inc > 300000) tax = (inc - 300000) * 0.05; // Simplified
+  if(inc > 300000) tax = (inc - 300000) * 0.05; 
   document.getElementById("taxResult").innerText = "Est. Tax: " + tax.toFixed(2);
 }
-
