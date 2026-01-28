@@ -100,28 +100,50 @@
       <div id="ageResult"></div>
     </div>
   </section>
-<section id="youtube" class="container" style="display:none;">
-    <button class="back-btn" onclick="goHome()">⬅ Back to Menu</button>
-    <h2>YouTube Earning Calculator</h2>
+<section id="youtube" class="container" style="display:none; max-width: 600px; margin: auto;">
+    <button class="back-btn" onclick="goHome()">⬅ Back</button>
     
-    <div class="calculator">
-        <label>Video Link or Handle (@name):</label>
-        <div style="display: flex; gap: 5px;">
-            <input type="text" id="ytInput" placeholder="Paste Link here...">
-            <button onclick="fetchYoutubeData()" style="background: #ff0000; color: white;">🔍 Check</button>
-        </div>
-        <p id="loadingMsg" style="font-size: 12px; color: #666; display: none;">Data aa raha hai...</p>
+    <div style="text-align: center; margin-bottom: 30px;">
+        <h2 style="font-size: 28px; margin-bottom: 10px;">YouTube Money Calculator</h2>
+        <p style="color: #666;">See how much you can earn based on Views & RPM.</p>
+    </div>
 
-        <hr style="margin: 20px 0; border-top: 1px solid #eee;">
-
-        <label>Total Views:</label>
-        <input type="number" id="ytViews" placeholder="Views apne aap aayenge">
+    <div class="calculator" style="background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08);">
         
-        <label>RPM ($ per 1k views):</label>
-        <input type="number" id="ytRPM" placeholder="Default: 0.5" value="0.5">
+        <label style="font-weight: 600; color: #333;">Analyze Channel/Video:</label>
+        <div style="display: flex; gap: 10px; margin-bottom: 30px;">
+            <input type="text" id="ytInput" placeholder="Paste Video Link..." style="padding: 12px; border-radius: 8px; border: 1px solid #ddd; width: 100%;">
+            <button onclick="fetchYoutubeData()" style="background: #ff0000; color: white; border: none; padding: 0 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">GO</button>
+        </div>
 
-        <button onclick="calculateYoutube()">Calculate Earning 💰</button>
-        <div id="ytResult"></div>
+        <div style="margin-bottom: 25px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <label style="color: #555;">Daily Views:</label>
+                <span id="viewDisplay" style="font-weight: bold; color: #ff0000;">10,000</span>
+            </div>
+            <input type="range" id="viewSlider" min="1000" max="1000000" step="1000" value="10000" style="width: 100%; accent-color: #ff0000; cursor: pointer;" oninput="updateSlider('views')">
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <label style="color: #555;">RPM ($ per 1k views):</label>
+                <span id="rpmDisplay" style="font-weight: bold; color: #ff0000;">$0.50</span>
+            </div>
+            <input type="range" id="rpmSlider" min="0.1" max="10" step="0.1" value="0.5" style="width: 100%; accent-color: #ff0000; cursor: pointer;" oninput="updateSlider('rpm')">
+        </div>
+
+        <div style="background: #f8f9fa; border: 1px solid #eee; border-radius: 15px; padding: 20px; text-align: center;">
+            <p style="margin: 0; color: #666; font-size: 14px;">Estimated Daily Earnings</p>
+            <h3 style="margin: 10px 0; color: #28a745; font-size: 32px;">$<span id="dailyDollar">5.00</span></h3>
+            <p style="margin: 0; color: #555; font-weight: 500;">₹<span id="dailyRupee">415.00</span> INR</p>
+        </div>
+
+        <input type="hidden" id="ytViews" value="10000">
+        <input type="hidden" id="ytRPM" value="0.5">
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; color: #888; font-size: 12px;">
+        <p>🔒 Secure & Safe • ⚡ Instant Calculation • 📈 Live Rates</p>
     </div>
 </section>
 
