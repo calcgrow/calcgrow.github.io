@@ -2,7 +2,7 @@
 // REAL YouTube Channel Fetch Logic
 // ================================
 
-const YT_API_KEY = "PASTE_YOUR_API_KEY_HERE";
+const YT_API_KEY = "AIzaSyB3e5jwd1Y-5fTWH2w4u62eO-_wVqYDJx0";
 
 // Extract channel identifier
 async function getChannelId(input) {
