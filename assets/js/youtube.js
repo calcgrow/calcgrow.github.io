@@ -77,3 +77,53 @@ async function analyzeChannel() {
     document.getElementById("monthly").innerText = `$${(daily * 30).toFixed(2)}`;
     document.getElementById("yearly").innerText = `$${(daily * 365).toFixed(2)}`;
 }
+
+// MODULE 1 – ANALYZER (DEMO + API READY)
+function analyzeChannel() {
+  const input = document.getElementById("ytInput").value;
+  if (!input) return alert("Paste something");
+
+  // DEMO DATA (replace with YouTube API v3)
+  document.getElementById("chName").innerText = "Demo Creator";
+  document.getElementById("chSubs").innerText = "1,250,000";
+  document.getElementById("chViews").innerText = "98,000,000";
+  document.getElementById("chVideos").innerText = "420";
+  document.getElementById("chCountry").innerText = "US";
+  document.getElementById("chLogo").src =
+    "https://i.pravatar.cc/150?img=12";
+}
+
+// MODULE 2 – EARNINGS
+let lastMonthly = 0;
+
+function calcEarnings() {
+  const views = +document.getElementById("views").value;
+  const rpm = +document.getElementById("rpm").value;
+
+  const daily = (views / 1000) * rpm;
+  const monthly = daily * 30;
+  const yearly = monthly * 12;
+
+  lastMonthly = monthly;
+
+  document.getElementById("daily").innerText = daily.toFixed(2);
+  document.getElementById("monthly").innerText = monthly.toFixed(2);
+  document.getElementById("yearly").innerText = yearly.toFixed(2);
+}
+
+// MODULE 3 – CURRENCY (STATIC → API READY)
+function convertINR() {
+  const rate = 83; // replace with FX API
+  document.getElementById("inr").innerText =
+    (lastMonthly * rate).toFixed(0);
+}
+
+// MODULE 4 – TARGET SYSTEM
+const tasks = document.querySelectorAll(".task");
+tasks.forEach(t => t.addEventListener("change", updateProgress));
+
+function updateProgress() {
+  const done = [...tasks].filter(t => t.checked).length;
+  const percent = Math.round((done / tasks.length) * 100);
+  document.getElementById("progress").innerText = percent + "%";
+}
