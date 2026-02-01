@@ -1,9 +1,9 @@
 // =============================
-// WORLD CLASS YOUTUBE LOGIC
+// WORLD CLASS YOUTUBE LOGIC v2
 // =============================
 
-// ⚠️ Replace 'YOUR_KEY_HERE' with your actual secure key from Google Cloud
-const YT_API_KEY = "AIzaSyB3e5jwd1Y-5fTWH2w4u62eO-_wVqYDJx0"; // <-- AAPKI KEY YAHAN AAYEGI
+// ⚠️ PASTE YOUR SECURE KEY HERE
+const YT_API_KEY = "AIzaSy..."; 
 
 // Helper: Format Numbers (1,200,000 -> 1.2M)
 function formatNumber(num) {
@@ -12,107 +12,98 @@ function formatNumber(num) {
     return num;
 }
 
-// Helper: Format Money
-function formatMoney(amount) {
-    return "$" + amount.toLocaleString('en-US', { maximumFractionDigits: 0 });
-}
-
-// 1. EXTRACT CHANNEL ID
-async function getChannelId(input) {
-    input = input.trim();
-    
-    // If input is a Handle (@mrbeast)
-    if (input.startsWith("@")) {
-        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${input}&key=${YT_API_KEY}`;
-        try {
-            const res = await fetch(url);
-            const data = await res.json();
-            return data.items?.[0]?.snippet?.channelId || null;
-        } catch (e) {
-            console.error(e);
-            return null;
-        }
-    }
-    
-    // If input is standard URL
-    // (Regex to find channel ID)
-    return null; // For now simplified, handles are best
-}
-
-// 2. FETCH DATA
+// 1. FETCH CHANNEL DATA (FIXED: Now uses Handle Lookup)
 async function analyzeChannel() {
-    const input = document.getElementById('channelInput').value;
+    let input = document.getElementById('channelInput').value.trim();
     const btn = document.querySelector('.analyze-btn');
     
-    if (!input) { alert("Please enter a channel name!"); return; }
+    if (!input) { alert("Please enter a channel handle!"); return; }
+
+    // Ensure handle starts with '@'
+    if (!input.startsWith("@")) {
+        input = "@" + input; 
+    }
 
     // Loading State
     btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Scanning...';
     
-    // Try to get ID
-    let channelId = await getChannelId(input);
-    
-    // Direct API Call for stats
-    if (channelId) {
-        const statsUrl = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${YT_API_KEY}`;
-        const res = await fetch(statsUrl);
+    // NEW API CALL: forHandle (More Accurate than Search)
+    const url = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&forHandle=${input}&key=${YT_API_KEY}`;
+
+    try {
+        const res = await fetch(url);
         const data = await res.json();
         
-        if (data.items) {
+        if (data.items && data.items.length > 0) {
+            // Channel Found!
             updateUI(data.items[0]);
+        } else {
+            alert("Channel not found! Make sure to use the exact handle (e.g. @MrBeast)");
         }
-    } else {
-        alert("Channel not found. Try using the Handle (e.g. @tseries)");
+    } catch (error) {
+        console.error(error);
+        alert("API Error: Check your Key or Quota.");
     }
 
     // Reset Button
     btn.innerText = 'Fetch Data';
 }
 
-// 3. UPDATE UI WITH REAL DATA
+// 2. UPDATE UI
 function updateUI(channel) {
-    // Show Channel Header
     document.getElementById('channelData').style.display = 'flex';
     document.getElementById('chName').innerText = channel.snippet.title;
     document.getElementById('chSubs').innerText = formatNumber(channel.statistics.subscriberCount) + " Subscribers";
     document.getElementById('chLogo').src = channel.snippet.thumbnails.high.url;
 
-    // Get Total Views & Avg Daily Views (Approx)
-    // YouTube API doesn't give "Daily Views", so we estimate based on Total/Videos or assume a standard growth
-    // For this calculator, let's assume active channels get 1% of subs as daily views (Heuristic)
+    // Estimate Daily Views (Active channels get ~1-5% of subs as daily views)
+    // We limit this to a reasonable max for calculation safety
     let subs = parseInt(channel.statistics.subscriberCount);
-    let estimatedDailyViews = subs * 0.05; // 5% of subs watch daily (active channel)
+    let estimatedDailyViews = subs * 0.02; // 2% Activity Ratio
     
     if (estimatedDailyViews < 1000) estimatedDailyViews = 1000;
-
-    // Update Slider & Calc
+    
+    // Auto-update slider
     document.getElementById('viewSlider').value = estimatedDailyViews;
     manualUpdate(estimatedDailyViews);
 }
 
-// 4. MANUAL SLIDER UPDATE
+// 3. SLIDER UPDATE
 function manualUpdate(val) {
-    // Update Text Display
     document.getElementById('viewsVal').innerText = parseInt(val).toLocaleString();
     reCalculate();
 }
 
-// 5. MAIN CALCULATION ENGINE
+// 4. CALCULATION ENGINE (WITH CURRENCY)
 function reCalculate() {
     let dailyViews = document.getElementById('viewSlider').value;
-    let rpm = document.getElementById('nicheSelect').value;
+    let rpm = parseFloat(document.getElementById('nicheSelect').value);
+    let currency = document.getElementById('currencySelect').value;
 
-    // Formula: (Views / 1000) * RPM
-    let dailyEarn = (dailyViews / 1000) * rpm;
-    let monthlyEarn = dailyEarn * 30;
-    let yearlyEarn = dailyEarn * 365;
+    // Base Calculation in USD
+    let dailyEarnUSD = (dailyViews / 1000) * rpm;
+    let monthlyEarnUSD = dailyEarnUSD * 30;
+    let yearlyEarnUSD = dailyEarnUSD * 365;
 
-    // Animation Effect for Money
-    document.getElementById('dailyRes').innerText = formatMoney(dailyEarn);
-    document.getElementById('monthlyRes').innerText = formatMoney(monthlyEarn);
-    document.getElementById('yearlyRes').innerText = formatMoney(yearlyEarn);
+    // Currency Conversion Rates (Approx)
+    let rate = 1;
+    let symbol = "$";
+
+    if (currency === "INR") { rate = 85; symbol = "₹"; }
+    if (currency === "EUR") { rate = 0.92; symbol = "€"; }
+    if (currency === "GBP") { rate = 0.79; symbol = "£"; }
+
+    // Display with Formatting
+    document.getElementById('dailyRes').innerText = formatMoney(dailyEarnUSD * rate, symbol);
+    document.getElementById('monthlyRes').innerText = formatMoney(monthlyEarnUSD * rate, symbol);
+    document.getElementById('yearlyRes').innerText = formatMoney(yearlyEarnUSD * rate, symbol);
 }
 
-// Init
+// Helper: Format Money
+function formatMoney(amount, symbol) {
+    return symbol + amount.toLocaleString('en-US', { maximumFractionDigits: 0 });
+}
 
+// Ini
+t
 reCalculate();
