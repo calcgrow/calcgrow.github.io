@@ -3,11 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CalcGrow - Smart Tools for Creators</title>
+    <title>CalcGrow - The Ultimate Creator OS</title>
+    <meta name="description" content="All-in-one growth tools for YouTube, Instagram & Finance.">
     
     <link rel="stylesheet" href="style.css">
-    
     <link rel="icon" href="icon.png" type="image/png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Special Styles for Social Grid */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Smaller, tighter cards */
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #eee;
+        }
+
+        .social-card:hover { transform: translateY(-5px); }
+        
+        /* Brand Colors */
+        .yt-brand { color: #ff0000; border-top: 4px solid #ff0000; }
+        .insta-brand { color: #E1306C; border-top: 4px solid #E1306C; } /* Insta Pink */
+        .fb-brand { color: #1877F2; border-top: 4px solid #1877F2; } /* FB Blue */
+        .snap-brand { color: #FFFC00; border-top: 4px solid #FFFC00; background: #fff; } /* Snap Yellow */
+        .snap-brand i { text-shadow: 0 0 2px #000; color: white; } /* Outline for visibility */
+        
+        .badge {
+            background: #eef2f7; color: #555; padding: 2px 8px; 
+            border-radius: 4px; font-size: 0.7rem; font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,84 +53,110 @@
     <header class="header">
         <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
             <img src="icon.png" alt="CalcGrow Logo" style="height: 40px; width: auto;">
-            <h2>CalcGrow</h2>
+            <div>
+                <h2 style="margin:0; line-height: 1;">CalcGrow</h2>
+                <small style="font-size: 0.7rem; color: #666;">Creator OS v1.0</small>
+            </div>
         </div>
     </header>
 
-    <section class="hero">
-        <h1>Make Smarter Decisions</h1>
-        <p>YouTube growth tools & daily calculators — trusted by users worldwide.</p>
-        <div class="hero-buttons">
-            <a href="tools/yt-earning.html" class="btn-primary">Try YouTube Tools</a>
-            <a href="#popular" class="btn-secondary">All Calculators</a>
+    <section class="hero" style="padding: 60px 20px;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <span style="background: #ffebeb; color: #ff0000; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem;">
+                <i class="fa-brands fa-youtube"></i> #1 Tool for Creators
+            </span>
+            <h1 style="font-size: 2.8rem; margin-top: 15px; line-height: 1.2;">Dominate Your <br><span style="color: #ff0000;">Digital Empire</span></h1>
+            <p style="font-size: 1.1rem; color: #555;">Advanced analytics & earnings prediction for YouTube, Instagram & Facebook.</p>
+            
+            <a href="tools/yt-earning.html" class="btn-primary" style="font-size: 1.2rem; padding: 15px 40px; margin-top: 20px; display: inline-block;">
+                <i class="fa-solid fa-rocket"></i> Launch YouTube Studio
+            </a>
         </div>
     </section>
 
-    <section id="popular" class="popular">
-        <h2>Popular Today</h2>
-
-        <div class="card-grid featured">
-            
-            <a class="card" href="tools/yt-earning.html" style="border: 2px solid #ff0000;">
-                <h3>🔴 YouTube Earnings</h3>
-                <p>Estimate income & analyze channel growth.</p>
+    <section id="social" style="max-width: 1000px; margin: 0 auto; padding: 20px;">
+        <h3 style="color: #444; border-left: 4px solid #333; padding-left: 10px;">Social Growth Tools</h3>
+        
+        <div class="social-grid">
+            <a href="tools/yt-earning.html" class="social-card yt-brand">
+                <i class="fa-brands fa-youtube fa-3x" style="color: #ff0000;"></i>
+                <h4 style="margin: 10px 0 5px;">YouTube</h4>
+                <span class="badge">Analytics</span>
             </a>
 
-            <a class="card" href="calculators/finance/emi-calculator.html">
-                <h3>EMI Calculator</h3>
-                <p>Plan home & car loans with clarity.</p>
+            <a href="instagram.html" class="social-card insta-brand">
+                <i class="fa-brands fa-instagram fa-3x" style="color: #E1306C;"></i>
+                <h4 style="margin: 10px 0 5px;">Instagram</h4>
+                <span class="badge">Engagement</span>
             </a>
 
-            <a class="card" href="bmi.html">
-                <h3>BMI Calculator</h3>
-                <p>Check your health status instantly.</p>
-            </a>
-            
-             <a class="card" href="age.html">
-                <h3>Age Calculator</h3>
-                <p>Calculate your exact age in years & days.</p>
+            <a href="facebook.html" class="social-card fb-brand">
+                <i class="fa-brands fa-facebook fa-3x" style="color: #1877F2;"></i>
+                <h4 style="margin: 10px 0 5px;">Facebook</h4>
+                <span class="badge">Ads Calc</span>
             </a>
 
+            <a href="#" onclick="alert('Snapchat Tools Coming Soon!')" class="social-card" style="border-top: 4px solid #FFFC00;">
+                <i class="fa-brands fa-snapchat fa-3x" style="color: #000;"></i> <h4 style="margin: 10px 0 5px;">Snapchat</h4>
+                <span class="badge">Streaks</span>
+            </a>
         </div>
     </section>
 
-    <section id="tools" class="categories">
-        <h2>Browse Categories</h2>
-
-        <div class="card-grid">
+    <section id="tools" style="background: #f8f9fa; padding: 40px 20px; margin-top: 40px;">
+        <div style="max-width: 1000px; margin: 0 auto;">
             
-            <a class="card" href="finance.html"> <h3>Finance & Money</h3>
-    <p>SIP, EMI, Discount & GST Tools.</p>
-    
-            </a>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="color: #444; border-left: 4px solid #28a745; padding-left: 10px;">Wealth & Utilities</h3>
+                <a href="finance.html" style="color: #007bff; text-decoration: none;">View All &rarr;</a>
+            </div>
 
-            <a class="card" href="bmi.html">
-                <h3>Health</h3>
-                <p>BMI & Age metrics.</p>
-            </a>
+            <div class="card-grid">
+                
+                <a class="card" href="finance.html">
+                    <div style="background: #e3f2fd; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                        <i class="fa-solid fa-coins" style="color: #007bff;"></i>
+                    </div>
+                    <h3>Finance Hub</h3>
+                    <p>SIP, GST, EMI & Crypto.</p>
+                </a>
 
-            <a class="card" href="percentage.html">
-                <h3>Daily Utilities</h3>
-                <p>Percentage & quick math.</p>
-            </a>
+                <a class="card" href="discount.html">
+                    <div style="background: #fff3cd; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                        <i class="fa-solid fa-tags" style="color: #ffc107;"></i>
+                    </div>
+                    <h3>Smart Shopping</h3>
+                    <p>Discount & Offers Calc.</p>
+                </a>
 
+                <a class="card" href="bmi.html">
+                    <div style="background: #d4edda; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                        <i class="fa-solid fa-heart-pulse" style="color: #28a745;"></i>
+                    </div>
+                    <h3>Health</h3>
+                    <p>BMI & Fitness Metrics.</p>
+                </a>
+
+                <a class="card" href="age.html">
+                    <div style="background: #f8d7da; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                        <i class="fa-solid fa-calendar-days" style="color: #dc3545;"></i>
+                    </div>
+                    <h3>Age & Time</h3>
+                    <p>Date difference & Age.</p>
+                </a>
+
+            </div>
         </div>
     </section>
 
-    <section class="trust">
-        <p>✔️ Used by creators worldwide</p>
-        <p>✔️ 100% Free & Privacy Focused</p>
-    </section>
-
-    <footer>
-        <h3>CalcGrow</h3>
-        <p>Helping creators & users make smarter decisions.</p>
+    <footer style="margin-top: 0;">
+        <p>&copy; 2026 CalcGrow. Built for the World's Creators.</p>
         <nav>
-            <a href="about.html">About</a>
             <a href="privacy.html">Privacy</a>
+            <a href="about.html">About</a>
         </nav>
     </footer>
 
-
+    
 </body>
 </html>
