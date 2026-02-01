@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <label style="margin-top: 15px;">Tax / VAT (%) <small style="color:#888">(Optional)</small></label>
+            <label style="margin-top: 15px;">Tax / GST (%) <small style="color:#888">(Optional)</small></label>
             <input type="number" id="tax" placeholder="e.g. 18">
 
             <button onclick="calculateDiscount()" class="btn-primary" style="width: 100%; margin-top: 15px;">Get Best Price</button>
@@ -59,8 +59,8 @@
                 </div>
 
                 <div style="text-align: center; margin-top: 10px;">
-                    <span id="old-price" style="text-decoration: line-through; color: #999; font-size: 1.2rem;">1999</span>
-                    <h2 id="final-price" style="color: #333; font-size: 2.5rem; margin: 5px 0;">1500</h2>
+                    <span id="old-price" style="text-decoration: line-through; color: #999; font-size: 1.2rem;"></span>
+                    <h2 id="final-price" style="color: #333; font-size: 2.5rem; margin: 5px 0;"></h2>
                     <p style="color: #666; font-size: 0.9rem;">Final Amount to Pay</p>
                 </div>
             </div>
@@ -85,42 +85,49 @@
 
     <script>
         function calculateDiscount() {
-            let price = parseFloat(document.getElementById('price').value);
-            let disc1 = parseFloat(document.getElementById('discount').value) || 0;
-            let disc2 = parseFloat(document.getElementById('extraDisc').value) || 0;
-            let tax = parseFloat(document.getElementById('tax').value) || 0;
+            // Get inputs
+            var priceInput = document.getElementById('price').value;
+            var disc1Input = document.getElementById('discount').value;
+            var disc2Input = document.getElementById('extraDisc').value;
+            var taxInput = document.getElementById('tax').value;
+            var currency = document.getElementById('currency').value;
+
+            // Convert to numbers
+            var price = parseFloat(priceInput);
+            var disc1 = parseFloat(disc1Input) || 0;
+            var disc2 = parseFloat(disc2Input) || 0;
+            var tax = parseFloat(taxInput) || 0;
+
+            // Check if price is valid
+            if (!price || isNaN(price)) {
+                alert("Please enter a valid Original Price!");
+                return;
+            }
+
+            // Calculation Logic
+            var originalPrice = price;
             
-            // Get Selected Currency Symbol
-            let currency = document.getElementById('currency').value;
-
-            if (!price) { alert("Enter a price!"); return; }
-
-            const originalPrice = price;
-
-            // Step 1: Apply First Discount
-            let discountedPrice = price - (price * (disc1 / 100));
-
-            // Step 2: Apply Additional Discount
-            discountedPrice = discountedPrice - (discountedPrice * (disc2 / 100));
-
-            // Step 3: Add Tax
-            let finalPrice = discountedPrice + (discountedPrice * (tax / 100));
+            // 1. First Discount
+            var afterDisc1 = price - (price * (disc1 / 100));
             
-            let totalSavings = originalPrice - finalPrice;
-            // Note: If tax makes it more expensive than original (rare in sales but possible), savings might be negative. 
-            // Let's handle simple savings logic: (Original - Discounted before tax) is usually what people call "Savings".
-            // But for "Amount to Pay", we include tax. Let's keep strict math:
+            // 2. Extra Discount
+            var afterDisc2 = afterDisc1 - (afterDisc1 * (disc2 / 100));
             
-            let displaySavings = originalPrice - discountedPrice; // Savings from discounts only
+            // 3. Tax
+            var finalPrice = afterDisc2 + (afterDisc2 * (tax / 100));
+            
+            // 4. Calculate Savings (Original - Price before Tax)
+            var totalSavings = originalPrice - afterDisc2;
 
-            // Display with Dynamic Currency
+            // Display Results
             document.getElementById('old-price').innerText = currency + originalPrice.toFixed(2);
             document.getElementById('final-price').innerText = currency + finalPrice.toFixed(2);
-            document.getElementById('save-amt').innerText = currency + displaySavings.toFixed(2);
+            document.getElementById('save-amt').innerText = currency + totalSavings.toFixed(2);
 
+            // Show Result Box
             document.getElementById('result').style.display = 'block';
         }
-    </scri
-        pt>
+    </script
+        >
 </body>
 </html>
