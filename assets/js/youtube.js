@@ -3,7 +3,7 @@
 // =============================
 
 // ⚠️ Replace 'YOUR_KEY_HERE' with your actual secure key from Google Cloud
-const YT_API_KEY = "AIzaSy..."; // <-- AAPKI KEY YAHAN AAYEGI
+const YT_API_KEY = "AIzaSyB3e5jwd1Y-5fTWH2w4u62eO-_wVqYDJx0"; // <-- AAPKI KEY YAHAN AAYEGI
 
 // Helper: Format Numbers (1,200,000 -> 1.2M)
 function formatNumber(num) {
