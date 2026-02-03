@@ -232,3 +232,15 @@ function renderLeaderboard() {
     board.innerHTML = h
         tml;
 }
+// Streak logic function
+function updateStreakUI() {
+    let streakCount = localStorage.getItem('streakCount') || '1'; // Default 1
+    const streakElement = document.getElementById('user-streak');
+    if (streakElement) {
+        streakElement.innerText = streakCount + " Day Streak";
+    }
+}
+
+// Ise page load hote hi chalao
+document.addEventListener('DOMContentLoaded', updateStreakUI)
+    ;
