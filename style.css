@@ -149,6 +149,6 @@ input:focus, select:focus {
     transform: translate(-50%, -50%);
     font-size: 30px;
     color: var(--gold);
-  
-  z-index: 10;
+ 
+    z-index: 10;
 }
