@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Tools - Basic & Percentage | CreatorOS</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Math Specific Styles */
+        .calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+        .math-card { background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #333; }
+        .btn-group { display: flex; gap: 10px; margin-top: 10px; }
+        .btn-op { flex: 1; padding: 10px; font-size: 18px; cursor: pointer; background: #333; color: white; border: none; border-radius: 5px; }
+        .btn-op:hover { background: #007bff; }
+        .result-text { font-size: 1.2rem; margin-top: 15px; color: #4caf50; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h2>Creator<span>OS</span></h2>
+    </header>
+
+    <section class="intro">
+        <h1>Mathematics Suite Vk</h1>
+        <p>Solve daily math problems instantly.</p>
+    </section>
+
+    <div class="intro calc-grid" style="text-align: left;">
+        
+        <div class="math-card">
+            <h3>🔢 Basic Calculator</h3>
+            <label>Number 1</label>
+            <input type="number" id="num1" placeholder="Enter first number">
+            
+            <label>Number 2</label>
+            <input type="number" id="num2" placeholder="Enter second number">
+
+            <div class="btn-group">
+                <button class="btn-op" onclick="calcBasic('+')">+</button>
+                <button class="btn-op" onclick="calcBasic('-')">−</button>
+                <button class="btn-op" onclick="calcBasic('*')">×</button>
+                <button class="btn-op" onclick="calcBasic('/')">÷</button>
+            </div>
+
+            <p class="result-text" id="basicResult">Result: 0</p>
+        </div>
+
+        <div class="math-card">
+            <h3>% Percentage Calculator</h3>
+            <label>What is</label>
+            <div style="display:flex; gap:10px; align-items:center;">
+                <input type="number" id="percVal" placeholder="e.g. 20" style="width: 80px;">
+                <span>% of</span>
+                <input type="number" id="percTotal" placeholder="e.g. 1000">
+            </div>
+            
+            <button onclick="calcPercentage()" style="margin-top: 15px; width: 100%;">Calculate</button>
+
+            <p class="result-text" id="percResult">Result: 0</p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 CreatorOS. All rights reserved.</p>
+    </footer>
+
+    <script src="../assets/js/math.js"></script>
+
+</bod
+  y>
+</html>
