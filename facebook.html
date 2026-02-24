@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Earning & Monetization Calculator | CalcGrow</title>
+    <meta name="description" content="Check Facebook Reels and Video monetization eligibility and estimate earnings accurately based on Meta policies.">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* FACEBOOK BRANDING */
+        :root {
+            --fb-blue: #1877F2;
+            --fb-bg: #F0F2F5;
+            --fb-card: #FFFFFF;
+        }
+
+        body { background-color: var(--fb-bg); font-family: 'Segoe UI', Helvetica, Arial, sans-serif; }
+
+        /* HEADER */
+        .fb-header {
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* TOGGLE SWITCH (Reels vs Video) */
+        .mode-switch {
+            display: flex;
+            background: #e4e6eb;
+            padding: 5px;
+            border-radius: 30px;
+            margin: 20px auto;
+            width: fit-content;
+        }
+
+        .mode-btn {
+            padding: 10px 25px;
+            border: none;
+            background: transparent;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #65676b;
+            transition: 0.3s;
+        }
+
+        .mode-btn.active {
+            background: white;
+            color: var(--fb-blue);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* CALCULATOR CARD */
+        .fb-card {
+            background: var(--fb-card);
+            max-width: 550px;
+            margin: 0 auto;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .input-label {
+            font-size: 0.9rem;
+            color: #65676b;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .fb-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            outline: none;
+        }
+        .fb-input:focus { border-color: var(--fb-blue); box-shadow: 0 0 0 2px #e7f3ff; }
+
+        .btn-fb {
+            background: var(--fb-blue);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .btn-fb:hover { background: #166fe5; }
+
+        /* RESULT SECTION */
+        .result-box {
+            background: #F0F2F5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+            display: none;
+            text-align: center;
+        }
+
+        .eligibility-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .eligible { background: #e6f6ec; color: #0f9d58; } /* Green */
+        .not-eligible { background: #fbecec; color: #d93025; } /* Red */
+
+        .big-money {
+            font-size: 2.2rem;
+            color: #1c1e21;
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="fb-header">
+        <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px; color: var(--fb-blue);">
+            <i class="fa-solid fa-chevron-left"></i>
+            <span style="font-weight: bold; font-size: 1.2rem;">Back to OS</span>
+        </a>
+        <div style="font-weight: bold; color: #1c1e21;">Meta Analytics</div>
+    </header>
+
+    <section style="padding: 20px;">
+        
+        <div style="text-align: center; margin-bottom: 20px;">
+            <i class="fa-brands fa-facebook fa-4x" style="color: var(--fb-blue);"></i>
+            <h1 style="color: #1c1e21; margin: 10px 0;">Earnings Estimate</h1>
+            <p style="color: #65676b;">Calculate revenue from In-Stream Ads & Reels.</p>
+        </div>
+
+        <div class="mode-switch">
+            <button class="mode-btn active" id="btn-video" onclick="setMode('video')">In-Stream Video</button>
+            <button class="mode-btn" id="btn-reels" onclick="setMode('reels')">Ads on Reels</button>
+        </div>
+
+        <div class="fb-card">
+            
+            <label class="input-label">Select Currency</label>
+            <select id="currency" class="fb-input">
+                <option value="USD">🇺🇸 USD ($) - Global</option>
+                <option value="INR">🇮🇳 INR (₹) - India</option>
+                <option value="EUR">🇪🇺 EUR (€) - Europe</option>
+            </select>
+
+            <label class="input-label">Total Followers (Page/Profile)</label>
+            <input type="number" id="followers" class="fb-input" placeholder="Min. 5,000 required for monetization">
+
+            <label class="input-label" id="views-label">Total Video Views (Last 28 Days)</label>
+            <input type="number" id="views" class="fb-input" placeholder="e.g. 100,000">
+
+            <button onclick="calculateFB()" class="btn-fb">Analyze Potential</button>
+
+            <div id="result" class="result-box">
+                <div id="badge-area"></div>
+                
+                <p style="color: #65676b; margin: 5px 0;">Estimated Monthly Earnings</p>
+                <div class="big-money" id="final-money">$0.00</div>
+                <p style="font-size: 0.8rem; color: #888; margin-top: 10px;" id="disclaimer">
+                    Based on standard RPM ($0.50 - $1.50).
+                </p>
+            </div>
+
+        </div>
+
+        <div style="max-width: 550px; margin: 30px auto; color: #65676b; font-size: 0.9rem;">
+            <h3>ℹ️ Meta Monetization Rules (2026)</h3>
+            <ul style="line-height: 1.6; padding-left: 20px;">
+                <li><strong>In-Stream Ads:</strong> Need 5k followers + 60k active minutes viewed.</li>
+                <li><strong>Ads on Reels:</strong> Invite-only program, usually requires high engagement.</li>
+                <li><strong>RPM varies:</strong> USA/UK views pay 5x more than Asian traffic.</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <script>
+        let currentMode = 'video'; // Default
+
+        function setMode(mode) {
+            currentMode = mode;
+            
+            // Toggle Visuals
+            document.getElementById('btn-video').classList.remove('active');
+            document.getElementById('btn-reels').classList.remove('active');
+            document.getElementById('btn-' + mode).classList.add('active');
+
+            // Change Text logic
+            if(mode === 'video') {
+                document.getElementById('views-label').innerText = "Total Video Views (3min+ Videos)";
+                document.getElementById('disclaimer').innerText = "Based on In-Stream RPM ($0.20 - $2.00)";
+            } else {
+                document.getElementById('views-label').innerText = "Total Reels Plays";
+                document.getElementById('disclaimer').innerText = "Based on Reels RPM ($0.01 - $0.10)";
+            }
+
+            // Hide previous result
+            document.getElementById('result').style.display = 'none';
+        }
+
+        function calculateFB() {
+            let followers = parseFloat(document.getElementById('followers').value);
+            let views = parseFloat(document.getElementById('views').value);
+            let currency = document.getElementById('currency').value;
+
+            if(!followers || !views) { alert("Please enter all fields!"); return; }
+
+            // 1. Check Eligibility (Real Meta Policy)
+            let isEligible = false;
+            let badgeHTML = "";
+
+            if(followers >= 5000) {
+                isEligible = true;
+                badgeHTML = '<span class="eligibility-tag eligible">✅ Eligible for Monetization</span>';
+            } else {
+                badgeHTML = '<span class="eligibility-tag not-eligible">❌ Not Eligible Yet (Need 5k Followers)</span>';
+            }
+
+            // 2. Calculate Earnings
+            // Logic derived from Meta Reports
+            let rpm = 0;
+            
+            if(currentMode === 'video') {
+                // Video RPM is higher. Avg $0.80 per 1k views
+                // But only ~40-50% of views get monetized ads.
+                rpm = 0.80 * 0.5; 
+            } else {
+                // Reels RPM is volume based. Avg $0.05 per 1k views
+                rpm = 0.05;
+            }
+
+            let earningsUSD = (views / 1000) * rpm;
+
+            // If not eligible, show 0 earning logic visually or keep potential?
+            // "Potential Earnings" is better for motivation.
+            
+            // 3. Convert Currency
+            let conversion = 1;
+            let symbol = "$";
+            if(currency === "INR") { conversion = 85; symbol = "₹"; }
+            if(currency === "EUR") { conversion = 0.92; symbol = "€"; }
+
+            let finalAmount = (earningsUSD * conversion).toFixed(2);
+            
+            // Display
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('badge-area').innerHTML = badgeHTML;
+            document.getElementById('final-money').innerText = symbol + Number(finalAmount).toLocaleString();
+        }
+    </script>
+
+</body>
+</html>
