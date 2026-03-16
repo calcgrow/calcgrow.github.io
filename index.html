@@ -1,98 +1,193 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CalcGrow | Ultimate Social Media Tools & Earning Estimator</title>
+    <title>CalcGrow | Global Content Creator Intelligence Suite</title>
+    <meta name="description" content="The world's most accurate earning estimator and utility toolkit for YouTube, Instagram, TikTok, Facebook, and Snapchat. Built for the modern creator.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        .premium-gradient { background: linear-gradient(135deg, #1e40af 0%, #4338ca 100%); }
+        .tool-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(226, 232, 240, 0.8);
         }
-        .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        .tool-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            border-color: #3b82f6;
         }
-        body { background-color: #f3f4f6; font-family: 'Inter', sans-serif; }
+        .stats-blur { backdrop-filter: blur(8px); background: rgba(255, 255, 255, 0.05); }
     </style>
 </head>
-<body>
+<body class="text-slate-900">
 
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-blue-600">CalcGrow</h1>
-            <div class="hidden md:flex space-x-6 font-medium text-gray-600">
-                <a href="#youtube" class="hover:text-red-500">YouTube</a>
-                <a href="#instagram" class="hover:text-pink-500">Instagram</a>
-                <a href="#tiktok" class="hover:text-black">TikTok</a>
-                <select class="bg-gray-100 rounded p-1 text-sm border-none">
-                    <option value="USD">🇺🇸 USD</option>
-                    <option value="INR">🇮🇳 INR</option>
-                    <option value="GBP">🇬🇧 GBP</option>
-                </select>
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 premium-gradient rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
+                    <i class="fas fa-chart-line text-white text-lg"></i>
+                </div>
+                <span class="text-2xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-indigo-600">CalcGrow</span>
             </div>
+            <div class="hidden lg:flex items-center gap-8 font-semibold text-slate-600">
+                <a href="#tools" class="hover:text-blue-600 transition-colors">All Tools</a>
+                <a href="#" class="hover:text-blue-600 transition-colors">Analytics</a>
+                <div class="flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
+                    <span class="text-sm">Currency:</span>
+                    <select class="bg-transparent border-none text-sm font-bold focus:ring-0">
+                        <option>USD ($)</option>
+                        <option>EUR (€)</option>
+                        <option>INR (₹)</option>
+                    </select>
+                </div>
+            </div>
+            <button class="lg:hidden text-slate-600"><i class="fas fa-bars text-2xl"></i></button>
         </div>
     </nav>
 
-    <header class="py-16 px-4 text-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
-        <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Empower Your Content Growth</h2>
-        <p class="text-lg opacity-90 mb-8">Professional earning estimators, downloaders, and creator tools for the global community.</p>
-        <div class="flex justify-center gap-4">
-            <span class="bg-white/20 px-4 py-2 rounded-full text-sm">✓ AdSense Compliant</span>
-            <span class="bg-white/20 px-4 py-2 rounded-full text-sm">✓ 100% Secure</span>
+    <section class="relative overflow-hidden premium-gradient pt-20 pb-32">
+        <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 bg-white/10 text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6 stats-blur border border-white/20">
+                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                Trusted by 50,000+ Creators Monthly
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+                Unlock Your Social <br><span class="text-blue-200">Earning Potential</span>
+            </h1>
+            <p class="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto mb-10 leading-relaxed">
+                The world's most advanced toolkit for cross-platform creators. Accurate revenue estimation, asset downloads, and smart analytics.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#tools" class="bg-white text-blue-700 px-8 py-4 rounded-2xl font-bold shadow-xl hover:bg-blue-50 transition-all flex items-center gap-2">
+                    Get Started Free <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
         </div>
-    </header>
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-white opacity-10 rounded-full blur-3xl"></div>
+    </section>
 
-    <main class="max-w-7xl mx-auto px-4 py-12">
+    <section id="tools" class="max-w-7xl mx-auto px-6 -mt-20 relative z-20">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <div class="glass-card p-8 rounded-2xl text-center">
-                <div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fab fa-youtube text-3xl"></i>
+            <div class="tool-card bg-white p-8 rounded-[2rem]">
+                <div class="w-14 h-14 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                    <i class="fab fa-youtube text-2xl"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-2">YouTube Suite</h3>
-                <p class="text-gray-500 text-sm mb-6">Earning calculator, thumbnail downloader, and transcript translator.</p>
-                <a href="youtube.html" class="inline-block w-full bg-red-600 text-white py-3 rounded-xl font-bold hover:bg-red-700">Open Tools</a>
+                <h3 class="text-2xl font-bold mb-3">YouTube Engine</h3>
+                <p class="text-slate-500 mb-6 leading-relaxed text-sm">Revenue estimation based on CPM/RPM, thumbnail downloader, and transcript translator.</p>
+                <a href="youtube.html" class="flex items-center justify-between w-full group bg-slate-50 hover:bg-red-600 p-4 rounded-xl transition-all">
+                    <span class="font-bold group-hover:text-white transition-colors">Open Toolkit</span>
+                    <i class="fas fa-chevron-right text-slate-300 group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+                </a>
             </div>
 
-            <div class="glass-card p-8 rounded-2xl text-center">
-                <div class="w-16 h-16 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fab fa-instagram text-3xl"></i>
+            <div class="tool-card bg-white p-8 rounded-[2rem]">
+                <div class="w-14 h-14 bg-pink-50 text-pink-600 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                    <i class="fab fa-instagram text-2xl"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-2">Instagram Suite</h3>
-                <p class="text-gray-500 text-sm mb-6">Reels downloader, income estimator, and profile insights.</p>
-                <a href="instagram.html" class="inline-block w-full bg-pink-600 text-white py-3 rounded-xl font-bold hover:bg-pink-700">Open Tools</a>
+                <h3 class="text-2xl font-bold mb-3">Instagram Suite</h3>
+                <p class="text-slate-500 mb-6 leading-relaxed text-sm">Link-based reel downloader and sponsor income calculator based on engagement rate.</p>
+                <a href="instagram.html" class="flex items-center justify-between w-full group bg-slate-50 hover:bg-pink-600 p-4 rounded-xl transition-all">
+                    <span class="font-bold group-hover:text-white transition-colors">Open Toolkit</span>
+                    <i class="fas fa-chevron-right text-slate-300 group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+                </a>
             </div>
 
-            <div class="glass-card p-8 rounded-2xl text-center">
-                <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fab fa-tiktok text-3xl"></i>
+            <div class="tool-card bg-white p-8 rounded-[2rem]">
+                <div class="w-14 h-14 bg-slate-900 text-white rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                    <i class="fab fa-tiktok text-2xl"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-2">TikTok Analytics</h3>
-                <p class="text-gray-500 text-sm mb-6">Real-time revenue estimation and video tools for creators.</p>
-                <a href="#" class="inline-block w-full bg-black text-white py-3 rounded-xl font-bold">Explore</a>
+                <h3 class="text-2xl font-bold mb-3">TikTok Analytics</h3>
+                <p class="text-slate-500 mb-6 leading-relaxed text-sm">Global revenue projections and viral video downloader for TikTok creators.</p>
+                <a href="#" class="flex items-center justify-between w-full group bg-slate-50 hover:bg-slate-900 p-4 rounded-xl transition-all">
+                    <span class="font-bold group-hover:text-white transition-colors">Open Toolkit</span>
+                    <i class="fas fa-chevron-right text-slate-300 group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+                </a>
+            </div>
+
+            <div class="tool-card bg-white p-8 rounded-[2rem]">
+                <div class="w-14 h-14 bg-blue-50 text-blue-700 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                    <i class="fab fa-facebook-f text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Facebook Monetization</h3>
+                <p class="text-slate-500 mb-6 leading-relaxed text-sm">Calculate Page earnings and download HD video content instantly.</p>
+                <a href="#" class="flex items-center justify-between w-full group bg-slate-50 hover:bg-blue-700 p-4 rounded-xl transition-all">
+                    <span class="font-bold group-hover:text-white transition-colors">Open Toolkit</span>
+                    <i class="fas fa-chevron-right text-slate-300 group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+                </a>
+            </div>
+
+            <div class="tool-card bg-white p-8 rounded-[2rem]">
+                <div class="w-14 h-14 bg-yellow-50 text-yellow-500 rounded-2xl flex items-center justify-center mb-6 shadow-inner">
+                    <i class="fab fa-snapchat-ghost text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Snapchat Spotlight</h3>
+                <p class="text-slate-500 mb-6 leading-relaxed text-sm">Spotlight revenue estimation and story insight tools for creators.</p>
+                <a href="#" class="flex items-center justify-between w-full group bg-slate-50 hover:bg-yellow-400 p-4 rounded-xl transition-all">
+                    <span class="font-bold group-hover:text-white transition-colors">Open Toolkit</span>
+                    <i class="fas fa-chevron-right text-slate-300 group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+                </a>
+            </div>
+
+            <div class="tool-card bg-slate-100 p-8 rounded-[2rem] border-dashed border-2 border-slate-300 flex flex-col items-center justify-center text-center">
+                <p class="font-bold text-slate-400 italic">More Tools <br>Coming Soon</p>
             </div>
 
         </div>
-    </main>
+    </section>
 
-    <footer class="bg-white border-t mt-12 py-12">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="flex flex-wrap justify-center gap-6 mb-8 text-sm font-medium text-gray-600">
-                <a href="about.html" class="hover:text-blue-600">About Us</a>
-                <a href="privacy-policy.html" class="hover:text-blue-600">Privacy Policy</a>
-                <a href="terms.html" class="hover:text-blue-600">Terms of Service</a>
-                <a href="contact.html" class="hover:text-blue-600">Contact</a>
-                <a href="help.html" class="hover:text-blue-600">Help Center</a>
+    <section class="max-w-4xl mx-auto px-6 py-24 text-center">
+        <h2 class="text-3xl font-extrabold mb-6">Why CalcGrow is the #1 Tool for Creators</h2>
+        <p class="text-slate-600 leading-relaxed mb-4">
+            In today's digital economy, understanding your data is the key to scaling. CalcGrow provides a transparent view into the social media landscape, helping influencers and brands worldwide calculate potential revenue based on real-world CPM and engagement metrics. 
+        </p>
+        <p class="text-slate-600 leading-relaxed">
+            Our algorithms are constantly updated to reflect the latest trends in YouTube monetization, Instagram sponsorship rates, and TikTok creator fund updates.
+        </p>
+    </section>
+
+    <footer class="bg-white border-t border-slate-200 py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-1">
+                    <span class="text-xl font-bold text-blue-700">CalcGrow</span>
+                    <p class="mt-4 text-sm text-slate-500 leading-relaxed">Global analytics for the next generation of digital entrepreneurs.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6">Tools</h4>
+                    <ul class="space-y-4 text-sm text-slate-600">
+                        <li><a href="#" class="hover:text-blue-600">YouTube Calc</a></li>
+                        <li><a href="#" class="hover:text-blue-600">Insta Downloader</a></li>
+                        <li><a href="#" class="hover:text-blue-600">TikTok Income</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6">Legal</h4>
+                    <ul class="space-y-4 text-sm text-slate-600">
+                        <li><a href="privacy-policy.html" class="hover:text-blue-600">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-blue-600">Terms of Service</a></li>
+                        <li><a href="contact.html" class="hover:text-blue-600">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6">Support</h4>
+                    <ul class="space-y-4 text-sm text-slate-600">
+                        <li><a href="help.html" class="hover:text-blue-600">Help Center</a></li>
+                        <li><a href="#" class="hover:text-blue-600">Feedback</a></li>
+                    </ul>
+                </div>
             </div>
-            <p class="text-gray-400 text-xs">© 2026 CalcGrow. Not affiliated with YouTube, Instagram, or TikTok.</p>
+            <div class="border-t border-slate-100 pt-8 flex flex-col md:row justify-between items-center gap-4">
+                <p class="text-xs text-slate-400 italic text-center">Disclaimer: CalcGrow is an independent tool and is not affiliated, associated, authorized, endorsed by, or in any way officially connected with YouTube, Instagram, TikTok, Facebook, or Snapchat.</p>
+                <p class="text-xs text-slate-500 font-bold">© 2026 CalcGrow. All Rights Reserved.</p>
+            </div>
         </div>
     </footer>
 
 </body>
-
-</html>
+                            </html>
+                            
