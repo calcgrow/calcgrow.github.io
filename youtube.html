@@ -1,1 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Creator Pro Tool | CalcGrow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        .premium-card { background: white; border-radius: 2rem; border: 1px solid #e2e8f0; transition: all 0.3s ease; }
+        .input-focus:focus { outline: none; border-color: #ef4444; box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1); }
+        .yt-gradient { background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%); }
+    </style>
+</head>
+<body class="text-slate-900">
 
+    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 font-bold text-xl text-red-600">
+                <i class="fas fa-arrow-left text-sm text-slate-400"></i> CalcGrow <span class="text-slate-400 font-light">| YT Engine</span>
+            </a>
+            <div class="flex gap-4">
+                <select id="currency" class="bg-slate-100 border-none rounded-lg text-xs font-bold px-2 py-1">
+                    <option value="USD">USD ($)</option>
+                    <option value="INR">INR (₹)</option>
+                </select>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-6 py-12">
+        
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-extrabold mb-4 tracking-tight">YouTube <span class="text-red-600">Smart Engine</span></h1>
+            <p class="text-slate-500">Analyze earnings, download assets, and get transcripts in seconds.</p>
+        </div>
+
+        <div class="premium-card p-4 mb-10 shadow-xl shadow-red-100/50">
+            <div class="flex flex-col md:flex-row gap-4">
+                <input type="text" id="videoUrl" placeholder="Paste YouTube Video Link Here (e.g. https://youtube.com/watch?v=...)" 
+                       class="flex-1 p-4 bg-slate-50 border border-slate-200 rounded-xl input-focus font-medium">
+                <button onclick="analyzeVideo()" class="yt-gradient text-white px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-all shadow-lg shadow-red-200">
+                    Analyze Video
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-2 space-y-8">
+                <div class="premium-card p-8">
+                    <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+                        <i class="fas fa-sack-dollar text-green-500"></i> Estimated Revenue
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <p class="text-xs font-bold text-slate-400 uppercase">Weekly</p>
+                            <p class="text-2xl font-extrabold text-slate-800 mt-1" id="weeklyEarn">$0.00</p>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <p class="text-xs font-bold text-slate-400 uppercase">Monthly</p>
+                            <p class="text-2xl font-extrabold text-blue-600 mt-1" id="monthlyEarn">$0.00</p>
+                        </div>
+                        <div class="bg-red-50 p-6 rounded-2xl border border-red-100">
+                            <p class="text-xs font-bold text-red-400 uppercase">Yearly Projection</p>
+                            <p class="text-2xl font-extrabold text-red-600 mt-1" id="yearlyEarn">$0.00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 pt-8 border-t border-slate-100">
+                        <label class="text-sm font-bold text-slate-600 flex justify-between mb-4">
+                            Adjust Average RPM: <span class="text-red-600" id="rpmVal">$3.50</span>
+                        </label>
+                        <input type="range" min="0.5" max="20" step="0.5" value="3.5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-red-600" id="rpmSlider">
+                        <p class="text-[10px] text-slate-400 mt-2 italic">*RPM varies by niche (Finance is high, Entertainment is low).</p>
+                    </div>
+                </div>
+
+                <div class="premium-card p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-lg font-bold flex items-center gap-2">
+                            <i class="fas fa-file-alt text-blue-500"></i> AI Transcript
+                        </h3>
+                        <select class="bg-slate-100 text-xs font-bold rounded-lg p-2 border-none">
+                            <option>English (Default)</option>
+                            <option>Hindi</option>
+                            <option>Spanish</option>
+                        </select>
+                    </div>
+                    <div class="bg-slate-50 rounded-2xl p-6 min-h-[200px] border border-dashed border-slate-300">
+                        <p class="text-slate-400 text-sm text-center mt-12">Enter a video link above to extract the transcript.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-1">
+                <div class="premium-card p-8 sticky top-24">
+                    <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+                        <i class="fas fa-image text-purple-500"></i> Thumbnails
+                    </h3>
+                    <div id="thumbPreview" class="aspect-video bg-slate-100 rounded-xl mb-6 overflow-hidden flex items-center justify-center border border-slate-200">
+                        <i class="fas fa-play text-4xl text-slate-300"></i>
+                    </div>
+                    <div class="space-y-3">
+                        <button class="w-full bg-slate-800 text-white p-3 rounded-xl text-sm font-bold hover:bg-black transition-all">Download HD (1080p)</button>
+                        <button class="w-full bg-slate-100 text-slate-600 p-3 rounded-xl text-sm font-bold hover:bg-slate-200 transition-all">Download SD (720p)</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <section class="max-w-5xl mx-auto px-6 pb-20 mt-10">
+        <div class="premium-card p-10 bg-slate-50 border-none">
+            <h2 class="text-2xl font-bold mb-4">How our YouTube Earning Calculator Works?</h2>
+            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                CalcGrow uses advanced algorithms to estimate a channel's potential revenue. We take into account the daily view count, the average CPM (Cost Per Mille), and RPM (Revenue Per Mille) typical for various niches in the international market. Whether you are a creator in the USA, UK, or India, our tool provides a realistic projection of your earnings.
+            </p>
+            <h3 class="text-lg font-bold mb-2">Key Features:</h3>
+            <ul class="text-slate-600 text-sm space-y-2 list-disc ml-5">
+                <li>Real-time data fetching based on video performance.</li>
+                <li>One-click HD Thumbnail saving for inspiration.</li>
+                <li>Multi-language transcript support for global content strategy.</li>
+                <li>Currency conversion for easy financial planning.</li>
+            </ul>
+        </div>
+    </section>
+
+    <script>
+        const rpmSlider = document.getElementById('rpmSlider');
+        const rpmVal = document.getElementById('rpmVal');
+        
+        rpmSlider.oninput = function() {
+            rpmVal.innerHTML = `$${this.value}`;
+            // Logic for calculation can be added here
+        }
+
+        function analyzeVideo() {
+            alert("Integrating API for real-time data... UI is ready!");
+            // Yahan hum baad mein fetch request dalenge data nikalne ke liye
+        }
+    </script>
+
+</bo
+  dy>
+  </html>
