@@ -239,33 +239,27 @@
         slider.oninput = function() {
             document.getElementById('viewCountDisplay').innerHTML = parseInt(this.value).toLocaleString();
         } 
-async function processAction() {
+
+   async function processAction() {
     const url = document.getElementById('mainInput').value;
     const btn = document.getElementById('actionBtn');
     
-    if(!url) { alert("Link daalo bhai!"); return; }
+    if(!url) { alert("Pehle link toh dalo bhai!"); return; }
 
-    btn.innerHTML = `<i class="fas fa-circle-notch animate-spin"></i> Fetching Data...`;
+    btn.innerHTML = `<i class="fas fa-circle-notch animate-spin"></i> Analyzing...`;
 
     try {
-        // Yahan aapko apni YouTube Data API v3 integration karni hogi
-        // Example logic:
-        // const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=YOUR_VIDEO_ID&key=YOUR_API_KEY&part=snippet,statistics`);
-        // const data = await response.json();
-        
-        // Abhi ke liye simulation rakhte hain jab tak API key set nahi karte
+        // API integration hone tak simulation
         setTimeout(() => {
             btn.innerHTML = `<i class="fas fa-bolt"></i> Analyze Revenue`;
-            alert("API Key missing hai! Google Cloud Console se key lekar yahan fetch URL mein daalni hogi.");
+            alert("API Key missing hai! Google Cloud Console se key lekar yahan update karo.");
         }, 1500);
-
     } catch (error) {
         console.error("Error:", error);
         btn.innerHTML = `<i class="fas fa-bolt"></i> Analyze Revenue`;
-    
     }
-}
-        
+       
+   }     
             const original = btn.innerHTML;
             btn.innerHTML = `<i class="fas fa-circle-notch animate-spin"></i> Processing...`;
             setTimeout(() => {
