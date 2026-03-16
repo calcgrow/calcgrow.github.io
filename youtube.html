@@ -263,8 +263,7 @@
             document.getElementById('dailyRevResult').innerText = `$${daily.toFixed(2)}`;
             document.getElementById('weeklyRevResult').innerText = `$${Math.round(weekly).toLocaleString()}`;
             document.getElementById('monthlyRevResult').innerText = `$${Math.round(monthlyMin).toLocaleString()} - $${Math.round(monthlyMax).toLocaleString()}`;
-            document.getElementById('yearlyRevResult').innerText = `$${Math.round(yearlyMin).toLocaleString()}k - $${Math.round(yearlyMax/1000).toLocaleString()}k`;
-        }
+            document.getElementById('yearlyRevResult').innerText = `$${Math.round(yearlyMin).toLocaleString()}k - $${Math.round(yearlyMax/1000).toLocaleString()}k`;        }
 
         // Main Action Button Logic
         async function processAction() {
@@ -295,8 +294,7 @@
                             const videoData = data.items[0];
                             document.getElementById('channelName').innerText = videoData.snippet.channelTitle;
                             // Update slider based on actual views (optional logic)
-                            // slider.value = videoData.statistics.viewCount;
-                        }
+                            // slider.value = videoData.statistics.viewCount;   }
                     } else {
                         // If no API key, run local calculation simulation
                         setTimeout(() => {
@@ -311,4 +309,20 @@
                     if(videoId) {
                         document.getElementById('thumbPlaceholder').classList.add('hidden');
                         document.getElementById('thumbPreview').classList.remove('hidden');
-                        document.getElementById('thumbPreview').src = `https://img.youtube.com/vi/${
+                        document.getElementById('thumbPreview').src = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+                    }
+                }
+                
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Something went wrong!");
+            } finally {
+                setTimeout(() => { btn.innerHTML = originalBtnHtml; }, 1000);
+            }
+        }
+
+        // Initialize defaults on load
+        calculateEarningLocally();
+    </script>
+</body>
+</html>
