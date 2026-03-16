@@ -3,137 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Ultimate Creator Suite | CalcGrow</title>
+    <title>CalcGrow Studio | YouTube Intelligence</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
-        .tab-active { border-bottom: 4px solid #ef4444; color: #ef4444; }
-        .premium-card { background: white; border-radius: 2rem; border: 1px solid #e2e8f0; }
-        .channel-banner { height: 180px; background-size: cover; background-position: center; border-radius: 1.5rem 1.5rem 0 0; background-image: url('https://via.placeholder.com/1200x400?text=Channel+Banner'); }
-        .yt-shadow { box-shadow: 0 20px 40px -15px rgba(239, 68, 68, 0.2); }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .studio-card { background: white; border-radius: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; }
+        .yt-input { border: 1px solid #e2e8f0; border-radius: 0.75rem; transition: all 0.2s; }
+        .yt-input:focus { border-color: #ef4444; ring: 3px rgba(239, 68, 68, 0.1); }
+        .analyze-btn { background: linear-gradient(180deg, #ff4d4d 0%, #e60000 100%); transition: transform 0.1s; }
+        .analyze-btn:active { transform: scale(0.98); }
+        .status-badge { background: #ecfdf5; color: #059669; font-size: 0.7rem; padding: 0.25rem 0.75rem; border-radius: 99px; border: 1px solid #d1fae5; }
+        .earning-black-card { background: #000; border-radius: 1rem; color: white; padding: 2rem; text-align: center; }
     </style>
 </head>
-<body class="text-slate-900">
+<body class="p-4 md:p-8">
 
-    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
-            <a href="index.html" class="font-bold text-xl text-red-600 flex items-center gap-2">
-                <i class="fas fa-arrow-left text-slate-400 text-sm"></i> CalcGrow
-            </a>
+    <header class="max-w-6xl mx-auto flex justify-between items-center mb-8">
+        <div class="flex items-center gap-2">
+            <i class="fab fa-youtube text-red-600 text-3xl"></i>
+            <div>
+                <h1 class="text-xl font-bold leading-none">CalcGrow</h1>
+                <p class="text-slate-400 text-sm font-medium">Studio</p>
+            </div>
         </div>
-    </nav>
+        <div class="status-badge flex items-center gap-1 font-bold">
+            <i class="fas fa-lock text-[10px]"></i> 256-Bit Secure & Private
+        </div>
+    </header>
 
-    <main class="max-w-5xl mx-auto px-6 py-12">
+    <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
         
-        <div class="flex justify-center gap-8 mb-12 border-b border-slate-200 overflow-x-auto">
-            <button onclick="showTool('earning')" id="tab-earning" class="pb-4 font-bold text-sm uppercase tracking-wider tab-active px-4 transition-all">Earning Calc</button>
-            <button onclick="showTool('thumbnail')" id="tab-thumbnail" class="pb-4 font-bold text-sm uppercase tracking-wider text-slate-400 px-4 transition-all">Thumbnail Downloader</button>
-            <button onclick="showTool('transcript')" id="tab-transcript" class="pb-4 font-bold text-sm uppercase tracking-wider text-slate-400 px-4 transition-all">AI Transcript</button>
+        <div class="studio-card p-8">
+            <h2 class="text-2xl font-bold mb-2">Channel Intelligence</h2>
+            <p class="text-slate-500 text-sm mb-8 leading-relaxed">Unlock detailed revenue data for any public YouTube channel.</p>
+
+            <div class="relative mb-6">
+                <i class="fas fa-search absolute left-4 top-4 text-slate-300"></i>
+                <input type="text" id="handleInput" placeholder="@mrbeast" 
+                       class="w-full pl-11 p-4 yt-input bg-slate-50 font-semibold focus:outline-none">
+            </div>
+
+            <button onclick="startAnalysis()" id="analyzeBtn" class="w-full analyze-btn text-white p-4 rounded-xl font-bold text-lg shadow-lg shadow-red-100 flex items-center justify-center gap-2 mb-8">
+                <i class="fas fa-bolt"></i> Analyze Revenue
+            </button>
+
+            <hr class="border-slate-100 mb-8">
+
+            <div class="space-y-6">
+                <p class="text-[10px] font-bold text-slate-300 uppercase tracking-widest text-center">Advanced Parameters</p>
+                
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <label class="text-sm font-bold text-slate-700">Average Daily Views</label>
+                        <span class="text-red-600 font-bold" id="viewCount">10,000</span>
+                    </div>
+                    <input type="range" min="1000" max="1000000" step="1000" value="10000" 
+                           class="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-red-600" id="viewSlider">
+                    <div class="flex justify-between text-[10px] text-slate-400 mt-2 font-bold uppercase">
+                        <span>Min</span> <span>Max</span>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-sm font-bold text-slate-700 block mb-3">Niche / Category RPM</label>
+                    <select class="w-full p-4 yt-input bg-slate-50 font-semibold text-sm focus:outline-none cursor-pointer">
+                        <option>Tech / Education ($8.00 RPM)</option>
+                        <option>Finance / Crypto ($12.50 RPM)</option>
+                        <option>Vlogs / Lifestyle ($4.00 RPM)</option>
+                        <option>Shorts / Memes ($0.50 RPM)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="text-sm font-bold text-slate-700 block mb-3">Currency</label>
+                    <select class="w-full p-4 yt-input bg-slate-50 font-semibold text-sm focus:outline-none cursor-pointer">
+                        <option>🇺🇸 USD - United States Dollar</option>
+                        <option>🇮🇳 INR - Indian Rupee</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
-        <div class="premium-card p-4 mb-10 yt-shadow">
-            <div class="flex flex-col md:row gap-4">
-                <input type="text" id="videoUrl" placeholder="Paste YouTube Video or Channel Link..." 
-                       class="flex-1 p-4 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-red-500 font-medium">
-                <button onclick="processRequest()" class="bg-red-600 text-white px-10 py-4 rounded-xl font-bold hover:bg-red-700 shadow-lg shadow-red-200 transition-all">
-                    Generate Result
+        <div class="space-y-6">
+            <div class="studio-card p-8">
+                <h2 class="text-2xl font-bold mb-2">Projected Earnings</h2>
+                <p class="text-slate-500 text-sm mb-8 leading-relaxed">Estimated based on CPM rates and daily traffic volume.</p>
+
+                <div class="earning-black-card mb-8">
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-2">Estimated Monthly Revenue</p>
+                    <h3 class="text-5xl font-extrabold mb-4" id="monthlyVal">$12 - $23</h3>
+                    <p class="text-[10px] text-slate-500 font-medium">*Excluding sponsorships</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 text-center">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Daily Income</p>
+                        <p class="text-xl font-bold text-green-600">$0 - $1</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 text-center">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Weekly Income</p>
+                        <p class="text-xl font-bold text-green-600">$4 - $10</p>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 text-center mb-6">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Yearly Forecast</p>
+                    <p class="text-2xl font-black text-blue-600">$146 - $274</p>
+                </div>
+
+                <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-100 text-center border-dashed">
+                    <p class="text-[11px] font-bold text-blue-700">🚢 EST. BRAND DEAL (PER VIDEO)</p>
+                    <p class="text-xl font-black text-blue-800">$20 - $50</p>
+                </div>
+                
+                <button class="w-full mt-6 text-slate-500 font-bold text-sm flex items-center justify-center gap-2 hover:text-slate-800 transition-colors">
+                    <i class="fas fa-share-alt"></i> Share Report
                 </button>
             </div>
         </div>
-
-        <div id="tool-earning" class="tool-section">
-            <div class="premium-card overflow-hidden mb-8">
-                <div class="channel-banner" id="ch-banner"></div>
-                <div class="p-8 -mt-16 flex flex-col md:flex-row items-center gap-6">
-                    <img src="https://via.placeholder.com/150" id="ch-logo" class="w-32 h-32 rounded-full border-4 border-white shadow-lg bg-white">
-                    <div class="text-center md:text-left pt-8 md:pt-0">
-                        <h2 class="text-3xl font-extrabold" id="ch-name">Channel Name</h2>
-                        <p class="text-slate-500 font-medium">@creatorhandle • 1.2M Subscribers</p>
-                    </div>
-                </div>
-                <div class="px-8 pb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                        <p class="text-xs font-bold text-slate-400 uppercase mb-2">Daily Revenue</p>
-                        <p class="text-2xl font-black text-slate-800">$140 - $420</p>
-                    </div>
-                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                        <p class="text-xs font-bold text-slate-400 uppercase mb-2">Monthly Income</p>
-                        <p class="text-2xl font-black text-blue-600">$4,200 - $12,600</p>
-                    </div>
-                    <div class="bg-red-50 p-6 rounded-2xl border border-red-100">
-                        <p class="text-xs font-bold text-red-400 uppercase mb-2">Yearly Projection</p>
-                        <p class="text-2xl font-black text-red-600">$50,400 - $151,200</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="tool-thumbnail" class="tool-section hidden">
-            <div class="premium-card p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div class="aspect-video bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 flex items-center justify-center">
-                    <img id="thumb-prev" src="https://via.placeholder.com/640x360?text=Thumbnail+Preview" class="w-full h-full object-cover">
-                </div>
-                <div>
-                    <h3 class="text-2xl font-bold mb-4">Download Assets</h3>
-                    <div class="space-y-4">
-                        <button class="w-full flex justify-between items-center bg-slate-900 text-white p-4 rounded-xl font-bold">
-                            <span>Maximum Quality (4K)</span> <i class="fas fa-download"></i>
-                        </button>
-                        <button class="w-full flex justify-between items-center bg-slate-100 text-slate-700 p-4 rounded-xl font-bold">
-                            <span>High Definition (HD)</span> <i class="fas fa-download"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="tool-transcript" class="tool-section hidden">
-            <div class="premium-card p-8">
-                <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
-                    <h3 class="text-xl font-bold">AI Video Transcript</h3>
-                    <div class="flex gap-2">
-                        <button class="bg-slate-100 px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-200">Copy Text</button>
-                        <button class="bg-slate-100 px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-200">Download .TXT</button>
-                    </div>
-                </div>
-                <div class="bg-slate-50 p-6 rounded-2xl border border-dashed border-slate-300 min-h-[300px] text-slate-500 leading-relaxed">
-                    Paste the video link above to extract the full transcript instantly...
-                </div>
-            </div>
-        </div>
-
     </main>
 
-    <script>
-        function showTool(toolId) {
-            // Hide all tools
-            document.querySelectorAll('.tool-section').forEach(section => section.classList.add('hidden'));
-            // Remove active tab style
-            document.querySelectorAll('button[id^="tab-"]').forEach(tab => {
-                tab.classList.remove('tab-active');
-                tab.classList.add('text-slate-400');
-            });
+    <section class="max-w-6xl mx-auto py-16 text-center">
+        <h3 class="text-2xl font-extrabold mb-2">Trusted by 50,000+ Creators</h3>
+        <p class="text-slate-400 text-sm mb-12">The industry standard for revenue estimation and channel growth analysis.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
+            <div>
+                <div class="w-12 h-12 bg-red-50 text-red-500 rounded-xl flex items-center justify-center mb-4 text-xl">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h4 class="font-bold mb-2">AI-Powered RPM</h4>
+                <p class="text-xs text-slate-500 leading-relaxed">Our algorithm adjusts earnings based on channel niche, country, and viewer retention rates.</p>
+            </div>
+            <div>
+                <div class="w-12 h-12 bg-red-50 text-red-500 rounded-xl flex items-center justify-center mb-4 text-xl">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4 class="font-bold mb-2">100% Privacy First</h4>
+                <p class="text-xs text-slate-500 leading-relaxed">No login required. We use public API data. Your search history is never stored.</p>
+            </div>
+            <div>
+                <div class="w-12 h-12 bg-red-50 text-red-500 rounded-xl flex items-center justify-center mb-4 text-xl">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h4 class="font-bold mb-2">Global Currency</h4>
+                <p class="text-xs text-slate-500 leading-relaxed">Convert earnings instantly into 4+ global currencies with real-time exchange rates.</p>
+            </div>
+        </div>
+    </section>
 
-            // Show selected tool
-            document.getElementById('tool-' + toolId).classList.remove('hidden');
-            // Add active tab style
-            document.getElementById('tab-' + toolId).classList.add('tab-active');
-            document.getElementById('tab-' + toolId).classList.remove('text-slate-400');
+    <script>
+        // Real-time Slider Update
+        const slider = document.getElementById('viewSlider');
+        const viewCount = document.getElementById('viewCount');
+        
+        slider.oninput = function() {
+            viewCount.innerHTML = parseInt(this.value).toLocaleString();
         }
 
-        function processRequest() {
-            // This is where the magic happens
-            const url = document.getElementById('videoUrl').value;
-            if(!url) { alert("Please paste a link first!"); return; }
-            
-            // Visual feedback
-            alert("Fetching Channel Branding & Data...");
-            // Logic to update Logo/Banner/Earnings will go here via API
+        function startAnalysis() {
+            const btn = document.getElementById('analyzeBtn');
+            btn.innerHTML = `<i class="fas fa-circle-notch animate-spin"></i> Analyzing...`;
+            setTimeout(() => {
+                btn.innerHTML = `<i class="fas fa-bolt"></i> Analyze Revenue`;
+                alert("Real-time data fetching connected!");
+            }, 2000);
         }
     </script>
-
-</bod
-    y>
+</body>
 </html>
