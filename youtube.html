@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Studio | CalcGrow Intelligence</title>
+    <title>CalcGrow Studio | YouTube Intelligence</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -29,17 +29,16 @@
                 <p class="text-slate-400 text-sm font-medium">Studio</p>
             </div>
         </div>
-        <div class="hidden md:block bg-emerald-50 text-emerald-600 text-[10px] px-3 py-1 rounded-full font-bold border border-emerald-100 uppercase tracking-widest">
+        <div class="hidden md:flex bg-emerald-50 text-emerald-600 text-[10px] px-3 py-1 rounded-full font-bold border border-emerald-100 items-center">
             <i class="fas fa-lock mr-1"></i> 256-Bit Secure & Private
         </div>
     </header>
 
     <main class="max-w-6xl mx-auto">
-        
         <div class="flex gap-8 mb-10 border-b border-slate-200 overflow-x-auto">
-            <button onclick="switchTab('earning')" id="tab-earning" class="tab-btn active pb-4 text-sm font-bold uppercase tracking-widest">Revenue Calc</button>
-            <button onclick="switchTab('thumbnail')" id="tab-thumbnail" class="tab-btn pb-4 text-sm font-bold uppercase tracking-widest text-slate-400">Thumbnails</button>
-            <button onclick="switchTab('transcript')" id="tab-transcript" class="tab-btn pb-4 text-sm font-bold uppercase tracking-widest text-slate-400">AI Transcript</button>
+            <button onclick="switchTab('earning')" id="tab-earning" class="tab-btn active pb-4 text-sm font-bold uppercase tracking-widest whitespace-nowrap">Revenue Analysis</button>
+            <button onclick="switchTab('thumbnail')" id="tab-thumbnail" class="tab-btn pb-4 text-sm font-bold uppercase tracking-widest text-slate-400 whitespace-nowrap">Thumbnail Pro</button>
+            <button onclick="switchTab('transcript')" id="tab-transcript" class="tab-btn pb-4 text-sm font-bold uppercase tracking-widest text-slate-400 whitespace-nowrap">AI Transcript</button>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -47,35 +46,44 @@
             <div class="lg:col-span-5">
                 <div class="studio-card p-8 sticky top-8">
                     <h2 id="tool-title" class="text-2xl font-black mb-2">Revenue Analysis</h2>
-                    <p id="tool-desc" class="text-slate-500 text-sm mb-8 leading-relaxed">Enter a channel or video link to get real-time creator intelligence.</p>
-
+                    <p id="tool-desc" class="text-slate-500 text-sm mb-8 leading-relaxed">Enter a channel or video link to get detailed intelligence and earnings.</p>
+                    
                     <div class="relative mb-6">
                         <i class="fas fa-link absolute left-4 top-4 text-slate-300"></i>
-                        <input type="text" id="mainInput" placeholder="Paste link here..." 
-                               class="w-full pl-11 p-4 yt-input bg-slate-50 font-semibold focus:outline-none">
+                        <input type="text" id="mainInput" placeholder="Paste link here..." class="w-full pl-11 p-4 yt-input bg-slate-50 font-semibold focus:outline-none focus:border-red-500 focus:bg-white transition-all">
                     </div>
-
-                    <button onclick="processAction()" id="actionBtn" class="w-full analyze-btn text-white p-4 rounded-xl font-bold text-lg shadow-lg shadow-red-100 flex items-center justify-center gap-2 mb-8 uppercase tracking-wider">
+                    
+                    <button onclick="processAction()" id="actionBtn" class="w-full analyze-btn text-white p-4 rounded-xl font-bold uppercase tracking-widest text-sm flex justify-center items-center gap-2">
                         <i class="fas fa-bolt"></i> Analyze Revenue
                     </button>
 
-                    <div id="earning-params" class="space-y-6 pt-4 border-t border-slate-100">
-                        <p class="text-[10px] font-bold text-slate-300 uppercase tracking-widest text-center">Custom Parameters</p>
+                    <div id="earning-params" class="space-y-6 pt-8 mt-8 border-t border-slate-100">
+                        <p class="text-[10px] font-bold text-slate-300 uppercase tracking-widest text-center">Advanced Parameters</p>
+                        
                         <div>
                             <div class="flex justify-between items-center mb-3 text-sm font-bold">
-                                <span>Daily Views</span>
+                                <span class="text-slate-700">Average Daily Views</span>
                                 <span class="text-red-600" id="viewCountDisplay">10,000</span>
                             </div>
-                            <input type="range" min="1000" max="1000000" value="10000" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-red-600" id="viewSlider">
+                            <input type="range" id="viewSlider" min="1000" max="1000000" value="10000" step="1000" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-red-600">
+                            <div class="flex justify-between mt-1 text-[10px] font-bold text-slate-400 uppercase">
+                                <span>Min</span><span>Max</span>
+                            </div>
                         </div>
+
                         <div>
-                            <label class="text-sm font-bold block mb-3">Niche Category</label>
-                            <select class="w-full p-4 yt-input bg-slate-50 font-semibold text-sm cursor-pointer outline-none">
-                                <option>Finance / Business ($12.00 RPM)</option>
-                                <option>Tech / Gadgets ($8.00 RPM)</option>
-                                <option>Vlogs ($4.00 RPM)</option>
-                                <option>Gaming ($2.50 RPM)</option>
-                            </select>
+                            <label class="text-sm font-bold block mb-3 text-slate-700">Niche / Category RPM</label>
+                            <div class="relative">
+                                <i class="fas fa-layer-group absolute left-4 top-4 text-slate-400"></i>
+                                <select id="rpmSelect" class="w-full pl-11 p-4 yt-input bg-slate-50 font-semibold text-sm cursor-pointer outline-none appearance-none">
+                                    <option value="0.50">Shorts / Memes ($0.50 RPM)</option>
+                                    <option value="2.50">Gaming / Entertainment ($2.50 RPM)</option>
+                                    <option value="4.00" selected>Vlogs / Lifestyle ($4.00 RPM)</option>
+                                    <option value="8.00">Tech / Gadgets ($8.00 RPM)</option>
+                                    <option value="12.00">Finance / Business ($12.00 RPM)</option>
+                                </select>
+                                <i class="fas fa-caret-down absolute right-4 top-4 text-slate-400 pointer-events-none"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,30 +93,34 @@
                 
                 <div id="res-earning" class="space-y-6">
                     <div class="studio-card overflow-hidden">
-                        <div class="banner-box" id="bannerImg" style="background-image: url('https://via.placeholder.com/1000x300?text=Channel+Banner+Preview');"></div>
+                        <div class="banner-box" id="bannerImg" style="background-image: url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop');"></div>
                         <div class="px-8 pb-8">
                             <div class="flex flex-col md:flex-row items-center gap-6 -mt-10 mb-8">
-                                <img src="https://via.placeholder.com/150" id="channelLogo" class="w-28 h-28 rounded-full border-4 border-white shadow-xl bg-white">
-                                <div class="text-center md:text-left pt-10 md:pt-12">
-                                    <h3 class="text-2xl font-extrabold" id="channelName">Channel Name</h3>
-                                    <p class="text-slate-400 text-sm font-bold uppercase tracking-widest">Global Intelligence Report</p>
+                                <img src="https://ui-avatars.com/api/?name=Channel&background=random" id="channelLogo" class="w-24 h-24 rounded-full border-4 border-white shadow-lg bg-white">
+                                <div class="text-center md:text-left pt-2 md:pt-10">
+                                    <h3 class="text-2xl font-extrabold" id="channelName">Channel Intelligence</h3>
+                                    <p class="text-slate-400 text-sm font-bold uppercase tracking-widest mt-1">Projected Earnings Report</p>
                                 </div>
                             </div>
-                            
-                            <div class="earning-black-card mb-6">
+
+                            <div class="earning-black-card mb-6 shadow-2xl">
                                 <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-2">Estimated Monthly Revenue</p>
-                                <h3 class="text-5xl font-black mb-4 tracking-tighter">$1,200 - $3,500</h3>
+                                <h3 class="text-5xl md:text-6xl font-black mb-4 tracking-tighter" id="monthlyRevResult">$1,200 - $1,500</h3>
                                 <p class="text-[10px] text-slate-500 font-medium">*Excluding Brand Deals & Merch</p>
                             </div>
 
-                            <div class="grid grid-cols-2 gap-4">
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                                 <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 text-center">
-                                    <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Weekly Income</p>
-                                    <p class="text-xl font-bold text-slate-800">$300 - $875</p>
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Daily Income</p>
+                                    <p class="text-xl font-bold text-emerald-600" id="dailyRevResult">$40</p>
                                 </div>
                                 <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 text-center">
-                                    <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Yearly Projection</p>
-                                    <p class="text-xl font-bold text-blue-600">$14K - $42K</p>
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Weekly Income</p>
+                                    <p class="text-xl font-bold text-emerald-600" id="weeklyRevResult">$280</p>
+                                </div>
+                                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 text-center col-span-2 md:col-span-1">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Yearly Forecast</p>
+                                    <p class="text-xl font-bold text-blue-600" id="yearlyRevResult">$14.4K - $18K</p>
                                 </div>
                             </div>
                         </div>
@@ -116,21 +128,26 @@
                 </div>
 
                 <div id="res-thumbnail" class="hidden studio-card p-8">
-                    <div class="aspect-video bg-slate-100 rounded-2xl overflow-hidden mb-8 border border-slate-100">
-                        <img id="thumbPreview" src="https://via.placeholder.com/640x360?text=Thumbnail+Preview" class="w-full h-full object-cover">
+                    <div class="aspect-video bg-slate-100 rounded-2xl overflow-hidden mb-8 border border-slate-200 flex items-center justify-center">
+                        <img id="thumbPreview" src="" alt="Thumbnail Preview" class="w-full h-full object-cover hidden">
+                        <p id="thumbPlaceholder" class="text-slate-400 font-bold uppercase tracking-widest text-sm">Thumbnail will appear here</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <button class="bg-slate-900 text-white p-4 rounded-xl font-bold hover:bg-black flex justify-between items-center">Download Ultra HD <i class="fas fa-download"></i></button>
-                        <button class="bg-slate-100 text-slate-700 p-4 rounded-xl font-bold hover:bg-slate-200 flex justify-between items-center">Download Standard <i class="fas fa-download"></i></button>
+                        <button class="bg-slate-900 text-white p-4 rounded-xl font-bold hover:bg-black transition flex justify-center items-center gap-2">
+                            <i class="fas fa-download"></i> Download Max Res
+                        </button>
+                        <button class="bg-slate-100 text-slate-700 p-4 rounded-xl font-bold hover:bg-slate-200 transition flex justify-center items-center gap-2">
+                            <i class="fas fa-image"></i> Standard Quality
+                        </button>
                     </div>
                 </div>
 
                 <div id="res-transcript" class="hidden studio-card p-8">
                     <div class="flex justify-between items-center mb-6">
                         <h4 class="font-bold uppercase tracking-widest text-xs text-slate-400">AI Generated Transcript</h4>
-                        <button class="text-blue-600 text-xs font-bold hover:underline">Copy All Text</button>
+                        <button class="text-blue-600 text-xs font-bold hover:underline"><i class="fas fa-copy mr-1"></i>Copy Text</button>
                     </div>
-                    <div class="bg-slate-50 p-6 rounded-2xl text-slate-600 text-sm leading-relaxed border border-dashed border-slate-200 min-h-[400px]">
+                    <div class="bg-slate-50 p-6 rounded-2xl text-slate-600 text-sm leading-relaxed border border-dashed border-slate-300 min-h-[300px]">
                         Transcript data will appear here after analysis...
                     </div>
                 </div>
@@ -138,135 +155,160 @@
             </div>
         </div>
     </main>
-    <section class="max-w-6xl mx-auto px-4 py-16 border-t border-slate-200 mt-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-            
-            <div class="space-y-4">
-                <h2 class="text-2xl font-black text-slate-800">Understanding YouTube Revenue Metrics</h2>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    CalcGrow Studio provides an advanced projection of creator earnings based on global CPM (Cost Per Mille) and RPM (Revenue Per Mille) standards. Unlike basic calculators, our algorithm factors in niche-specific data, such as high-paying sectors like <strong>Finance, SaaS, and Real Estate</strong>, versus high-volume sectors like <strong>Entertainment and Gaming</strong>.
-                </p>
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                    <h4 class="font-bold text-red-600 mb-2 italic">Pro Tip for Creators:</h4>
-                    <p class="text-xs text-slate-500">To increase your RPM, target Tier-1 audiences in the USA, UK, and Canada. Content consumed in these regions typically generates 3x higher ad revenue compared to global averages.</p>
-                </div>
+
+    <section class="max-w-6xl mx-auto px-4 py-16 border-t border-slate-200 mt-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            <div>
+                <div class="bg-red-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-red-600 text-2xl"><i class="fas fa-robot"></i></div>
+                <h3 class="font-bold text-lg mb-2">AI-Powered RPM</h3>
+                <p class="text-slate-500 text-sm">Our algorithm adjusts earnings based on channel niche, country, and viewer retention rates.</p>
             </div>
-
-            <div class="space-y-4">
-                <h2 class="text-2xl font-black text-slate-800">How to Use Our AI Utilities</h2>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    Our suite is designed for efficiency. With the <strong>YouTube Thumbnail Downloader</strong>, you can extract high-definition assets for fair-use analysis or inspiration. The <strong>AI Transcript Engine</strong> utilizes natural language processing to convert video speech into structured text, supporting creators in multi-language SEO optimization and accessibility compliance.
-                </p>
-                <ul class="space-y-2">
-                    <li class="flex items-center gap-2 text-sm text-slate-700 font-semibold">
-                        <i class="fas fa-check text-green-500"></i> No Login Required for Global Access
-                    </li>
-                    <li class="flex items-center gap-2 text-sm text-slate-700 font-semibold">
-                        <i class="fas fa-check text-green-500"></i> Real-time Exchange Rates for Currency
-                    </li>
-                    <li class="flex items-center gap-2 text-sm text-slate-700 font-semibold">
-                        <i class="fas fa-check text-green-500"></i> GDPR & Privacy Compliant Data Fetching
-                    </li>
-                </ul>
+            <div>
+                <div class="bg-red-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-red-600 text-2xl"><i class="fas fa-shield-alt"></i></div>
+                <h3 class="font-bold text-lg mb-2">100% Privacy First</h3>
+                <p class="text-slate-500 text-sm">No login required. We use public API data. Your search history is never stored.</p>
             </div>
-
-        </div>
-
-        <div class="mt-12 pt-8 border-t border-slate-100 text-center">
-            <p class="text-[10px] text-slate-400 uppercase font-bold tracking-[0.2em] mb-4">International Creator Resources</p>
-            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[11px] text-slate-400 font-medium">
-                <span>YouTube Money Calculator</span>
-                <span>CPM Rates 2026</span>
-                <span>Video Transcript API</span>
-                <span>HD Thumbnail Grabber</span>
-                <span>Social Media Revenue Insights</span>
-                <span>Creator Economy Analytics</span>
+            <div>
+                <div class="bg-red-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-red-600 text-2xl"><i class="fas fa-globe"></i></div>
+                <h3 class="font-bold text-lg mb-2">Global Standards</h3>
+                <p class="text-slate-500 text-sm">Convert earnings instantly into 4+ global currencies with real-time exchange rates.</p>
             </div>
         </div>
     </section>
 
-    <footer class="bg-white border-t border-slate-200 py-12 mt-10">
+    <footer class="bg-white border-t border-slate-200 py-10">
         <div class="max-w-6xl mx-auto px-6 text-center">
             <div class="flex flex-wrap justify-center gap-6 mb-6 text-xs font-bold text-slate-500 uppercase tracking-widest">
-                <a href="privacy-policy.html" class="hover:text-red-600">Privacy Policy</a>
-                <a href="terms.html" class="hover:text-red-600">Terms of Service</a>
-                <a href="contact.html" class="hover:text-red-600">Contact Us</a>
-                <a href="help.html" class="hover:text-red-600">Help Center</a>
+                <a href="#" class="hover:text-red-600 transition">Privacy Policy</a>
+                <a href="#" class="hover:text-red-600 transition">Terms of Service</a>
+                <a href="#" class="hover:text-red-600 transition">Contact Us</a>
             </div>
-            <p class="text-[10px] text-slate-400">CalcGrow is an independent analytics platform and is not endorsed by YouTube or Google LLC.</p>
+            <p class="text-[10px] text-slate-400">© 2026 CalcGrow is an independent analytics platform and is not endorsed by YouTube.</p>
         </div>
-    </foo
-        ter>
-    <script>
-        function switchTab(tab) {
-            // UI Update
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active', 'text-slate-400'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.add('text-slate-400'));
-            document.getElementById('tab-'+tab).classList.add('active');
-            document.getElementById('tab-'+tab).classList.remove('text-slate-400');
+    </footer>
 
-            // Sections Visibility
+    <script>
+        // YAHAN APNI REAL API KEY PASTE KAREIN
+        const API_KEY = "YOUR_API_KEY_HERE"; 
+
+        // Tab Switching Logic
+        function switchTab(tab) {
+            // Update Buttons
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('active', 'text-slate-800');
+                b.classList.add('text-slate-400');
+            });
+            document.getElementById('tab-' + tab).classList.remove('text-slate-400');
+            document.getElementById('tab-' + tab).classList.add('active', 'text-slate-800');
+
+            // Hide all sections
             document.getElementById('res-earning').classList.add('hidden');
             document.getElementById('res-thumbnail').classList.add('hidden');
             document.getElementById('res-transcript').classList.add('hidden');
+
+            // Show selected section
             document.getElementById('res-' + tab).classList.remove('hidden');
 
-            // Sidebar Text Update
+            // Update Sidebar UI based on Tab
             const title = document.getElementById('tool-title');
             const desc = document.getElementById('tool-desc');
             const btn = document.getElementById('actionBtn');
             const params = document.getElementById('earning-params');
 
-            if(tab === 'earning') {
+            if (tab === 'earning') {
                 title.innerText = "Revenue Analysis";
-                desc.innerText = "Get detailed channel intelligence and earnings.";
-                btn.innerHTML = `<i class="fas fa-bolt"></i> Analyze Revenue`;
+                desc.innerText = "Enter a channel or video link to get detailed intelligence and earnings.";
+                btn.innerHTML = '<i class="fas fa-bolt"></i> Analyze Revenue';
                 params.classList.remove('hidden');
-            } else if(tab === 'thumbnail') {
+            } else if (tab === 'thumbnail') {
                 title.innerText = "Thumbnail Pro";
                 desc.innerText = "Download high-quality video thumbnails instantly.";
-                btn.innerHTML = `<i class="fas fa-image"></i> Get Thumbnail`;
+                btn.innerHTML = '<i class="fas fa-image"></i> Get Thumbnail';
                 params.classList.add('hidden');
             } else {
                 title.innerText = "AI Transcript";
                 desc.innerText = "Extract and translate video text with precision.";
-                btn.innerHTML = `<i class="fas fa-file-alt"></i> Extract Text`;
+                btn.innerHTML = '<i class="fas fa-file-alt"></i> Extract Text';
                 params.classList.add('hidden');
             }
         }
 
+        // Slider Logic
         const slider = document.getElementById('viewSlider');
+        const viewCountDisplay = document.getElementById('viewCountDisplay');
+        const rpmSelect = document.getElementById('rpmSelect');
+
         slider.oninput = function() {
-            document.getElementById('viewCountDisplay').innerHTML = parseInt(this.value).toLocaleString();
-        } 
-
-   async function processAction() {
-    const url = document.getElementById('mainInput').value;
-    const btn = document.getElementById('actionBtn');
-    
-    if(!url) { alert("Pehle link toh dalo bhai!"); return; }
-
-    btn.innerHTML = `<i class="fas fa-circle-notch animate-spin"></i> Analyzing...`;
-
-    try {
-        // API integration hone tak simulation
-        setTimeout(() => {
-            btn.innerHTML = `<i class="fas fa-bolt"></i> Analyze Revenue`;
-            alert("API Key missing hai! Google Cloud Console se key lekar yahan update karo.");
-        }, 1500);
-    } catch (error) {
-        console.error("Error:", error);
-        btn.innerHTML = `<i class="fas fa-bolt"></i> Analyze Revenue`;
-    }
-       
-   }     
-            const original = btn.innerHTML;
-            btn.innerHTML = `<i class="fas fa-circle-notch animate-spin"></i> Processing...`;
-            setTimeout(() => {
-                btn.innerHTML = original;
-                alert("Data processed successfully for international market!");
-            }, 1500);
+            viewCountDisplay.innerText = parseInt(this.value).toLocaleString();
+            calculateEarningLocally(); // Auto update as slider moves
         }
-    </script>
-</body>
-</html>
+        
+        rpmSelect.onchange = function() {
+            calculateEarningLocally(); // Auto update when dropdown changes
+        }
+
+        // Calculation Math
+        function calculateEarningLocally() {
+            const views = parseInt(slider.value);
+            const rpm = parseFloat(rpmSelect.value); // Selected RPM from dropdown
+            
+            // Formula: (Views / 1000) * RPM * 30 days
+            const daily = (views / 1000) * rpm;
+            const monthlyMin = daily * 30 * 0.8; // 20% margin for min
+            const monthlyMax = daily * 30 * 1.2; // 20% margin for max
+            const weekly = daily * 7;
+            const yearlyMin = monthlyMin * 12;
+            const yearlyMax = monthlyMax * 12;
+
+            document.getElementById('dailyRevResult').innerText = `$${daily.toFixed(2)}`;
+            document.getElementById('weeklyRevResult').innerText = `$${Math.round(weekly).toLocaleString()}`;
+            document.getElementById('monthlyRevResult').innerText = `$${Math.round(monthlyMin).toLocaleString()} - $${Math.round(monthlyMax).toLocaleString()}`;
+            document.getElementById('yearlyRevResult').innerText = `$${Math.round(yearlyMin).toLocaleString()}k - $${Math.round(yearlyMax/1000).toLocaleString()}k`;
+        }
+
+        // Main Action Button Logic
+        async function processAction() {
+            const url = document.getElementById('mainInput').value;
+            const btn = document.getElementById('actionBtn');
+            
+            if(!url) { alert("Please enter a valid link first!"); return; }
+
+            const originalBtnHtml = btn.innerHTML;
+            btn.innerHTML = `<i class="fas fa-circle-notch animate-spin"></i> Processing...`;
+
+            try {
+                // Determine active tab
+                const activeTab = document.querySelector('.tab-btn.active').id.replace('tab-', '');
+                
+                if (activeTab === 'earning') {
+                    // Extract Video ID logic (basic)
+                    let videoId = "";
+                    if(url.includes("v=")) { videoId = url.split("v=")[1].substring(0, 11); }
+                    else if(url.includes("youtu.be/")) { videoId = url.split("youtu.be/")[1].substring(0, 11); }
+
+                    // API Call (If API key is valid)
+                    if (API_KEY !== "YOUR_API_KEY_HERE" && videoId) {
+                        const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${API_KEY}`);
+                        const data = await res.json();
+                        
+                        if(data.items && data.items.length > 0) {
+                            const videoData = data.items[0];
+                            document.getElementById('channelName').innerText = videoData.snippet.channelTitle;
+                            // Update slider based on actual views (optional logic)
+                            // slider.value = videoData.statistics.viewCount;
+                        }
+                    } else {
+                        // If no API key, run local calculation simulation
+                        setTimeout(() => {
+                            calculateEarningLocally();
+                            document.getElementById('channelName').innerText = "Analyzed Channel";
+                            alert("Showing estimations based on slider parameters.");
+                        }, 1000);
+                    }
+                } else if (activeTab === 'thumbnail') {
+                    // Extract thumbnail logic
+                    let videoId = url.split("v=")[1]?.substring(0, 11) || url.split("youtu.be/")[1]?.substring(0, 11);
+                    if(videoId) {
+                        document.getElementById('thumbPlaceholder').classList.add('hidden');
+                        document.getElementById('thumbPreview').classList.remove('hidden');
+                        document.getElementById('thumbPreview').src = `https://img.youtube.com/vi/${
