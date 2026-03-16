@@ -2,354 +2,97 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CalcGrow | The Ultimate Creator Operating System</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalcGrow | Ultimate Social Media Tools & Earning Estimator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- 1. CORE VARIABLES (Design System) --- */
-        :root {
-            --brand-primary: #FF0000;
-            --brand-hover: #D90000;
-            --bg-body: #F8F9FA;
-            --bg-surface: #FFFFFF;
-            --text-main: #0F172A;
-            --text-muted: #64748B;
-            --border-light: #E2E8F0;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
-            --shadow-hover: 0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.02);
-            --radius-md: 12px;
-            --radius-lg: 24px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        /* --- 2. GLOBAL RESET --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
-        body { background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
-        a { text-decoration: none; color: inherit; transition: var(--transition); }
-        ul { list-style: none; }
-
-        /* --- 3. FROSTED GLASS HEADER --- */
-        .navbar {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-light);
-            padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center;
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .logo { font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 8px; letter-spacing: -0.5px; }
-        .logo i { color: var(--brand-primary); }
-        
-        .nav-links { display: flex; gap: 32px; align-items: center; }
-        .nav-links a { font-weight: 500; font-size: 0.95rem; color: var(--text-muted); }
-        .nav-links a:hover { color: var(--text-main); }
-        
-        /* Auth System UI */
-        .auth-group { display: flex; gap: 12px; align-items: center; }
-        .btn { padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: var(--transition); border: none; }
-        .btn-ghost { background: transparent; color: var(--text-main); }
-        .btn-ghost:hover { background: var(--border-light); }
-        .btn-primary { background: var(--brand-primary); color: white; box-shadow: 0 4px 14px rgba(255, 0, 0, 0.2); }
-        .btn-primary:hover { background: var(--brand-hover); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255, 0, 0, 0.3); }
-        
-        /* User Profile Pill */
-        .user-pill { display: none; align-items: center; gap: 10px; background: var(--bg-body); padding: 6px 16px 6px 6px; border-radius: 50px; border: 1px solid var(--border-light); cursor: pointer; }
-        .user-pill:hover { background: var(--border-light); }
-        .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--brand-primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; }
-
-        /* Mobile Toggle */
-        .mobile-menu-btn { display: none; font-size: 1.5rem; cursor: pointer; color: var(--text-main); border: none; background: transparent; }
-
-        /* --- 4. HERO SECTION --- */
-        .hero {
-            padding: 160px 5% 80px; text-align: center;
-            background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-body) 100%);
-            border-bottom: 1px solid var(--border-light);
-        }
-        .hero-badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 6px 16px; border-radius: 100px; font-size: 0.85rem; font-weight: 600;
-            background: rgba(255, 0, 0, 0.05); color: var(--brand-primary); border: 1px solid rgba(255,0,0,0.1);
-            margin-bottom: 24px;
-        }
-        .hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 24px; color: var(--text-main); }
-        .hero p { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; }
-        
-        .trust-banner { margin-top: 60px; font-size: 0.9rem; color: var(--text-muted); font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 10px; }
-
-        /* --- 5. MAIN CONTENT & CATEGORY BOXES --- */
-        .container { max-width: 1280px; margin: 0 auto; padding: 80px 5%; }
-        
-        .category-box {
-            background: var(--bg-surface); padding: 48px; border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md); border: 1px solid var(--border-light);
-            margin-bottom: 40px;
-        }
-        
-        .section-title { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; }
-        .section-indicator { width: 6px; height: 32px; border-radius: 10px; }
-        .section-title h2 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.5px; }
-
-        /* Tool Grid (Fully Responsive Auto-Fit) */
-        .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
-        
-        .tool-card {
-            display: block; background: var(--bg-surface); border: 1px solid var(--border-light);
-            padding: 32px 24px; border-radius: var(--radius-md); text-align: center;
-            transition: var(--transition); position: relative; overflow: hidden;
-        }
-        .tool-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: transparent; }
-        
-        /* Branding Borders */
-        .tool-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; transition: var(--transition); }
-        .c-yt::before { background: #FF0000; }
-        .c-ig::before { background: #E1306C; }
-        .c-fb::before { background: #1877F2; }
-        .c-sc::before { background: #FFFC00; }
-        .c-fin::before { background: #00C853; }
-        .c-shop::before { background: #FFD600; }
-        .c-health::before { background: #00BFA5; }
-        .c-age::before { background: #FF5252; }
-
-        .tool-icon { font-size: 2.5rem; margin-bottom: 20px; display: inline-block; }
-        .tool-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
-        .tool-card p { font-size: 0.9rem; color: var(--text-muted); }
-        
-        .status-badge { position: absolute; top: 16px; right: 16px; background: #F1F5F9; color: var(--text-muted); font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .status-hot { background: rgba(255,0,0,0.1); color: var(--brand-primary); }
-
-        /* --- 6. PREMIUM FOOTER --- */
-        .footer { background: var(--text-main); color: #F1F5F9; padding: 80px 5% 40px; }
-        .footer-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
-        .footer-brand p { color: #94A3B8; margin-top: 16px; font-size: 0.95rem; max-width: 300px; }
-        .footer-col h4 { font-size: 1rem; font-weight: 700; margin-bottom: 24px; color: white; }
-        .footer-col ul li { margin-bottom: 12px; }
-        .footer-col a { color: #94A3B8; font-size: 0.95rem; }
-        .footer-col a:hover { color: white; }
-        .footer-bottom { max-width: 1280px; margin: 60px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #94A3B8; font-size: 0.85rem; }
-
-        /* --- 7. MOBILE RESPONSIVE DESIGN (Media Queries) --- */
-        @media (max-width: 992px) {
-            .footer-grid { grid-template-columns: 1fr 1fr; }
-            .footer-brand { grid-column: 1 / -1; }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links, .auth-group { display: none; } /* Hide desktop nav */
-            .mobile-menu-btn { display: block; }
-            .category-box { padding: 32px 20px; }
-            .hero { padding: 120px 5% 60px; }
-        }
-
-        /* Mobile Menu Overlay */
-        .mobile-nav { display: none; position: fixed; top: 70px; left: 0; width: 100%; background: var(--bg-surface); border-bottom: 1px solid var(--border-light); padding: 20px 5%; box-shadow: var(--shadow-md); z-index: 999; flex-direction: column; gap: 15px; }
-        .mobile-nav.active { display: flex; }
-        .mobile-nav a { font-size: 1.1rem; font-weight: 600; padding: 10px 0; border-bottom: 1px solid var(--border-light); }
+        body { background-color: #f3f4f6; font-family: 'Inter', sans-serif; }
     </style>
 </head>
 <body>
 
-    <header class="navbar">
-        <a href="#" class="logo"><i class="fa-solid fa-calculator"></i> CalcGrow</a>
-        
-        <nav class="nav-links">
-            <a href="#tools">Tools</a>
-            <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
-        </nav>
-
-        <div class="auth-group" id="authGroup">
-            <button class="btn btn-ghost" onclick="toggleAuth()">Log in</button>
-            <button class="btn btn-primary" onclick="toggleAuth()">Sign up free</button>
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-600">CalcGrow</h1>
+            <div class="hidden md:flex space-x-6 font-medium text-gray-600">
+                <a href="#youtube" class="hover:text-red-500">YouTube</a>
+                <a href="#instagram" class="hover:text-pink-500">Instagram</a>
+                <a href="#tiktok" class="hover:text-black">TikTok</a>
+                <select class="bg-gray-100 rounded p-1 text-sm border-none">
+                    <option value="USD">🇺🇸 USD</option>
+                    <option value="INR">🇮🇳 INR</option>
+                    <option value="GBP">🇬🇧 GBP</option>
+                </select>
+            </div>
         </div>
+    </nav>
 
-        <div class="user-pill" id="userProfile" onclick="toggleAuth()">
-            <div class="avatar">C</div>
-            <span style="font-weight: 600; font-size: 0.9rem;">Creator</span>
-            <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; color: var(--text-muted);"></i>
+    <header class="py-16 px-4 text-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Empower Your Content Growth</h2>
+        <p class="text-lg opacity-90 mb-8">Professional earning estimators, downloaders, and creator tools for the global community.</p>
+        <div class="flex justify-center gap-4">
+            <span class="bg-white/20 px-4 py-2 rounded-full text-sm">✓ AdSense Compliant</span>
+            <span class="bg-white/20 px-4 py-2 rounded-full text-sm">✓ 100% Secure</span>
         </div>
-
-        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-            <i class="fa-solid fa-bars" id="menuIcon"></i>
-        </button>
     </header>
 
-    <div class="mobile-nav" id="mobileNav">
-        <a href="#tools">Tools</a>
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" onclick="toggleAuth(); toggleMobileMenu();">Account</button>
-    </div>
-
-    <section class="hero">
-        <div class="hero-badge">
-            <i class="fa-solid fa-bolt" style="color:#FFD700"></i> Analytics Engine v2.0 Live
-        </div>
-        <h1>Dominate Your<br>Digital Empire.</h1>
-        <p>The ultimate operating system for modern creators. Predict revenue, analyze engagement, and manage your wealth from one dashboard.</p>
-        
-        <a href="tools/yt-earning.html" class="btn btn-primary" style="padding: 16px 32px; font-size: 1.1rem;">
-            <i class="fa-brands fa-youtube" style="margin-right: 8px;"></i> Launch YouTube Studio
-        </a>
-
-        <div class="trust-banner">
-            <i class="fa-solid fa-shield-check" style="color: #10B981;"></i> Trusted globally by 50,000+ creators & agencies.
-        </div>
-    </section>
-
-    <main class="container" id="tools">
-        
-        <div class="category-box">
-            <div class="section-title">
-                <div class="section-indicator" style="background: var(--brand-primary);"></div>
-                <h2>Social Growth Engine</h2>
-            </div>
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <div class="tool-grid">
-                <a href="tools/yt-earning.html" class="tool-card c-yt">
-                    <span class="status-badge status-hot">Popular</span>
-                    <i class="fa-brands fa-youtube tool-icon" style="color:#FF0000"></i>
-                    <h3>YouTube Studio</h3>
-                    <p>Revenue prediction & RPM analysis.</p>
-                </a>
-                <a href="#" class="tool-card c-ig">
-                    <i class="fa-brands fa-instagram tool-icon" style="color:#E1306C"></i>
-                    <h3>Instagram Insights</h3>
-                    <p>Sponsorship & engagement rates.</p>
-                </a>
-                <a href="#" class="tool-card c-fb">
-                    <i class="fa-brands fa-facebook tool-icon" style="color:#1877F2"></i>
-                    <h3>Meta Ads Hub</h3>
-                    <p>ROAS & campaign budgeting.</p>
-                </a>
-                <a href="#" class="tool-card c-sc">
-                    <i class="fa-brands fa-snapchat tool-icon" style="color:#FFFC00; text-shadow: 0 1px 3px rgba(0,0,0,0.2);"></i>
-                    <h3>Snapchat Spotlight</h3>
-                    <p>Streak value & reward estimation.</p>
-                </a>
+            <div class="glass-card p-8 rounded-2xl text-center">
+                <div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fab fa-youtube text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">YouTube Suite</h3>
+                <p class="text-gray-500 text-sm mb-6">Earning calculator, thumbnail downloader, and transcript translator.</p>
+                <a href="youtube.html" class="inline-block w-full bg-red-600 text-white py-3 rounded-xl font-bold hover:bg-red-700">Open Tools</a>
             </div>
-        </div>
 
-        <div class="category-box">
-            <div class="section-title">
-                <div class="section-indicator" style="background: #10B981;"></div>
-                <h2>Wealth & Utilities</h2>
+            <div class="glass-card p-8 rounded-2xl text-center">
+                <div class="w-16 h-16 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fab fa-instagram text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Instagram Suite</h3>
+                <p class="text-gray-500 text-sm mb-6">Reels downloader, income estimator, and profile insights.</p>
+                <a href="instagram.html" class="inline-block w-full bg-pink-600 text-white py-3 rounded-xl font-bold hover:bg-pink-700">Open Tools</a>
             </div>
-            
-            <div class="tool-grid">
-                <a href="#" class="tool-card c-fin">
-                    <i class="fa-solid fa-coins tool-icon" style="color:#10B981"></i>
-                    <h3>Finance Hub</h3>
-                    <p>SIP, Compound interest & Tax.</p>
-                </a>
-                <a href="#" class="tool-card c-shop">
-                    <i class="fa-solid fa-tags tool-icon" style="color:#F59E0B"></i>
-                    <h3>Smart Shopping</h3>
-                    <p>Global discount & margin calculator.</p>
-                </a>
-                <a href="#" class="tool-card c-health">
-                    <i class="fa-solid fa-heart-pulse tool-icon" style="color:#14B8A6"></i>
-                    <h3>Health Metrics</h3>
-                    <p>BMI & daily caloric requirements.</p>
-                </a>
-                <a href="#" class="tool-card c-age">
-                    <i class="fa-solid fa-calendar-days tool-icon" style="color:#EF4444"></i>
-                    <h3>Time & Age Tracker</h3>
-                    <p>Precise date difference calculation.</p>
-                </a>
-            </div>
-        </div>
 
+            <div class="glass-card p-8 rounded-2xl text-center">
+                <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fab fa-tiktok text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">TikTok Analytics</h3>
+                <p class="text-gray-500 text-sm mb-6">Real-time revenue estimation and video tools for creators.</p>
+                <a href="#" class="inline-block w-full bg-black text-white py-3 rounded-xl font-bold">Explore</a>
+            </div>
+
+        </div>
     </main>
 
-    <footer class="footer">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <div class="logo" style="color: white;"><i class="fa-solid fa-calculator"></i> CalcGrow</div>
-                <p>Empowering the next generation of digital creators with world-class analytical tools and financial intelligence.</p>
+    <footer class="bg-white border-t mt-12 py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex flex-wrap justify-center gap-6 mb-8 text-sm font-medium text-gray-600">
+                <a href="about.html" class="hover:text-blue-600">About Us</a>
+                <a href="privacy-policy.html" class="hover:text-blue-600">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-blue-600">Terms of Service</a>
+                <a href="contact.html" class="hover:text-blue-600">Contact</a>
+                <a href="help.html" class="hover:text-blue-600">Help Center</a>
             </div>
-            
-            <div class="footer-col">
-                <h4>Platform</h4>
-                <ul>
-                    <li><a href="#">Creator OS</a></li>
-                    <li><a href="#">API Access</a></li>
-                    <li><a href="#">Pricing</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h4>Legal & Support</h4>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">FAQ & Help Center</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; <span id="year"></span> CalcGrow Inc. Built for the global creator economy. All rights reserved.
+            <p class="text-gray-400 text-xs">© 2026 CalcGrow. Not affiliated with YouTube, Instagram, or TikTok.</p>
         </div>
     </footer>
 
-    <script>
-        // 1. Dynamic Footer Year
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // 2. Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const nav = document.getElementById('mobileNav');
-            const icon = document.getElementById('menuIcon');
-            nav.classList.toggle('active');
-            
-            if(nav.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-xmark');
-            } else {
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
-            }
-        }
-
-        // 3. LocalStorage Auth State Manager
-        function checkAuth() {
-            const isLoggedIn = localStorage.getItem('calcGrowAuth') === 'true';
-            if (isLoggedIn) {
-                document.getElementById('authGroup').style.display = 'none';
-                document.getElementById('userProfile').style.display = 'flex';
-            } else {
-                document.getElementById('authGroup').style.display = 'flex';
-                document.getElementById('userProfile').style.display = 'none';
-            }
-        }
-
-        function toggleAuth() {
-            const currentStatus = localStorage.getItem('calcGrowAuth') === 'true';
-            if (currentStatus) {
-                // Logout
-                localStorage.setItem('calcGrowAuth', 'false');
-                alert("You have been securely logged out.");
-            } else {
-                // Login
-                localStorage.setItem('calcGrowAuth', 'true');
-                alert("Welcome back! Your dashboard preferences are loaded.");
-            }
-            checkAuth(); // Refresh UI
-        }
-
-        // Run on page load
-        window.onload = checkAuth;
-    </script>
 </body>
+
 </html>
