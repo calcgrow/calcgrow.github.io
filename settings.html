@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings | CalcGrow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { heading: ['Outfit', 'sans-serif'], body: ['Inter', 'sans-serif'] },
+                    colors: { mcDark: '#030305', mcCard: 'rgba(255,255,255,0.03)' }
+                }
+            }
+        }
+    </script>
+    <style>
+        .auth-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(20px); }
+        .dark .auth-card { background: rgba(255, 255, 255, 0.03); }
+        /* Light Mode Styles */
+        .light body { background-color: #f8fafc; color: #1e293b; }
+        .light .auth-card { background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .light .text-mcTextDim { color: #64748b; }
+    </style>
+</head>
+<body class="font-body bg-mcDark text-white transition-colors duration-300 dark">
+
+    <nav class="p-6 flex justify-between items-center max-w-7xl mx-auto">
+        <a href="index.html" class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white">
+                <i class="fas fa-layer-group"></i>
+            </div>
+            <span class="font-heading font-bold text-xl">CalcGrow</span>
+        </a>
+        <button onclick="toggleTheme()" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition">
+            <i id="themeIcon" class="fas fa-sun"></i>
+        </button>
+    </nav>
+
+    <main class="max-w-md mx-auto px-6 pt-20 pb-24">
+        
+        <div class="flex bg-white/5 p-1 rounded-xl mb-8">
+            <button onclick="showTab('login')" id="btn-login" class="flex-1 py-2 rounded-lg text-sm font-bold bg-indigo-600 text-white transition">Login</button>
+            <button onclick="showTab('signup')" id="btn-signup" class="flex-1 py-2 rounded-lg text-sm font-bold text-mcTextDim transition">Sign Up</button>
+        </div>
+
+        <div id="login-form" class="auth-card p-8 rounded-3xl">
+            <h2 class="font-heading text-2xl font-bold mb-6">Welcome Back</h2>
+            <form class="space-y-4">
+                <div>
+                    <label class="text-xs font-bold uppercase tracking-wider text-mcTextDim mb-2 block">Email Address</label>
+                    <input type="email" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-indigo-500 transition" placeholder="name@email.com">
+                </div>
+                <div>
+                    <label class="text-xs font-bold uppercase tracking-wider text-mcTextDim mb-2 block">Password</label>
+                    <input type="password" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-indigo-500 transition" placeholder="••••••••">
+                </div>
+                <button type="button" class="w-full bg-indigo-600 hover:bg-indigo-500 py-4 rounded-xl font-bold shadow-lg shadow-indigo-500/20 mt-4 transition">Sign In</button>
+            </form>
+        </div>
+
+        <div id="signup-form" class="auth-card p-8 rounded-3xl hidden">
+            <h2 class="font-heading text-2xl font-bold mb-6">Create Account</h2>
+            <form class="space-y-4">
+                <div>
+                    <label class="text-xs font-bold uppercase tracking-wider text-mcTextDim mb-2 block">Full Name</label>
+                    <input type="text" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-indigo-500 transition" placeholder="Prashant">
+                </div>
+                <div>
+                    <label class="text-xs font-bold uppercase tracking-wider text-mcTextDim mb-2 block">Email</label>
+                    <input type="email" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-indigo-500 transition" placeholder="name@email.com">
+                </div>
+                <button type="button" class="w-full bg-indigo-600 hover:bg-indigo-500 py-4 rounded-xl font-bold mt-4 transition">Get Started</button>
+            </form>
+        </div>
+
+        <div class="mt-12 space-y-4">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-mcTextDim px-2">Preferences</h3>
+            <div class="auth-card p-4 rounded-2xl flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-moon text-indigo-400"></i>
+                    <span class="text-sm font-medium">Dark Mode</span>
+                </div>
+                <button onclick="toggleTheme()" class="w-12 h-6 bg-indigo-600 rounded-full relative">
+                    <div id="toggle-dot" class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full transition-all"></div>
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function showTab(tab) {
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const btnLogin = document.getElementById('btn-login');
+            const btnSignup = document.getElementById('btn-signup');
+
+            if(tab === 'login') {
+                loginForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+                btnLogin.className = "flex-1 py-2 rounded-lg text-sm font-bold bg-indigo-600 text-white transition";
+                btnSignup.className = "flex-1 py-2 rounded-lg text-sm font-bold text-mcTextDim transition";
+            } else {
+                signupForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+                btnSignup.className = "flex-1 py-2 rounded-lg text-sm font-bold bg-indigo-600 text-white transition";
+                btnLogin.className = "flex-1 py-2 rounded-lg text-sm font-bold text-mcTextDim transition";
+            }
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('themeIcon');
+            const dot = document.getElementById('toggle-dot');
+            
+            if(body.classList.contains('dark')) {
+                body.classList.remove('dark', 'bg-mcDark', 'text-white');
+                body.classList.add('light');
+                icon.className = 'fas fa-moon';
+                dot.style.right = 'auto';
+                dot.style.left = '4px';
+            } else {
+                body.classList.remove('light');
+                body.classList.add('dark', 'bg-mcDark', 'text-white');
+                icon.className = 'fas fa-sun';
+                dot.style.left = 'auto';
+                dot.style.right = '4px';
+            }
+        }
+    </script>
+</body>
+  
+  </html>
