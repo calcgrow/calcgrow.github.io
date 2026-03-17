@@ -358,4 +358,196 @@
 
             <div class="mc-card faq-item cursor-pointer" onclick="toggleFaq(this)">
                 <div class="p-6 flex justify-between items-center">
-                    <h4 class="font-semibold text-white text-lg">Do I need to sig
+                    <h4 class="font-semibold text-white text-lg">Do I need to  sign up or link my YouTube account?</h4>
+                    <i class="fas fa-chevron-down text-mcTextDim faq-icon"></i>
+                </div>
+                <div class="faq-answer px-6">
+                    <p class="pb-6 text-mcTextDim leading-relaxed">
+                        Absolutely not. We believe in zero-barrier access. CalcGrow does not require user registration, passwords, or OAuth account linking. We fetch metrics securely using public API endpoints so your private studio data remains 100% secure.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mc-card faq-item cursor-pointer" onclick="toggleFaq(this)">
+                <div class="p-6 flex justify-between items-center">
+                    <h4 class="font-semibold text-white text-lg">Is this platform completely free to use?</h4>
+                    <i class="fas fa-chevron-down text-mcTextDim faq-icon"></i>
+                </div>
+                <div class="faq-answer px-6">
+                    <p class="pb-6 text-mcTextDim leading-relaxed">
+                        Yes, the core utility suite on CalcGrow is completely free for digital entrepreneurs globally. We sustain our infrastructure through unobtrusive advertisements and premium enterprise consultancy, ensuring individual creators never hit a paywall.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mc-card faq-item cursor-pointer" onclick="toggleFaq(this)">
+                <div class="p-6 flex justify-between items-center">
+                    <h4 class="font-semibold text-white text-lg">Why are my actual earnings slightly different?</h4>
+                    <i class="fas fa-chevron-down text-mcTextDim faq-icon"></i>
+                </div>
+                <div class="faq-answer px-6">
+                    <p class="pb-6 text-mcTextDim leading-relaxed">
+                        Revenue calculations are estimations. Actual earnings can fluctuate daily based on ad inventory, viewer geographic location, seasonal advertiser spending (like Q4 holiday spikes), and YouTube's specific revenue-sharing cuts. Our tool gives you the most statistically probable baseline.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-white/5 bg-[#020203] pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <div class="lg:col-span-2">
+                    <div class="flex items-center gap-2 mb-6">
+                        <i class="fas fa-layer-group text-indigo-500 text-xl"></i>
+                        <span class="font-heading text-2xl font-bold text-white tracking-tight">CalcGrow</span>
+                    </div>
+                    <p class="text-sm text-mcTextDim max-w-sm leading-relaxed">
+                        The definitive intelligence platform for the global creator economy. Analyze data, optimize content, and scale revenue without compromising privacy.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wide">Legal & Policies</h4>
+                    <ul class="space-y-4 text-sm text-mcTextDim">
+                        <li><a href="javascript:void(0)" onclick="openModal('privacyModal')" class="hover:text-indigo-400 transition">Privacy Policy</a></li>
+                        <li><a href="javascript:void(0)" onclick="openModal('termsModal')" class="hover:text-indigo-400 transition">Terms of Service</a></li>
+                        <li><a href="javascript:void(0)" onclick="openModal('cookieModal')" class="hover:text-indigo-400 transition">Cookie Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wide">Support</h4>
+                    <ul class="space-y-4 text-sm text-mcTextDim">
+                        <li><a href="#faq" class="hover:text-indigo-400 transition">Help Center</a></li>
+                        <li><a href="javascript:void(0)" onclick="openModal('contactModal')" class="hover:text-indigo-400 transition">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition">API Documentation</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-[11px] text-mcTextDim uppercase tracking-[0.2em] font-semibold">
+                    © 2026 CalcGrow Analytics. All Rights Reserved.
+                </p>
+                <div class="flex gap-4 text-mcTextDim">
+                    <a href="#" class="hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="privacyModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-overlay" onclick="closeModalOutside(event, 'privacyModal')">
+        <div class="modal-box bg-[#0a0a0e] border border-white/10 w-full max-w-3xl rounded-3xl overflow-hidden max-h-[85vh] flex flex-col shadow-2xl shadow-indigo-500/10">
+            <div class="p-6 border-b border-white/5 flex justify-between items-center bg-white/5">
+                <h3 class="font-heading text-2xl font-bold text-white"><i class="fas fa-shield-alt text-indigo-500 mr-2"></i> Privacy Policy</h3>
+                <button onclick="closeModal('privacyModal')" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-8 overflow-y-auto text-sm text-mcTextDim space-y-6 leading-relaxed custom-scrollbar">
+                <p class="text-white font-semibold">Last Updated: January 2026</p>
+                <p>At CalcGrow, we respect your privacy and are committed to protecting your personal data. This privacy policy informs you how we handle data when you visit our platform.</p>
+                
+                <h4 class="font-bold text-white text-base">1. Zero Data Collection Policy</h4>
+                <p>We operate as a public data analytics tool. We do NOT require account creation, nor do we ask for Personal Identifiable Information (PII). We do not record the URLs you paste into our tools.</p>
+                
+                <h4 class="font-bold text-white text-base">2. API Usage & Security</h4>
+                <p>Our infrastructure fetches real-time public data via official APIs (such as the YouTube Data API). All mathematical operations regarding revenue estimations occur locally within your browser. We do not transmit or store your results on external servers.</p>
+                
+                <h4 class="font-bold text-white text-base">3. Cookies and Tracking</h4>
+                <p>We utilize strictly necessary cookies to ensure basic website functionality (e.g., remembering dark mode preferences). We partner with Google AdSense, which may use cookies to serve personalized ads based on your prior visits.</p>
+            </div>
+            <div class="p-6 border-t border-white/5 bg-white/5 text-right">
+                <button onclick="closeModal('privacyModal')" class="btn-primary text-white px-8 py-3 rounded-xl font-bold text-sm">Acknowledge</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="termsModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-overlay" onclick="closeModalOutside(event, 'termsModal')">
+        <div class="modal-box bg-[#0a0a0e] border border-white/10 w-full max-w-3xl rounded-3xl overflow-hidden max-h-[85vh] flex flex-col shadow-2xl shadow-indigo-500/10">
+            <div class="p-6 border-b border-white/5 flex justify-between items-center bg-white/5">
+                <h3 class="font-heading text-2xl font-bold text-white"><i class="fas fa-file-contract text-blue-500 mr-2"></i> Terms of Service</h3>
+                <button onclick="closeModal('termsModal')" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-8 overflow-y-auto text-sm text-mcTextDim space-y-6 leading-relaxed">
+                <p class="text-white font-semibold">Effective Date: January 2026</p>
+                <p>By accessing or using CalcGrow, you agree to be bound by these Terms. If you disagree with any part, you may not access the service.</p>
+                
+                <h4 class="font-bold text-white text-base">1. Platform Nature</h4>
+                <p>CalcGrow is an independent utility tool. We are NOT affiliated, associated, authorized, endorsed by, or in any way officially connected with YouTube, Meta, TikTok, or Snapchat.</p>
+                
+                <h4 class="font-bold text-white text-base">2. Disclaimer of Estimates</h4>
+                <p>The financial figures generated by our calculators are strictly <strong>estimates</strong> based on global industry averages. They do not constitute financial advice, nor do they guarantee actual payout amounts from any platform.</p>
+                
+                <h4 class="font-bold text-white text-base">3. Intellectual Property</h4>
+                <p>The code, design, and layout of CalcGrow are proprietary. However, thumbnails and metadata fetched remain the intellectual property of their respective creators and platform owners.</p>
+            </div>
+            <div class="p-6 border-t border-white/5 bg-white/5 text-right">
+                <button onclick="closeModal('termsModal')" class="btn-primary text-white px-8 py-3 rounded-xl font-bold text-sm">Agree & Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="contactModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-overlay" onclick="closeModalOutside(event, 'contactModal')">
+        <div class="modal-box bg-[#0a0a0e] border border-white/10 w-full max-w-md rounded-3xl p-8 text-center shadow-2xl shadow-indigo-500/10">
+            <div class="w-16 h-16 bg-indigo-500/10 text-indigo-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-6">
+                <i class="fas fa-envelope-open-text"></i>
+            </div>
+            <h3 class="font-heading text-3xl font-bold text-white mb-4">Get in Touch</h3>
+            <p class="text-mcTextDim mb-8 text-sm leading-relaxed">For business inquiries, API access, or tool support, reach out to our team. We typically respond within 24 hours.</p>
+            
+            <div class="bg-white/5 border border-white/10 p-4 rounded-xl mb-8 select-all">
+                <p class="text-white font-bold tracking-wide">hello@calcgrow.com</p>
+            </div>
+            
+            <button onclick="closeModal('contactModal')" class="w-full btn-primary text-white px-6 py-3 rounded-xl font-bold">Done</button>
+        </div>
+    </div>
+
+    <script>
+        // Modal Handlers
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal when clicking outside the box
+        function closeModalOutside(event, modalId) {
+            if (event.target.id === modalId) {
+                closeModal(modalId);
+            }
+        }
+
+        // Smooth FAQ Accordion Logic
+        function toggleFaq(element) {
+            // Optional: Close others (uncomment if you want only 1 open at a time)
+            /*
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if(item !== element && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-answer').style.maxHeight = null;
+                }
+            });
+            */
+
+            element.classList.toggle('active');
+            let answer = element.querySelector('.faq-answer');
+            
+            if (element.classList.contains('active')) {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            } else {
+                answer.style.maxHeight = null;
+            }
+        }
+    </script>
+</body>
+</html>
+
