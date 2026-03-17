@@ -3,214 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CalcGrow | Global Creator Intelligence & Revenue Analytics</title>
+    <title>CalcGrow | Empowering the Next Generation of Creators</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --apple-bg: #000000; --apple-card: #1c1c1e; --apple-blue: #0071e3; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--apple-bg); color: #ffffff; -webkit-font-smoothing: antialiased; }
+        :root {
+            --mc-bg: #050505;
+            --mc-accent: #3d5eff;
+            --mc-card: #0f0f0f;
+            --mc-text-dim: #9ca3af;
+        }
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background-color: var(--mc-bg); 
+            color: white; 
+            scroll-behavior: smooth;
+        }
         
-        /* Premium Glassmorphism */
-        .glass-nav { background: rgba(0, 0, 0, 0.8); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .apple-card { background: var(--apple-card); border-radius: 24px; transition: all 0.5s cubic-bezier(0.15, 0, 0.2, 1); border: 1px solid rgba(255,255,255,0.05); }
-        .apple-card:hover { transform: scale(1.02); border-color: rgba(255,255,255,0.2); box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
-        
-        /* Content Sections */
-        .text-gradient { background: linear-gradient(135deg, #fff 0%, #a1a1a6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .seo-section { line-height: 1.8; color: #a1a1a6; }
-        
-        /* Modal iOS */
-        .modal { opacity: 0; pointer-events: none; transition: 0.4s; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); }
-        .modal.active { opacity: 1; pointer-events: auto; }
-        .modal-content { transform: translateY(50px); transition: 0.4s; border: 1px solid rgba(255,255,255,0.1); }
-        .modal.active .modal-content { transform: translateY(0); }
+        /* Mediacube Glass Effect */
+        .glass-nav { 
+            background: rgba(5, 5, 5, 0.8); 
+            backdrop-filter: blur(12px); 
+            border-bottom: 1px solid rgba(255,255,255,0.08); 
+        }
 
-        /* Smooth FAQ */
-        .faq-answer { max-height: 0; overflow: hidden; transition: 0.3s ease-out; }
-        .faq-active .faq-answer { max-height: 500px; padding-bottom: 20px; }
-        .faq-active .faq-icon { transform: rotate(180deg); color: var(--apple-blue); }
+        /* Hero Gradient */
+        .hero-glow {
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(61, 94, 255, 0.15) 0%, rgba(5, 5, 5, 0) 70%);
+            z-index: -1;
+        }
+
+        /* Premium MediaCube Cards */
+        .mc-card {
+            background: var(--mc-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        .mc-card:hover {
+            border-color: var(--mc-accent);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(61, 94, 255, 0.1);
+        }
+
+        .mc-gradient-text {
+            background: linear-gradient(to right, #ffffff, #3d5eff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Feature Badge */
+        .mc-badge {
+            background: rgba(61, 94, 255, 0.1);
+            color: var(--mc-accent);
+            border: 1px solid rgba(61, 94, 255, 0.2);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* AdSense Content Layout */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
     </style>
 </head>
 <body>
 
+    <div class="hero-glow"></div>
+
     <nav class="fixed top-0 w-full z-50 glass-nav">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                    <i class="fas fa-chart-line text-white text-sm"></i>
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-mc-accent rounded-xl flex items-center justify-center rotate-3 shadow-lg shadow-blue-500/20">
+                    <i class="fas fa-cube text-white"></i>
                 </div>
-                <h1 class="text-xl font-bold tracking-tighter">CalcGrow.</h1>
+                <span class="text-2xl font-bold tracking-tighter">CalcGrow</span>
             </div>
-            <div class="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.15em] text-[#a1a1a6]">
-                <a href="#suite" class="hover:text-white transition">Apps</a>
-                <a href="#insights" class="hover:text-white transition">Insights</a>
-                <a href="#about" class="hover:text-white transition">About</a>
-                <a href="#faq" class="hover:text-white transition">Support</a>
+            <div class="hidden lg:flex gap-10 text-sm font-medium text-mc-text-dim">
+                <a href="#ecosystem" class="hover:text-white transition">Ecosystem</a>
+                <a href="#monetization" class="hover:text-white transition">Monetization</a>
+                <a href="#faq" class="hover:text-white transition">Knowledge Base</a>
             </div>
-            <button onclick="openModal('contactModal')" class="bg-white text-black px-5 py-2 rounded-full text-xs font-bold hover:bg-[#d2d2d7] transition">Contact</button>
+            <button class="bg-white text-black px-6 py-2.5 rounded-full text-sm font-bold hover:bg-gray-200 transition">Get Started</button>
         </div>
     </nav>
 
-    <header class="max-w-6xl mx-auto px-6 pt-44 pb-24 text-center">
-        <span class="inline-block px-4 py-1.5 rounded-full bg-[#1c1c1e] text-[#a1a1a6] text-[10px] font-bold uppercase tracking-widest mb-6 border border-white/5">World-Class Analytics v3.0</span>
-        <h2 class="text-6xl md:text-[90px] font-extrabold tracking-tighter leading-[0.95] mb-8 text-gradient">
-            Intelligence for the <br>Next-Gen Creator.
-        </h2>
-        <p class="text-lg md:text-xl text-[#a1a1a6] font-medium max-w-2xl mx-auto mb-12">
-            Professional-grade tools to master your revenue across the global digital economy. Data-driven. Privacy-focused. Seamlessly fast.
-        </p>
-        <div class="flex flex-wrap justify-center gap-6">
-            <a href="#suite" class="bg-apple-blue text-white px-8 py-4 rounded-full font-bold text-sm hover:opacity-90 transition shadow-2xl shadow-blue-500/20">Explore Suite</a>
-            <a href="#insights" class="bg-transparent border border-white/20 text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-white/5 transition">Read Insights</a>
+    <section class="max-w-7xl mx-auto px-6 pt-48 pb-32 text-center lg:text-left flex flex-col lg:flex-row items-center gap-16">
+        <div class="lg:w-3/5">
+            <div class="mc-badge mb-6 inline-block">Trusted by 50,000+ Creators</div>
+            <h1 class="text-6xl lg:text-[80px] font-extrabold leading-[1.1] mb-8 mc-gradient-text">
+                Scaling your <br>creative empire.
+            </h1>
+            <p class="text-xl text-mc-text-dim mb-10 max-w-2xl leading-relaxed">
+                CalcGrow provides a premium infrastructure for professional creators to analyze, optimize, and scale their digital revenue across international markets.
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                <a href="#ecosystem" class="bg-mc-accent text-white px-10 py-4 rounded-2xl font-bold text-lg hover:shadow-xl hover:shadow-blue-500/30 transition">Access Tools</a>
+                <a href="#monetization" class="bg-white/5 border border-white/10 text-white px-10 py-4 rounded-2xl font-bold text-lg hover:bg-white/10 transition">Learn More</a>
+            </div>
         </div>
-    </header>
-
-    <section id="suite" class="max-w-7xl mx-auto px-6 py-20">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <a href="youtube.html" class="apple-card p-10 group">
-                <i class="fab fa-youtube text-4xl text-red-500 mb-8 block"></i>
-                <h3 class="text-2xl font-bold mb-4">YouTube Studio</h3>
-                <p class="text-[#a1a1a6] text-sm leading-relaxed mb-6">Analyze channel RPM, calculate video revenue, and extract AI-driven insights from any video globally.</p>
-                <span class="text-apple-blue font-bold text-xs uppercase tracking-widest group-hover:underline">Enter App →</span>
-            </a>
-            <a href="instagram.html" class="apple-card p-10 group">
-                <i class="fab fa-instagram text-4xl text-pink-500 mb-8 block"></i>
-                <h3 class="text-2xl font-bold mb-4">Insta Metrics</h3>
-                <p class="text-[#a1a1a6] text-sm leading-relaxed mb-6">Evaluate engagement ratios, profile valuation, and viral potential for high-ticket sponsorships.</p>
-                <span class="text-apple-blue font-bold text-xs uppercase tracking-widest group-hover:underline">Enter App →</span>
-            </a>
-            <a href="tiktok.html" class="apple-card p-10 group">
-                <i class="fab fa-tiktok text-4xl text-white mb-8 block"></i>
-                <h3 class="text-2xl font-bold mb-4">TikTok Intelligence</h3>
-                <p class="text-[#a1a1a6] text-sm leading-relaxed mb-6">Track creator fund estimations and viral trend analysis for USA/UK-based accounts.</p>
-                <span class="text-apple-blue font-bold text-xs uppercase tracking-widest group-hover:underline">Enter App →</span>
-            </a>
-            <a href="facebook.html" class="apple-card p-10 group">
-                <i class="fab fa-facebook text-4xl text-blue-500 mb-8 block"></i>
-                <h3 class="text-2xl font-bold mb-4">Meta Monetizer</h3>
-                <p class="text-[#a1a1a6] text-sm leading-relaxed mb-6">Estimate ad-break revenue and page performance metrics for global Facebook pages.</p>
-                <span class="text-apple-blue font-bold text-xs uppercase tracking-widest group-hover:underline">Enter App →</span>
-            </a>
-            <a href="snapchat.html" class="apple-card p-10 group">
-                <i class="fab fa-snapchat text-4xl text-yellow-400 mb-8 block"></i>
-                <h3 class="text-2xl font-bold mb-4">Snap Spotlight</h3>
-                <p class="text-[#a1a1a6] text-sm leading-relaxed mb-6">Calculate spotlight payout potentials and lens engagement analytics for creators.</p>
-                <span class="text-apple-blue font-bold text-xs uppercase tracking-widest group-hover:underline">Enter App →</span>
-            </a>
-            <a href="global.html" class="apple-card p-10 group bg-gradient-to-br from-blue-900/20 to-purple-900/20">
-                <i class="fas fa-globe-americas text-4xl text-white mb-8 block"></i>
-                <h3 class="text-2xl font-bold mb-4">Global Economy</h3>
-                <p class="text-[#a1a1a6] text-sm leading-relaxed mb-6">Advanced comparison tool for RPM/CPM rates across different tiers of countries.</p>
-                <span class="text-apple-blue font-bold text-xs uppercase tracking-widest group-hover:underline">Launch Core →</span>
-            </a>
+        <div class="lg:w-2/5 grid grid-cols-2 gap-4">
+            <div class="mc-card p-6 text-center">
+                <div class="text-3xl font-bold text-mc-accent mb-1">$2.4M+</div>
+                <div class="text-xs text-mc-text-dim uppercase">Revenue Tracked</div>
+            </div>
+            <div class="mc-card p-6 text-center mt-8">
+                <div class="text-3xl font-bold text-purple-500 mb-1">140+</div>
+                <div class="text-xs text-mc-text-dim uppercase">Countries</div>
+            </div>
         </div>
     </section>
 
-    <section id="insights" class="max-w-5xl mx-auto px-6 py-24 border-y border-white/5">
-        <div class="mb-16">
-            <h2 class="text-4xl font-bold mb-6">Deep Digital Insights</h2>
-            <div class="grid md:grid-cols-2 gap-12 seo-section">
+    <section id="ecosystem" class="max-w-7xl mx-auto px-6 py-24">
+        <div class="flex flex-col lg:flex-row justify-between items-end mb-16 gap-6">
+            <div class="max-w-2xl">
+                <h2 class="text-4xl font-bold mb-4">A powerful ecosystem.</h2>
+                <p class="text-mc-text-dim">Our tools are built with one goal: To give you absolute clarity on your digital earnings.</p>
+            </div>
+            <div class="text-mc-accent font-bold cursor-pointer">View All Apps <i class="fas fa-arrow-right ml-2"></i></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="mc-card p-8 group">
+                <div class="w-14 h-14 bg-red-500/10 rounded-2xl flex items-center justify-center mb-10 border border-red-500/20">
+                    <i class="fab fa-youtube text-2xl text-red-500"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">YouTube Intelligence</h3>
+                <p class="text-mc-text-dim text-sm mb-8">Professional RPM forecasting and video analytics for high-growth channels.</p>
+                <a href="youtube.html" class="inline-flex items-center gap-2 text-white font-bold group-hover:text-mc-accent transition">Launch Studio <i class="fas fa-arrow-up-right-from-square text-xs"></i></a>
+            </div>
+
+            <div class="mc-card p-8 group">
+                <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-10 border border-white/20">
+                    <i class="fab fa-tiktok text-2xl text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">TikTok Trends</h3>
+                <p class="text-mc-text-dim text-sm mb-8">Calculate Creator Fund potentials and identify viral shifts in the algorithm.</p>
+                <a href="tiktok.html" class="inline-flex items-center gap-2 text-white font-bold group-hover:text-mc-accent transition">Launch Studio <i class="fas fa-arrow-up-right-from-square text-xs"></i></a>
+            </div>
+
+            <div class="mc-card p-8 group">
+                <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-10 border border-blue-500/20">
+                    <i class="fab fa-facebook text-2xl text-blue-500"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Meta Revenue</h3>
+                <p class="text-mc-text-dim text-sm mb-8">Deep analytics for Facebook In-stream ads and audience retention metrics.</p>
+                <a href="facebook.html" class="inline-flex items-center gap-2 text-white font-bold group-hover:text-mc-accent transition">Launch Studio <i class="fas fa-arrow-up-right-from-square text-xs"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="monetization" class="bg-[#0a0a0a] py-32 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
                 <div>
-                    <h4 class="text-white font-bold text-xl mb-4 italic tracking-tight">Why Analytics Matter in 2026?</h4>
-                    <p class="mb-6">Digital content creation has evolved from a hobby into a multi-billion dollar economy. To thrive, creators must understand that **not all views are equal**. A viewer in the USA can generate 10x more revenue than a viewer in lower-tier markets. CalcGrow bridges this gap by providing real-time intelligence into RPM (Revenue Per Mille) and CPM fluctuations.</p>
-                    <p>Our platform uses sophisticated data models to analyze how niche-specific variables—such as Finance, Tech, or Gaming—impact your bottom line. By monitoring these metrics, creators can pivot their content strategy for maximum profitability.</p>
+                    <h2 class="text-5xl font-extrabold mb-10 leading-tight">Maximize your <br><span class="text-mc-accent">Global Revenue.</span></h2>
+                    <div class="space-y-8">
+                        <div class="flex gap-6">
+                            <div class="text-mc-accent mt-1"><i class="fas fa-check-circle text-xl"></i></div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">High-CPM Targeting</h4>
+                                <p class="text-mc-text-dim leading-relaxed">Understand which countries are paying the most for your content niche and shift your strategy to target Tier-1 markets.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="text-mc-accent mt-1"><i class="fas fa-check-circle text-xl"></i></div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Algorithm-Friendly Metadata</h4>
+                                <p class="text-mc-text-dim leading-relaxed">Our insights help you create SEO-friendly titles and descriptions that work with international search patterns.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h4 class="text-white font-bold text-xl mb-4 italic tracking-tight">The Science of RPM Optimization</h4>
-                    <p class="mb-6">Maximizing your digital earnings isn't just about going viral; it's about targeting high-intent audiences. CalcGrow's suite of tools helps you identify which platforms (YouTube, TikTok, or Meta) are currently offering the highest payout for your specific content type.</p>
-                    <p>We provide deep-dives into metadata analysis, thumbnail CTR optimization, and viewer retention logic. Understanding these "invisible" numbers is what separates a professional creator from an amateur.</p>
+                <div class="mc-card p-2">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80" alt="Analytics View" class="rounded-[20px] opacity-80">
+                </div>
+            </div>
+
+            <div class="info-grid mt-24">
+                <div class="p-4">
+                    <h3 class="text-xl font-bold mb-4">Understanding the Creator Economy</h3>
+                    <p class="text-mc-text-dim text-sm leading-relaxed">The digital landscape in 2026 is driven by precision. CalcGrow empowers creators to treat their channels as a business. By analyzing historical RPM data across 5 major platforms, we provide a roadmap for financial freedom in the creator economy.</p>
+                </div>
+                <div class="p-4">
+                    <h3 class="text-xl font-bold mb-4">Platform Transparency</h3>
+                    <p class="text-mc-text-dim text-sm leading-relaxed">Most platforms keep their payment algorithms in a black box. Our tools use real-world data shared by our community to estimate payments, allowing you to plan your production budget with confidence.</p>
+                </div>
+                <div class="p-4">
+                    <h3 class="text-xl font-bold mb-4">Strategic Growth</h3>
+                    <p class="text-mc-text-dim text-sm leading-relaxed">Scaling a channel requires more than just good content. It requires data. From thumbnail click-through rates (CTR) to session duration, CalcGrow provides the metrics that matter for sustainable growth.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="faq" class="max-w-3xl mx-auto px-6 py-24">
-        <h2 class="text-4xl font-bold text-center mb-16">Common Queries</h2>
-        <div class="space-y-4">
-            <div class="apple-card px-8 py-2 faq-item cursor-pointer" onclick="this.classList.toggle('faq-active')">
-                <div class="flex justify-between py-6 items-center">
-                    <span class="font-bold">How accurate are the revenue estimations?</span>
-                    <i class="fas fa-plus text-xs faq-icon transition-transform"></i>
+    <section id="faq" class="max-w-4xl mx-auto px-6 py-32">
+        <h2 class="text-4xl font-bold text-center mb-16">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+            <div class="mc-card p-6 cursor-pointer" onclick="this.classList.toggle('bg-mc-accent/10')">
+                <div class="flex justify-between items-center font-bold">
+                    <span>How does CalcGrow predict revenue?</span>
+                    <i class="fas fa-chevron-down text-mc-text-dim"></i>
                 </div>
-                <div class="faq-answer text-[#a1a1a6] text-sm">
-                    Our estimations are based on a massive database of current platform RPMs. While these are projections, they provide a 90% accuracy rate for standard niche content. Factors like sponsorship deals are not included in these calculations.
-                </div>
-            </div>
-            <div class="apple-card px-8 py-2 faq-item cursor-pointer" onclick="this.classList.toggle('faq-active')">
-                <div class="flex justify-between py-6 items-center">
-                    <span class="font-bold">Is my data shared with third parties?</span>
-                    <i class="fas fa-plus text-xs faq-icon transition-transform"></i>
-                </div>
-                <div class="faq-answer text-[#a1a1a6] text-sm">
-                    No. CalcGrow is built on a "Privacy First" architecture. We process data locally in your session and do not store any personal links or search queries on our servers.
+                <div class="mt-4 text-sm text-mc-text-dim leading-relaxed">
+                    We utilize current market RPM (Revenue Per Mille) benchmarks and combine them with your channel's specific category data. This allows us to provide a high-precision estimate based on global ad spend trends.
                 </div>
             </div>
-            <div class="apple-card px-8 py-2 faq-item cursor-pointer" onclick="this.classList.toggle('faq-active')">
-                <div class="flex justify-between py-6 items-center">
-                    <span class="font-bold">Why is the tool free?</span>
-                    <i class="fas fa-plus text-xs faq-icon transition-transform"></i>
+            <div class="mc-card p-6 cursor-pointer" onclick="this.classList.toggle('bg-mc-accent/10')">
+                <div class="flex justify-between items-center font-bold">
+                    <span>Is it free for all creators?</span>
+                    <i class="fas fa-chevron-down text-mc-text-dim"></i>
                 </div>
-                <div class="faq-answer text-[#a1a1a6] text-sm">
-                    We believe in empowering the creator community. We sustain our operations through minimal ad placements and enterprise-level consultancy, ensuring the core tools remain accessible to everyone.
+                <div class="mt-4 text-sm text-mc-text-dim leading-relaxed">
+                    Yes, CalcGrow is currently a free-to-use utility ecosystem. We aim to democratize data for independent creators who are just starting their journey to professionalization.
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="max-w-7xl mx-auto px-6 py-20 border-t border-white/5 text-[#a1a1a6]">
-        <div class="grid md:grid-cols-4 gap-12 mb-20">
-            <div class="col-span-2">
-                <h3 class="text-white font-bold text-xl mb-6">CalcGrow.</h3>
-                <p class="max-w-sm text-sm">The world's most sophisticated utility portal for the digital creator economy. Empowering million-dollar channels with zero-cost data.</p>
-            </div>
+    <footer class="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-10">
             <div>
-                <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-6">Legal</h4>
-                <div class="flex flex-col gap-4 text-sm">
-                    <a href="javascript:void(0)" onclick="openModal('privacyModal')" class="hover:text-white transition">Privacy Policy</a>
-                    <a href="javascript:void(0)" onclick="openModal('termsModal')" class="hover:text-white transition">Terms of Service</a>
+                <div class="flex items-center gap-2 mb-4">
+                    <i class="fas fa-cube text-mc-accent text-xl"></i>
+                    <span class="text-xl font-bold">CalcGrow</span>
                 </div>
+                <p class="text-mc-text-dim text-sm max-w-xs">Building the future of creator intelligence. Professional tools for professional creators.</p>
             </div>
-            <div>
-                <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-6">Network</h4>
-                <div class="flex flex-col gap-4 text-sm">
-                    <a href="#" class="hover:text-white transition">YouTube Studio</a>
-                    <a href="#" class="hover:text-white transition">Insta Insights</a>
-                </div>
+            <div class="flex gap-10 text-sm font-bold">
+                <a href="#" class="hover:text-mc-accent">Privacy</a>
+                <a href="#" class="hover:text-mc-accent">Terms</a>
+                <a href="#" class="hover:text-mc-accent">Contact</a>
             </div>
         </div>
-        <div class="text-[10px] uppercase tracking-[0.2em] font-bold text-center border-t border-white/5 pt-10">
-            © 2026 CalcGrow Analytics. Engineered for Creators.
+        <div class="text-center text-[10px] text-mc-text-dim mt-20 uppercase tracking-[4px]">
+            © 2026 CALCGROW ANALYTICS • INTERNATIONAL EDITION
         </div>
     </footer>
 
-    <div id="privacyModal" class="modal fixed inset-0 z-[100] flex items-center justify-center p-4">
-        <div class="modal-content bg-[#1c1c1e] w-full max-w-2xl rounded-3xl p-10 max-h-[80vh] overflow-y-auto">
-            <h3 class="text-3xl font-bold mb-6">Privacy Policy</h3>
-            <div class="text-[#a1a1a6] space-y-4 text-sm leading-relaxed">
-                <p>At CalcGrow, we prioritize your digital anonymity. We do not track, store, or sell your data.</p>
-                <p><strong>1. Data Collection:</strong> We do not require account registration. All tool-based calculations are performed in real-time.</p>
-                <p><strong>2. Third-Party APIs:</strong> We use official YouTube and Meta APIs to fetch public data. This data is subject to their respective privacy terms.</p>
-                <p><strong>3. Advertising:</strong> We may use Google AdSense to serve ads. These partners may use cookies to personalize your experience.</p>
-            </div>
-            <button onclick="closeModal('privacyModal')" class="mt-10 bg-white text-black px-8 py-3 rounded-full font-bold text-sm">Close</button>
-        </div>
-    </div>
-
-    <div id="contactModal" class="modal fixed inset-0 z-[100] flex items-center justify-center p-4">
-        <div class="modal-content bg-[#1c1c1e] w-full max-w-lg rounded-3xl p-10 text-center">
-            <h3 class="text-3xl font-bold mb-6">Connect with Us</h3>
-            <p class="text-[#a1a1a6] mb-8">For business inquiries or tool support, reach out via our official creator channel.</p>
-            <div class="bg-black/40 p-6 rounded-2xl mb-8 border border-white/5">
-                <p class="text-white font-bold text-lg">support@calcgrow.com</p>
-            </div>
-            <button onclick="closeModal('contactModal')" class="bg-apple-blue text-white px-8 py-3 rounded-full font-bold text-sm">Done</button>
-        </div>
-    </div>
-
-    <script>
-        function openModal(id) { document.getElementById(id).classList.add('active'); document.body.style.overflow = 'hidden'; }
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); document.body.style.overflow = 'auto'; }
-    </script>
 </body>
 </html>
