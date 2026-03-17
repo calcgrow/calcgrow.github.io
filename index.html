@@ -427,7 +427,21 @@
                 </div>
 
             </div>
-            
+            <div>
+    <h4 class="text-white font-bold mb-6 tracking-wide text-sm uppercase">Legal</h4>
+    <ul class="space-y-4 text-sm text-mcTextDim">
+        <li><a href="privacy-policy.html" class="hover:text-indigo-400 transition">Privacy Policy</a></li>
+        <li><a href="terms.html" class="hover:text-indigo-400 transition">Terms of Service</a></li>
+    </ul>
+</div>
+
+<div>
+    <h4 class="text-white font-bold mb-6 tracking-wide text-sm uppercase">Support</h4>
+    <ul class="space-y-4 text-sm text-mcTextDim">
+        <li><a href="about-us.html" class="hover:text-indigo-400 transition">About Us</a></li>
+        <li><a href="contact-us.html" class="hover:text-indigo-400 transition">Contact Us</a></li>
+    </ul>
+</div>
             <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-[11px] text-mcTextDim uppercase tracking-[0.2em] font-semibold">
                     © 2026 CalcGrow Analytics. All Rights Reserved.
@@ -439,6 +453,7 @@
                 </div>
             </div>
         </div>
+        
     </footer>
 
     <div id="privacyModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-overlay" onclick="closeModalOutside(event, 'privacyModal')">
@@ -511,32 +526,25 @@
         // Modal Handlers
         function openModal(modalId) {
             document.getElementById(modalId).classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling }
 
         function closeModal(modalId) {
             document.getElementById(modalId).classList.remove('active');
-            document.body.style.overflow = '';
-        }
+            document.body.style.overflow = ''; }
 
         // Close modal when clicking outside the box
         function closeModalOutside(event, modalId) {
             if (event.target.id === modalId) {
-                closeModal(modalId);
-            }
-        }
+                closeModal(modalId); }   }
 
         // Smooth FAQ Accordion Logic
-        function toggleFaq(element) {
-            // Optional: Close others (uncomment if you want only 1 open at a time)
+        function toggleFaq(element) 
+        { // Optional: Close others (uncomment if you want only 1 open at a time)
             /*
             document.querySelectorAll('.faq-item').forEach(item => {
                 if(item !== element && item.classList.contains('active')) {
                     item.classList.remove('active');
-                    item.querySelector('.faq-answer').style.maxHeight = null;
-                }
-            });
-            */
+                    item.querySelector('.faq-answer').style.maxHeight = null; } });   */
 
             element.classList.toggle('active');
             let answer = element.querySelector('.faq-answer');
@@ -544,9 +552,7 @@
             if (element.classList.contains('active')) {
                 answer.style.maxHeight = answer.scrollHeight + "px";
             } else {
-                answer.style.maxHeight = null;
-            }
-        }
+                answer.style.maxHeight = null;  }}
     </script>
 </body>
 </html>
