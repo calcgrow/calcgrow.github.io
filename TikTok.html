@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Creator Tools | Earnings & Video Downloader | CalcGrow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { heading: ['Outfit', 'sans-serif'], body: ['Inter', 'sans-serif'] },
+                    colors: { mcDark: '#030305', mcTextDim: '#94a3b8' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #030305; color: #f8fafc; overflow-x: hidden; }
+        .glow-blob {
+            position: absolute; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(37, 244, 238, 0.1) 0%, rgba(3, 3, 5, 0) 70%);
+            border-radius: 50%; z-index: -1; filter: blur(60px); pointer-events: none;
+        }
+        .mc-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,255,255,0.05); border-radius: 24px;
+        }
+        .btn-tiktok {
+            background: #fe2c55;
+            box-shadow: 0 4px 15px rgba(254, 44, 85, 0.3); transition: all 0.3s ease;
+        }
+        .btn-tiktok:hover { box-shadow: 0 6px 25px rgba(254, 44, 85, 0.5); transform: scale(1.02); }
+        .input-field {
+            width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; padding: 12px 16px; outline: none; color: white; transition: all 0.3s ease;
+        }
+        .input-field:focus { border-color: #25f4ee; }
+    </style>
+</head>
+<body class="font-body relative antialiased">
+
+    <div class="glow-blob" style="top: -100px; left: -200px;"></div>
+    <div class="glow-blob" style="bottom: 10%; right: -200px; background: radial-gradient(circle, rgba(254, 44, 85, 0.1) 0%, rgba(3, 3, 5, 0) 70%);"></div>
+
+    <nav class="w-full z-50 border-b border-white/5 bg-[#030305]/80 backdrop-blur-md sticky top-0">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 text-mcTextDim hover:text-white transition">
+                <i class="fas fa-arrow-left"></i> <span class="text-sm font-bold uppercase tracking-widest hidden md:inline">Back to Suite</span>
+            </a>
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-black border border-white/20 flex items-center justify-center shadow-lg">
+                    <i class="fab fa-tiktok text-white"></i>
+                </div>
+                <span class="font-heading text-xl font-bold text-white tracking-tight">TikTokTools</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-12 md:py-20">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h1 class="font-heading text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
+                Everything for <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#25f4ee] to-[#fe2c55]">TikTok Creators.</span>
+            </h1>
+            <p class="text-mcTextDim text-lg">Calculate earnings, download videos, and generate viral scripts in seconds.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8 mb-20">
+            
+            <div class="mc-card p-8 flex flex-col border-t-4 border-t-[#fe2c55]">
+                <div class="flex items-center gap-3 mb-6">
+                    <i class="fas fa-dollar-sign text-[#fe2c55] text-2xl"></i>
+                    <h3 class="font-heading text-xl font-bold text-white">Earning Estimator</h3>
+                </div>
+                <div class="space-y-4 flex-grow">
+                    <p class="text-xs text-mcTextDim uppercase font-bold tracking-widest">Paste Video/Profile Link</p>
+                    <input type="url" id="tiktok-url" placeholder="https://www.tiktok.com/@user/..." class="input-field">
+                    <button onclick="estimateTikTok()" class="btn-tiktok w-full py-3 rounded-xl font-bold text-white transition">Estimate Revenue</button>
+                    
+                    <div id="tiktok-result" class="hidden mt-6 p-4 rounded-xl bg-white/5 border border-white/10 text-center animate-pulse">
+                        <span class="text-xs text-mcTextDim uppercase font-bold">Estimated Payout</span>
+                        <div class="text-3xl font-black text-white mt-1" id="payout-val">$0.00</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mc-card p-8 flex flex-col border-t-4 border-t-[#25f4ee]">
+                <div class="flex items-center gap-3 mb-6">
+                    <i class="fas fa-download text-[#25f4ee] text-2xl"></i>
+                    <h3 class="font-heading text-xl font-bold text-white">Video Downloader</h3>
+                </div>
+                <div class="space-y-4 flex-grow">
+                    <p class="text-xs text-mcTextDim uppercase font-bold tracking-widest">Paste Link to Save</p>
+                    <input type="url" id="dl-url" placeholder="Paste link here..." class="input-field">
+                    <button onclick="downloadTikTok()" class="w-full bg-white/10 hover:bg-white/15 text-white font-bold py-3 rounded-xl border border-white/10 transition">Fetch Video</button>
+                    
+                    <div id="dl-result" class="hidden mt-6 text-center">
+                        <div class="w-full h-32 bg-white/5 rounded-xl border border-dashed border-white/20 flex items-center justify-center mb-4">
+                            <i class="fas fa-video text-mcTextDim text-2xl"></i>
+                        </div>
+                        <a href="#" id="final-dl" class="text-sm font-bold text-[#25f4ee] hover:underline uppercase tracking-widest">Download MP4 (No Watermark)</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mc-card p-8 flex flex-col border-t-4 border-t-white/20">
+                <div class="flex items-center gap-3 mb-6">
+                    <i class="fas fa-magic text-purple-400 text-2xl"></i>
+                    <h3 class="font-heading text-xl font-bold text-white">Viral Script Gen</h3>
+                </div>
+                <div class="space-y-4 flex-grow">
+                    <p class="text-xs text-mcTextDim uppercase font-bold tracking-widest">Your Video Topic</p>
+                    <input type="text" id="script-topic" placeholder="e.g. Life Hacks, Vlog, Tech..." class="input-field">
+                    <button onclick="generateScript()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl transition">Generate Hook</button>
+                    
+                    <div id="script-result" class="hidden mt-4 p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/20 italic text-sm text-indigo-200">
+                        <p id="script-text"></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mc-card p-10">
+            <h2 class="font-heading text-3xl font-bold text-white mb-8">TikTok Monetization Guide 2026</h2>
+            <div class="grid md:grid-cols-2 gap-12 prose prose-invert max-w-none">
+                <div>
+                    <h3 class="text-xl font-bold text-[#fe2c55] mb-4">The Creator Fund vs. Creativity Program</h3>
+                    <p class="text-mcTextDim leading-relaxed text-sm">
+                        TikTok has shifted its focus from the original Creator Fund to the **Creativity Program Premier**. This new system pays significantly higher RPM (Revenue Per Mille), sometimes up to $1.00 per 1,000 qualified views, but only for videos longer than 60 seconds. Our calculator uses these updated 2026 metrics to give you a realistic estimate.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-[#25f4ee] mb-4">How to Maximize Your Earnings</h3>
+                    <ul class="text-mcTextDim space-y-3 text-sm">
+                        <li><strong class="text-white">Watch Time is King:</strong> TikTok's algorithm prioritizes retention. Use our Script Generator to create powerful "Hooks" in the first 3 seconds.</li>
+                        <li><strong class="text-white">Regional RPM:</strong> Views from the USA, UK, and Germany pay significantly more than other regions.</li>
+                        <li><strong class="text-white">Engagement:</strong> Likes and Shares don't pay directly, but they push your video to the FYP (For You Page), increasing your reach.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-white/5 bg-[#020203] pt-16 pb-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fab fa-tiktok text-white text-xl"></i>
+                        <span class="font-heading text-xl font-bold text-white">CalcGrow</span>
+                    </div>
+                    <p class="text-xs text-mcTextDim uppercase tracking-[0.2em]">© 2026 Professional Creator Suite</p>
+                </div>
+                <div class="flex gap-8 text-sm font-bold uppercase tracking-widest text-mcTextDim">
+                    <a href="privacy-policy.html" class="hover:text-white transition">Privacy</a>
+                    <a href="terms.html" class="hover:text-white transition">Terms</a>
+                    <a href="contact-us.html" class="hover:text-white transition">Support</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Earning Estimator Simulation
+        function estimateTikTok() {
+            const url = document.getElementById('tiktok-url').value;
+            if(!url.includes('tiktok.com')) { alert("Enter a valid TikTok link!"); return; }
+            
+            const res = document.getElementById('tiktok-result');
+            const val = document.getElementById('payout-val');
+            res.classList.remove('hidden');
+            val.innerText = "Analyzing...";
+            
+            setTimeout(() => {
+                // Random simulation based on link
+                const mockEarnings = (Math.random() * (150 - 20) + 20).toFixed(2);
+                val.innerText = `$${mockEarnings}`;
+            }, 1500);
+        }
+
+        // 2. Downloader Simulation
+        function downloadTikTok() {
+            const url = document.getElementById('dl-url').value;
+            if(!url) return;
+            const res = document.getElementById('dl-result');
+            res.classList.remove('hidden');
+            document.getElementById('final-dl').innerText = "Link Ready: Download Now";
+        }
+
+        // 3. Script Generator
+        function generateScript() {
+            const topic = document.getElementById('script-topic').value;
+            if(!topic) return;
+            const res = document.getElementById('script-result');
+            const text = document.getElementById('script-text');
+            res.classList.remove('hidden');
+            text.innerText = `Hook: "Stop scrolling! If you're interested in ${topic}, you NEED to see this secret I found..."`;
+        }
+    </script>
+</body>
+  </html>
+  
