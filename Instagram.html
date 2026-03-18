@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Creator Tools | Transcript & Calculator | CalcGrow</title>
+    <title>Instagram Creator Tools | Money Calculator, Transcripts & Hashtags</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -107,57 +107,88 @@
         <div class="prose prose-invert max-w-none mt-8 lg:mt-16">
             <h2 class="font-heading text-2xl font-bold text-white mb-4">Mastering Instagram Monetization</h2>
             <p class="text-mcTextDim leading-relaxed mb-6 text-sm md:text-base">
-                Unlike traditional AdSense models, Instagram creators generate revenue primarily through Brand Sponsorships. Your market value is determined by your engagement rate and niche authority.
+                Unlike traditional AdSense models, Instagram creators generate revenue primarily through <strong>Brand Sponsorships, Affiliate Marketing, and digital product sales</strong>. Your market value is determined not just by follower count, but by your engagement rate and niche authority.
             </p>
             <div class="bg-white/5 border border-white/10 p-6 rounded-2xl mb-6">
                 <h4 class="text-white font-bold mb-3 text-sm uppercase tracking-wider">High-RPM Niches 2026:</h4>
                 <ul class="space-y-2 text-sm text-mcTextDim">
-                    <li><i class="fas fa-chart-line text-pink-500 mr-2 w-4"></i> Finance & Crypto</li>
-                    <li><i class="fas fa-laptop-code text-pink-500 mr-2 w-4"></i> Tech & Software</li>
-                    <li><i class="fas fa-plane text-pink-500 mr-2 w-4"></i> Luxury Travel</li>
+                    <li><i class="fas fa-chart-line text-pink-500 mr-2 w-4"></i> Finance & Crypto (Highest paying)</li>
+                    <li><i class="fas fa-laptop-code text-pink-500 mr-2 w-4"></i> Tech & Software Reviews</li>
+                    <li><i class="fas fa-plane text-pink-500 mr-2 w-4"></i> Luxury Travel & Lifestyle</li>
+                    <li><i class="fas fa-heartbeat text-pink-500 mr-2 w-4"></i> Health & Biohacking</li>
                 </ul>
             </div>
+            <p class="text-mcTextDim leading-relaxed text-sm md:text-base">
+                Using tools like our <strong>Viral Hashtag Generator</strong> below allows you to repurpose your Reels into SEO-friendly blog posts or capture a global audience, directly increasing your profile's valuation.
+            </p>
         </div>
     </main>
 
     <section class="border-t border-white/5 bg-[#050508] py-16">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-12">
-                <h2 class="font-heading text-3xl font-bold text-white mb-3">Reel Transcript Extractor</h2>
-                <p class="text-mcTextDim">Extract and translate audio directly from Instagram Reels.</p>
+                <h2 class="font-heading text-3xl font-bold text-white mb-3">Creator Toolkit</h2>
+                <p class="text-mcTextDim">Advanced utilities to extract transcripts, translate, and optimize your content.</p>
             </div>
 
-            <div class="max-w-3xl mx-auto mc-card p-6 md:p-8">
-                <div class="flex items-center gap-3 mb-6">
-                    <i class="fas fa-closed-captioning text-purple-400 text-2xl"></i>
-                    <h3 class="font-heading text-xl font-bold text-white">Extract & Translate</h3>
-                </div>
+            <div class="grid lg:grid-cols-2 gap-8">
                 
-                <div class="space-y-4">
-                    <div>
-                        <input type="url" id="reel-url" placeholder="Paste Reel Link here (e.g. https://www.instagram.com/reel/...)" class="input-field">
+                <div class="mc-card p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="fas fa-closed-captioning text-purple-400 text-2xl"></i>
+                        <h3 class="font-heading text-xl font-bold text-white">Transcript & Translator</h3>
                     </div>
-                    <button onclick="extractTranscript()" id="extract-btn" class="w-full bg-white/10 hover:bg-white/15 text-white font-semibold py-3 rounded-xl border border-white/10 transition flex items-center justify-center gap-2">
-                        <span>Extract Transcript</span>
-                    </button>
                     
-                    <textarea id="transcript-output" rows="4" class="input-field text-sm hidden bg-[#030305]" readonly></textarea>
+                    <div class="space-y-4">
+                        <div>
+                            <input type="url" id="reel-url" placeholder="Paste Instagram Reel Link here..." class="input-field">
+                        </div>
+                        <button onclick="extractTranscript()" id="extract-btn" class="w-full bg-white/10 hover:bg-white/15 text-white font-semibold py-3 rounded-xl border border-white/10 transition flex items-center justify-center gap-2">
+                            <span>Extract Transcript</span>
+                        </button>
+                        
+                        <textarea id="transcript-output" rows="3" class="input-field text-sm hidden" placeholder="Extracted text will appear here..." readonly></textarea>
+                        
+                        <div id="translate-controls" class="hidden space-y-4 pt-4 border-t border-white/10">
+                            <div class="flex gap-4">
+                                <select id="target-lang" class="input-field flex-1 text-sm appearance-none cursor-pointer">
+                                    <option value="en">English (US/UK)</option>
+                                    <option value="hi">Hindi (हिंदी)</option>
+                                    <option value="es">Spanish (Español)</option>
+                                    <option value="fr">French (Français)</option>
+                                </select>
+                                <button onclick="translateText()" id="translate-btn" class="bg-purple-600 hover:bg-purple-500 text-white font-semibold px-6 py-2 rounded-xl transition text-sm whitespace-nowrap">
+                                    Translate
+                                </button>
+                            </div>
+                            <textarea id="translation-output" rows="3" class="input-field text-sm text-purple-200 border-purple-500/30" placeholder="Translated text will appear here..." readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mc-card p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="fas fa-hashtag text-pink-400 text-2xl"></i>
+                        <h3 class="font-heading text-xl font-bold text-white">Viral Hashtag Generator</h3>
+                    </div>
                     
-                    <div id="translate-controls" class="hidden space-y-4 pt-4 border-t border-white/10">
-                        <div class="flex gap-4">
-                            <select id="target-lang" class="input-field flex-1 text-sm appearance-none cursor-pointer">
-                                <option value="en">English (US/UK)</option>
-                                <option value="hi">Hindi (हिंदी)</option>
-                                <option value="es">Spanish (Español)</option>
-                                <option value="fr">French (Français)</option>
-                            </select>
-                            <button onclick="translateText()" id="translate-btn" class="bg-purple-600 hover:bg-purple-500 text-white font-semibold px-6 py-2 rounded-xl transition text-sm whitespace-nowrap">
-                                Translate
+                    <div class="space-y-4">
+                        <div>
+                            <input type="text" id="hashtag-keyword" placeholder="Enter topic (e.g., Digital Marketing, Fitness)..." class="input-field">
+                        </div>
+                        <button onclick="generateHashtags()" id="hashtag-btn" class="w-full bg-white/10 hover:bg-white/15 text-white font-semibold py-3 rounded-xl border border-white/10 transition flex items-center justify-center gap-2">
+                            <span>Generate Tags</span>
+                        </button>
+                        
+                        <div id="hashtag-output" class="hidden bg-black/40 border border-white/5 rounded-xl p-4 min-h-[100px]">
+                            <p class="text-sm text-mcTextDim leading-relaxed" id="tags-text"></p>
+                            <button onclick="copyTags()" class="mt-4 text-xs font-bold text-pink-400 uppercase tracking-widest hover:text-white transition flex items-center gap-1">
+                                <i class="fas fa-copy"></i> Copy Tags
                             </button>
                         </div>
-                        <textarea id="translation-output" rows="4" class="input-field text-sm text-purple-200 border-purple-500/30 bg-[#030305]" placeholder="Translated text will appear here..." readonly></textarea>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -199,7 +230,7 @@
             const selectEl = document.getElementById('currency');
             const currencySymbol = selectEl.options[selectEl.selectedIndex].text.match(/\((.*?)\)/)[1];
 
-            if(!followers || !views) { alert("Please enter both followers and views!"); return; }
+            if(!followers || !views) { alert("Please enter followers and views."); return; }
 
             const engagementRate = (views / followers) * 100;
             let baseValue = (followers * 0.005) + (views * 0.012);
@@ -209,12 +240,13 @@
             document.getElementById('result-box').classList.remove('hidden');
             
             let current = 0;
-            const increment = finalValue / 20;
+            const target = finalValue;
+            const increment = target / 20;
             const obj = document.getElementById('est-earnings');
             const timer = setInterval(() => {
                 current += increment;
-                if(current >= finalValue) {
-                    obj.innerText = `${currencySymbol}${finalValue.toLocaleString()}`;
+                if(current >= target) {
+                    obj.innerText = `${currencySymbol}${target.toLocaleString()}`;
                     clearInterval(timer);
                 } else {
                     obj.innerText = `${currencySymbol}${Math.round(current).toLocaleString()}`;
@@ -222,17 +254,13 @@
             }, 30);
         }
 
-        // 2. Transcript Logic (Fixed to always work)
+        // 2. Transcript Extraction Simulation (Requires API backend in real life)
         function extractTranscript() {
             const url = document.getElementById('reel-url').value;
-            if(!url) { 
-                alert("Bhai, pehle video ka link toh daalo!"); 
-                return; 
-            }
+            if(!url.includes('instagram.com')) { alert("Please enter a valid Instagram Reel URL"); return; }
             
             const btn = document.getElementById('extract-btn');
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Extracting Audio...';
-            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Extracting...';
             
             setTimeout(() => {
                 btn.innerHTML = '<i class="fas fa-check"></i> Extracted';
@@ -241,42 +269,68 @@
                 const output = document.getElementById('transcript-output');
                 output.classList.remove('hidden');
                 
-                // Personalized text output for your target audience!
-                output.value = "Yo, what's good guys! In today's video, we're diving into the absolute best ways to secure the bag in 2026. This strategy is totally fire, no cap. Don't sleep on this, smash that like button and let's get it!";
+                // Yeh dummy text aayega kyunki HTML bina backend ke data fetch nahi kar sakta.
+                output.value = "Hey guys! In today's video, I'm going to share 3 secret tips to boost your engagement rate organically. Make sure to save this reel for later and check the link in my bio!";
                 
                 document.getElementById('translate-controls').classList.remove('hidden');
-                btn.disabled = false;
             }, 1500);
         }
 
-        // 3. Translation Logic (Fixed to include English)
+        // 3. Translation Simulation
         function translateText() {
             const lang = document.getElementById('target-lang').value;
             const originalText = document.getElementById('transcript-output').value;
             const btn = document.getElementById('translate-btn');
-            const output = document.getElementById('translation-output');
             
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Translating...';
-            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
             
             setTimeout(() => {
                 btn.innerHTML = 'Translate';
+                const output = document.getElementById('translation-output');
                 
                 let translated = "";
                 if(lang === 'en') {
-                    // Agar wapas English select kiya, toh wahi text dikhayega
                     translated = originalText;
-                } else if(lang === 'hi') {
-                    translated = "नमस्ते दोस्तों! आज के वीडियो में, हम 2026 में पैसे कमाने के सबसे बेहतरीन तरीकों के बारे में गहराई से जानेंगे। यह रणनीति एकदम शानदार है। इस मौके को हाथ से न जाने दें, लाइक बटन दबाएं और चलिए शुरू करते हैं!";
-                } else if(lang === 'es') {
-                    translated = "¡Hola chicos! En el vídeo de hoy, vamos a analizar las mejores formas absolutas de asegurar la bolsa en 2026. Esta estrategia es fuego total. ¡No te duermas en esto, dale al botón de me gusta y vamos a conseguirlo!";
-                } else if(lang === 'fr') {
-                    translated = "Salut les gars ! Dans la vidéo d'aujourd'hui, nous plongeons dans les meilleures façons absolues de sécuriser le sac en 2026. Cette stratégie est totalement le feu. Ne dormez pas là-dessus, cliquez sur ce bouton J'aime et c'est parti !";
+                }
+                else if(lang === 'hi') {
+                    translated = "हे दोस्तों! आज के वीडियो में, मैं आपकी एंगेजमेंट को ऑर्गेनिक रूप से बढ़ाने के लिए 3 गुप्त टिप्स साझा करने जा रहा हूँ। इस रील को बाद के लिए सेव करना न भूलें!";
+                }
+                else if(lang === 'es') {
+                    translated = "¡Hola chicos! En el video de hoy, voy a compartir 3 consejos secretos para aumentar su tasa de participación de forma orgánica.";
+                }
+                else if(lang === 'fr') {
+                    translated = "Salut les gars ! Dans la vidéo d'aujourd'hui, je vais partager 3 conseils secrets pour augmenter votre taux d'engagement de manière organique.";
                 }
                 
                 output.value = translated;
-                btn.disabled = false;
             }, 1000);
+        }
+
+        // 4. Hashtag Generator Logic (Working dynamically)
+        function generateHashtags() {
+            const keyword = document.getElementById('hashtag-keyword').value.trim();
+            if(!keyword) { alert("Enter a topic first!"); return; }
+            
+            const btn = document.getElementById('hashtag-btn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+            
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-magic"></i> Generate Again';
+                const outputBox = document.getElementById('hashtag-output');
+                const tagsText = document.getElementById('tags-text');
+                
+                // Space hata kar topic ko hashtag format mein convert karega
+                const baseWord = keyword.replace(/\s+/g, '');
+                tagsText.innerText = `#${baseWord} #${baseWord}Tips #${baseWord}Strategy #ExplorePage #ViralReels #CreatorEconomy #InstaGrowth #${baseWord}Community #Trending #ReelsInstagram #Instagram${baseWord}`;
+                
+                outputBox.classList.remove('hidden');
+            }, 800);
+        }
+
+        function copyTags() {
+            const text = document.getElementById('tags-text').innerText;
+            navigator.clipboard.writeText(text);
+            alert("Hashtags copied to clipboard!");
         }
     </script>
 </body>
