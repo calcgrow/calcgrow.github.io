@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viral Hook Library | CalcGrow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #030305; color: #f8fafc; font-family: 'Inter', sans-serif; }
+        .hook-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; margin-bottom: 12px; padding: 20px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .hook-item:hover { background: rgba(255,255,255,0.05); border-color: #fbbf24; }
+        .copy-btn { background: #fbbf24; color: black; font-weight: 800; padding: 6px 12px; border-radius: 8px; font-size: 10px; text-transform: uppercase; cursor: pointer; transition: 0.2s; }
+        .copy-btn:active { transform: scale(0.9); }
+    </style>
+</head>
+<body class="p-6 md:p-12">
+    <nav class="max-w-4xl mx-auto mb-12 flex justify-between items-center">
+        <a href="index.html" class="text-gray-400 hover:text-white font-bold"><i class="fas fa-arrow-left mr-2"></i> Back</a>
+        <h2 class="text-xl font-black tracking-tighter">CalcGrow<span class="text-yellow-400">.</span></h2>
+    </nav>
+
+    <main class="max-w-3xl mx-auto">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-black mb-4">Viral <span class="text-yellow-400">Hooks</span> Library</h1>
+            <p class="text-gray-400">Proven scripts to stop the scroll in the first 3 seconds.</p>
+        </div>
+
+        <h3 class="text-yellow-400 font-bold uppercase tracking-widest text-xs mb-6">Education & Study Vlogs (NEET Special)</h3>
+        <div class="hook-item">
+            <span class="text-sm md:text-base italic">"How I studied for 10 hours today without feeling tired..."</span>
+            <div class="copy-btn" onclick="copyHook(this)">Copy</div>
+        </div>
+        <div class="hook-item">
+            <span class="text-sm md:text-base italic">"Stop scrolling! This 1 minute tip will save your NEET prep..."</span>
+            <div class="copy-btn" onclick="copyHook(this)">Copy</div>
+        </div>
+        <div class="hook-item">
+            <span class="text-sm md:text-base italic">"3 mistakes I made in my first mock test that you should avoid..."</span>
+            <div class="copy-btn" onclick="copyHook(this)">Copy</div>
+        </div>
+
+        <h3 class="text-indigo-400 font-bold uppercase tracking-widest text-xs mt-12 mb-6">General Viral Hooks</h3>
+        <div class="hook-item">
+            <span class="text-sm md:text-base italic">"I'm going to let you in on a secret that [Industry] doesn't want you to know..."</span>
+            <div class="copy-btn" onclick="copyHook(this)">Copy</div>
+        </div>
+        <div class="hook-item">
+            <span class="text-sm md:text-base italic">"If you want to [Goal] in 2026, stop doing this immediately..."</span>
+            <div class="copy-btn" onclick="copyHook(this)">Copy</div>
+        </div>
+    </main>
+
+    <script>
+        function copyHook(btn) {
+            const text = btn.previousElementSibling.innerText;
+            navigator.clipboard.writeText(text);
+            const original = btn.innerText;
+            btn.innerText = "COPIED!";
+            btn.style.background = "#4ade80"; // Green color when copied
+            setTimeout(() => {
+                btn.innerText = original;
+                btn.style.background = "#fbbf24";
+            }, 1500);
+        }
+    </script>
+</body>
+</ht
+  ml>
