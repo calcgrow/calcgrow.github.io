@@ -1,251 +1,325 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Earning Calculator - Sponsored Post Estimator | CalcGrow</title>
-    <meta name="description" content="Calculate how much you can earn from Instagram Sponsored Posts and Reels based on your followers and views.">
-    
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="icon.png" type="image/png">
+    <title>Instagram Creator Tools | Money Calculator & Transcript Extractor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { heading: ['Outfit', 'sans-serif'], body: ['Inter', 'sans-serif'] },
+                    colors: { mcDark: '#030305', mcTextDim: '#94a3b8' }
+                }
+            }
+        }
+    </script>
     <style>
-        /* INSTAGRAM BRANDING THEME */
-        :root {
-            --insta-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            --insta-bg: #fafafa;
+        body { background-color: #030305; color: #f8fafc; overflow-x: hidden; }
+        .glow-blob {
+            position: absolute; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, rgba(3, 3, 5, 0) 70%);
+            border-radius: 50%; z-index: -1; filter: blur(60px); pointer-events: none;
         }
-
-        body { background-color: var(--insta-bg); }
-
-        .insta-hero {
-            background: white;
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
+        .mc-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,255,255,0.05); border-radius: 24px;
         }
-
-        .insta-icon-box {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            background: var(--insta-gradient);
-            border-radius: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 20px rgba(220, 39, 67, 0.3);
-        }
-
-        .insta-icon-box i { font-size: 2.5rem; color: white; }
-
-        /* INPUT CARD DESIGN */
-        .calculator-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 500px;
-            margin: -30px auto 0;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
-            position: relative;
-        }
-
-        .input-group { margin-bottom: 20px; text-align: left; }
-        .input-group label { font-weight: 600; color: #333; font-size: 0.9rem; display: block; margin-bottom: 8px; }
-        
-        .custom-input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #eee;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        .custom-input:focus { border-color: #cc2366; outline: none; }
-
         .btn-insta {
-            background: var(--insta-gradient);
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 15px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            box-shadow: 0 5px 15px rgba(204, 35, 102, 0.3);
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3); transition: all 0.3s ease;
         }
-        .btn-insta:active { transform: scale(0.98); }
-
-        /* RESULT CARD DESIGN */
-        .earning-card {
-            background: #fff;
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 25px;
-            border: 1px solid #eee;
-            display: none; /* Hidden by default */
-            animation: slideUp 0.5s ease;
+        .btn-insta:hover { box-shadow: 0 6px 25px rgba(220, 39, 67, 0.5); transform: scale(1.02); }
+        .input-field {
+            width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; padding: 12px 16px; outline: none; color: white; transition: all 0.3s ease;
         }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .earning-range {
-            font-size: 2rem;
-            font-weight: 800;
-            background: var(--insta-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 10px 0;
-        }
-
-        .status-badge {
-            background: #eee; padding: 5px 12px; border-radius: 20px; 
-            font-size: 0.8rem; font-weight: bold; color: #555;
-            display: inline-block; margin-bottom: 10px;
-        }
-
+        .input-field:focus { border-color: #ec4899; background: rgba(255,255,255,0.08); }
     </style>
 </head>
+<body class="font-body relative antialiased">
 
-<body>
+    <div class="glow-blob" style="top: -100px; right: -200px;"></div>
+    <div class="glow-blob" style="bottom: 10%; left: -200px; background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(3, 3, 5, 0) 70%);"></div>
 
-    <header class="header" style="background: white; border-bottom: 1px solid #eee;">
-        <div class="logo-container">
-            <a href="index.html" style="text-decoration: none; color: #333; display: flex; align-items: center; gap: 10px;">
-                <i class="fa-solid fa-arrow-left"></i> 
-                <span style="font-weight: 600;">Back to OS</span>
+    <nav class="w-full z-50 border-b border-white/5 bg-[#030305]/80 backdrop-blur-md sticky top-0">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 text-mcTextDim hover:text-white transition">
+                <i class="fas fa-arrow-left"></i> <span class="text-sm font-bold uppercase tracking-widest hidden md:inline">Back to Suite</span>
             </a>
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-pink-500 to-purple-500 flex items-center justify-center shadow-lg shadow-pink-500/20">
+                    <i class="fab fa-instagram text-white"></i>
+                </div>
+                <span class="font-heading text-xl font-bold text-white tracking-tight">InstaMetrics</span>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <section class="insta-hero">
-        <div class="insta-icon-box">
-            <i class="fa-brands fa-instagram"></i>
-        </div>
-        <h1 style="margin: 0; color: #222;">Instagram Money Calculator</h1>
-        <p style="color: #666; margin-top: 10px;">Estimate earnings per Sponsored Post & Reel based on global market rates.</p>
-    </section>
-
-    <section style="padding: 0 20px 50px;">
-        <div class="calculator-card">
-            
-            <div class="input-group">
-                <label>Select Currency</label>
-                <select id="currency" class="custom-input">
-                    <option value="USD">🇺🇸 USD ($) - Global</option>
-                    <option value="INR">🇮🇳 INR (₹) - India</option>
-                    <option value="EUR">🇪🇺 EUR (€) - Europe</option>
-                    <option value="GBP">🇬🇧 GBP (£) - UK</option>
-                </select>
+    <main class="max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-2 gap-16 items-start">
+        
+        <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-400 text-xs font-bold uppercase tracking-widest mb-6">
+                Sponsorship Estimator
             </div>
+            <h1 class="font-heading text-4xl md:text-5xl font-black text-white mb-4 leading-tight">
+                Instagram <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-orange-400">Money Calculator</span>
+            </h1>
+            <p class="text-mcTextDim mb-10 leading-relaxed">Estimate your potential earnings per Sponsored Post and Reel based on global influencer marketing rates.</p>
 
-            <div class="input-group">
-                <label>Total Followers</label>
-                <input type="number" id="followers" class="custom-input" placeholder="e.g. 50000">
-            </div>
-
-            <div class="input-group">
-                <label>Average Views per Reel/Post</label>
-                <input type="number" id="views" class="custom-input" placeholder="e.g. 25000">
-                <small style="color: #888; display: block; margin-top: 5px;">*Check your insights for average views (Last 10 posts).</small>
-            </div>
-
-            <button onclick="calculateInstaEarnings()" class="btn-insta">Calculate My Worth</button>
-
-            <div id="result" class="earning-card">
-                <div style="text-align: center;">
-                    <span id="influencer-tier" class="status-badge">MICRO INFLUENCER</span>
-                    <p style="margin: 0; color: #666; font-size: 0.9rem;">Estimated Earnings Per Post</p>
-                    
-                    <div class="earning-range">
-                        <span id="min-earn">0</span> - <span id="max-earn">0</span>
+            <div class="mc-card p-6 md:p-8">
+                <form id="insta-calc" class="space-y-5">
+                    <div>
+                        <label class="text-xs font-bold uppercase tracking-wider text-mcTextDim mb-2 block">Select Currency</label>
+                        <select id="currency" class="input-field appearance-none">
+                            <option value="1">🇺🇸 USD ($) - Global</option>
+                            <option value="83">🇮🇳 INR (₹) - India</option>
+                            <option value="0.92">🇪🇺 EUR (€) - Europe</option>
+                        </select>
                     </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-xs font-bold uppercase tracking-wider text-mcTextDim mb-2 block">Total Followers</label>
+                            <input type="number" id="followers" placeholder="50000" class="input-field">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold uppercase tracking-wider text-mcTextDim mb-2 block">Avg. Views</label>
+                            <input type="number" id="views" placeholder="25000" class="input-field">
+                        </div>
+                    </div>
+                    <button type="button" onclick="calculateWorth()" class="btn-insta w-full py-4 rounded-xl font-bold text-white text-lg mt-2">
+                        Calculate My Worth
+                    </button>
+                </form>
 
-                    <p style="font-size: 0.8rem; color: #888; line-height: 1.5;">
-                        *This estimate is based on typical brand deal rates (CPM $5 - $20). Income varies by niche (Tech/Finance pays more than Comedy).
-                    </p>
+                <div id="result-box" class="hidden mt-8 pt-6 border-t border-white/10 text-center transition-all">
+                    <p class="text-sm text-mcTextDim uppercase tracking-widest font-bold mb-2">Estimated Value</p>
+                    <div class="font-heading text-4xl md:text-5xl font-black text-white mb-2" id="est-earnings">$0</div>
+                    <p class="text-pink-400 font-medium text-sm">Per Sponsored Post / Reel</p>
                 </div>
             </div>
+        </div>
 
+        <div class="prose prose-invert max-w-none mt-8 lg:mt-16">
+            <h2 class="font-heading text-2xl font-bold text-white mb-4">Mastering Instagram Monetization</h2>
+            <p class="text-mcTextDim leading-relaxed mb-6 text-sm md:text-base">
+                Unlike traditional AdSense models, Instagram creators generate revenue primarily through <strong>Brand Sponsorships, Affiliate Marketing, and digital product sales</strong>. Your market value is determined not just by follower count, but by your engagement rate and niche authority.
+            </p>
+            <div class="bg-white/5 border border-white/10 p-6 rounded-2xl mb-6">
+                <h4 class="text-white font-bold mb-3 text-sm uppercase tracking-wider">High-RPM Niches 2026:</h4>
+                <ul class="space-y-2 text-sm text-mcTextDim">
+                    <li><i class="fas fa-chart-line text-pink-500 mr-2 w-4"></i> Finance & Crypto (Highest paying)</li>
+                    <li><i class="fas fa-laptop-code text-pink-500 mr-2 w-4"></i> Tech & Software Reviews</li>
+                    <li><i class="fas fa-plane text-pink-500 mr-2 w-4"></i> Luxury Travel & Lifestyle</li>
+                    <li><i class="fas fa-heartbeat text-pink-500 mr-2 w-4"></i> Health & Biohacking</li>
+                </ul>
+            </div>
+            <p class="text-mcTextDim leading-relaxed text-sm md:text-base">
+                Using tools like our <strong>Transcript Extractor</strong> below allows you to repurpose your Reels into SEO-friendly blog posts or translate them to capture a global audience, directly increasing your profile's valuation.
+            </p>
+        </div>
+    </main>
+
+    <section class="border-t border-white/5 bg-[#050508] py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="font-heading text-3xl font-bold text-white mb-3">Creator Toolkit</h2>
+                <p class="text-mcTextDim">Advanced utilities to extract, translate, and optimize your Instagram content.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                
+                <div class="mc-card p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="fas fa-closed-captioning text-purple-400 text-2xl"></i>
+                        <h3 class="font-heading text-xl font-bold text-white">Reel Transcript & Translator</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <input type="url" id="reel-url" placeholder="Paste Instagram Reel Link here..." class="input-field">
+                        </div>
+                        <button onclick="extractTranscript()" id="extract-btn" class="w-full bg-white/10 hover:bg-white/15 text-white font-semibold py-3 rounded-xl border border-white/10 transition flex items-center justify-center gap-2">
+                            <span>Extract Transcript</span>
+                        </button>
+                        
+                        <textarea id="transcript-output" rows="3" class="input-field text-sm hidden" placeholder="Extracted text will appear here..." readonly></textarea>
+                        
+                        <div id="translate-controls" class="hidden space-y-4 pt-4 border-t border-white/10">
+                            <div class="flex gap-4">
+                                <select id="target-lang" class="input-field flex-1 text-sm appearance-none">
+                                    <option value="hi">Hindi (हिंदी)</option>
+                                    <option value="es">Spanish (Español)</option>
+                                    <option value="fr">French (Français)</option>
+                                    <option value="de">German (Deutsch)</option>
+                                </select>
+                                <button onclick="translateText()" id="translate-btn" class="bg-purple-600 hover:bg-purple-500 text-white font-semibold px-6 py-2 rounded-xl transition text-sm whitespace-nowrap">
+                                    Translate
+                                </button>
+                            </div>
+                            <textarea id="translation-output" rows="3" class="input-field text-sm text-purple-200 border-purple-500/30" placeholder="Translated text will appear here..." readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mc-card p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="fas fa-hashtag text-pink-400 text-2xl"></i>
+                        <h3 class="font-heading text-xl font-bold text-white">Viral Hashtag Generator</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <input type="text" id="hashtag-keyword" placeholder="Enter topic (e.g., Digital Marketing, Fitness)..." class="input-field">
+                        </div>
+                        <button onclick="generateHashtags()" id="hashtag-btn" class="w-full bg-white/10 hover:bg-white/15 text-white font-semibold py-3 rounded-xl border border-white/10 transition flex items-center justify-center gap-2">
+                            <span>Generate Tags</span>
+                        </button>
+                        
+                        <div id="hashtag-output" class="hidden bg-black/40 border border-white/5 rounded-xl p-4 min-h-[100px]">
+                            <p class="text-sm text-mcTextDim leading-relaxed" id="tags-text"></p>
+                            <button onclick="copyTags()" class="mt-4 text-xs font-bold text-pink-400 uppercase tracking-widest hover:text-white transition flex items-center gap-1">
+                                <i class="fas fa-copy"></i> Copy Tags
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 20px; color: #888; font-size: 0.8rem;">
-        <p>&copy; 2026 CalcGrow. Data based on Influencer Marketing Hub standards.</p>
+    <footer class="border-t border-white/5 bg-[#020203] pt-16 pb-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div class="lg:col-span-2">
+                    <div class="flex items-center gap-2 mb-6">
+                        <i class="fas fa-layer-group text-pink-500 text-xl"></i>
+                        <span class="font-heading text-2xl font-bold text-white tracking-tight">CalcGrow</span>
+                    </div>
+                    <p class="text-sm text-mcTextDim max-w-sm leading-relaxed">The definitive intelligence platform for the global creator economy.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wide text-xs uppercase">Legal</h4>
+                    <ul class="space-y-4 text-sm text-mcTextDim">
+                        <li><a href="privacy-policy.html" class="hover:text-pink-400 transition">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-pink-400 transition">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wide text-xs uppercase">Support</h4>
+                    <ul class="space-y-4 text-sm text-mcTextDim">
+                        <li><a href="about-us.html" class="hover:text-pink-400 transition">About Us</a></li>
+                        <li><a href="contact-us.html" class="hover:text-pink-400 transition">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <script>
-        function calculateInstaEarnings() {
-            // 1. Get Values
-            let followers = parseFloat(document.getElementById('followers').value);
-            let views = parseFloat(document.getElementById('views').value);
-            let currency = document.getElementById('currency').value;
+        // 1. Money Calculator Logic
+        function calculateWorth() {
+            const followers = document.getElementById('followers').value;
+            const views = document.getElementById('views').value;
+            const currencyRate = document.getElementById('currency').value;
+            const selectEl = document.getElementById('currency');
+            const currencySymbol = selectEl.options[selectEl.selectedIndex].text.match(/\((.*?)\)/)[1];
 
-            // Validation
-            if (!followers || !views) {
-                alert("Please enter both Followers and Average Views!");
-                return;
-            }
+            if(!followers || !views) { alert("Please enter followers and views."); return; }
 
-            // 2. Determine Influencer Tier (Status Badge)
-            let tier = "ASPIRING CREATOR";
-            if(followers > 10000) tier = "MICRO INFLUENCER";
-            if(followers > 50000) tier = "MID-TIER INFLUENCER";
-            if(followers > 500000) tier = "MACRO INFLUENCER";
-            if(followers > 1000000) tier = "MEGA / CELEBRITY";
+            const engagementRate = (views / followers) * 100;
+            let baseValue = (followers * 0.005) + (views * 0.012);
+            if(engagementRate > 10) baseValue *= 1.25; 
 
-            document.getElementById('influencer-tier').innerText = tier;
-
-            // 3. THE MATH (Based on Market CPM Rates)
-            // Logic: Brands pay approx $5 to $10 per 1,000 views for average engagement.
-            // High engagement/niche can go up to $20 per 1,000 views.
+            const finalValue = Math.round(baseValue * currencyRate);
+            document.getElementById('result-box').classList.remove('hidden');
             
-            // Base calculation in USD
-            let lowCPM = 5;  // $5 per 1k views
-            let highCPM = 15; // $15 per 1k views (Optimistic)
+            // Animation for numbers
+            let current = 0;
+            const target = finalValue;
+            const increment = target / 20;
+            const obj = document.getElementById('est-earnings');
+            const timer = setInterval(() => {
+                current += increment;
+                if(current >= target) {
+                    obj.innerText = `${currencySymbol}${target.toLocaleString()}`;
+                    clearInterval(timer);
+                } else {
+                    obj.innerText = `${currencySymbol}${Math.round(current).toLocaleString()}`;
+                }
+            }, 30);
+        }
 
-            let minUsd = (views / 1000) * lowCPM;
-            let maxUsd = (views / 1000) * highCPM;
-
-            // Correction: If views are very low but followers are high (low engagement),
-            // floor value helps. Brands pay minimum for the "Follower Count" prestige.
-            let baseFollowerPay = (followers / 1000) * 2; // $2 per 1k followers base
+        // 2. Transcript Extraction Simulation (Requires Backend API for real use)
+        function extractTranscript() {
+            const url = document.getElementById('reel-url').value;
+            if(!url.includes('instagram.com')) { alert("Please enter a valid Instagram Reel URL"); return; }
             
-            if (minUsd < baseFollowerPay) {
-                minUsd = baseFollowerPay;
-                maxUsd = baseFollowerPay * 2.5;
-            }
-
-            // 4. Currency Conversion Rates (Approx)
-            let conversionRate = 1;
-            let symbol = "$";
-
-            if (currency === "INR") { conversionRate = 85; symbol = "₹"; }
-            if (currency === "EUR") { conversionRate = 0.92; symbol = "€"; }
-            if (currency === "GBP") { conversionRate = 0.79; symbol = "£"; }
-
-            // Apply Conversion
-            let finalMin = (minUsd * conversionRate).toFixed(0);
-            let finalMax = (maxUsd * conversionRate).toFixed(0);
-
-            // Format Numbers (Add Commas)
-            finalMin = Number(finalMin).toLocaleString();
-            finalMax = Number(finalMax).toLocaleString();
-
-            // 5. Display Result
-            document.getElementById('min-earn').innerText = symbol + finalMin;
-            document.getElementById('max-earn').innerText = symbol + finalMax;
+            const btn = document.getElementById('extract-btn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Extracting...';
             
-            document.getElementById('result').style.display = 'block';
+            // Simulating API Fetch Time
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> Extracted';
+                btn.classList.add('bg-green-500/20', 'text-green-400', 'border-green-500/30');
+                
+                const output = document.getElementById('transcript-output');
+                output.classList.remove('hidden');
+                output.value = "Hey guys! In today's video, I'm going to share 3 secret tips to boost your engagement rate organically. Make sure to save this reel for later!";
+                
+                document.getElementById('translate-controls').classList.remove('hidden');
+            }, 1500);
+        }
+
+        // 3. Translation Simulation
+        function translateText() {
+            const lang = document.getElementById('target-lang').value;
+            const btn = document.getElementById('translate-btn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            
+            setTimeout(() => {
+                btn.innerHTML = 'Translated';
+                const output = document.getElementById('translation-output');
+                
+                let translated = "";
+                if(lang === 'hi') translated = "हे दोस्तों! आज के वीडियो में, मैं आपकी एंगेजमेंट को ऑर्गेनिक रूप से बढ़ाने के लिए 3 गुप्त टिप्स साझा करने जा रहा हूँ। इस रील को बाद के लिए सेव करना न भूलें!";
+                else if(lang === 'es') translated = "¡Hola chicos! En el video de hoy, voy a compartir 3 consejos secretos para aumentar su tasa de participación de forma orgánica.";
+                else translated = "Translation successful. (Demo output based on selected language).";
+                
+                output.value = translated;
+            }, 1000);
+        }
+
+        // 4. Hashtag Generator Logic
+        function generateHashtags() {
+            const keyword = document.getElementById('hashtag-keyword').value.trim();
+            if(!keyword) { alert("Enter a topic first!"); return; }
+            
+            const btn = document.getElementById('hashtag-btn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+            
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-magic"></i> Generate Again';
+                const outputBox = document.getElementById('hashtag-output');
+                const tagsText = document.getElementById('tags-text');
+                
+                const baseWord = keyword.replace(/\s+/g, '');
+                tagsText.innerText = `#${baseWord} #${baseWord}Tips #${baseWord}Strategy #ExplorePage #ViralReels #CreatorEconomy #InstaGrowth #${baseWord}Community #Trending #ReelsInstagram`;
+                
+                outputBox.classList.remove('hidden');
+            }, 800);
+        }
+
+        function copyTags() {
+            const text = document.getElementById('tags-text').innerText;
+            navigator.clipboard.writeText(text);
+            alert("Hashtags copied to clipboard!");
         }
     </script>
-
 </body>
 </html>
