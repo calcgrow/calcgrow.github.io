@@ -3,67 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viral Hook Library | CalcGrow</title>
+    <title>Viral Hook Search | CalcGrow Creator Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { background-color: #030305; color: #f8fafc; font-family: 'Inter', sans-serif; }
-        .hook-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; margin-bottom: 12px; padding: 20px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .hook-item:hover { background: rgba(255,255,255,0.05); border-color: #fbbf24; }
-        .copy-btn { background: #fbbf24; color: black; font-weight: 800; padding: 6px 12px; border-radius: 8px; font-size: 10px; text-transform: uppercase; cursor: pointer; transition: 0.2s; }
-        .copy-btn:active { transform: scale(0.9); }
+        .hook-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; padding: 20px; border-radius: 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .hook-card:hover { border-color: #fbbf24; background: rgba(251, 191, 36, 0.05); }
+        .search-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 20px; width: 100%; outline: none; transition: 0.3s; }
+        .search-input:focus { border-color: #fbbf24; box-shadow: 0 0 15px rgba(251, 191, 36, 0.1); }
+        .badge { font-size: 10px; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; font-weight: bold; margin-bottom: 4px; display: inline-block; }
     </style>
 </head>
-<body class="p-6 md:p-12">
-    <nav class="max-w-4xl mx-auto mb-12 flex justify-between items-center">
-        <a href="index.html" class="text-gray-400 hover:text-white font-bold"><i class="fas fa-arrow-left mr-2"></i> Back</a>
-        <h2 class="text-xl font-black tracking-tighter">CalcGrow<span class="text-yellow-400">.</span></h2>
+<body class="p-6">
+    <nav class="max-w-5xl mx-auto mb-12 flex justify-between items-center">
+        <a href="index.html" class="text-gray-400 hover:text-white font-bold transition"><i class="fas fa-arrow-left"></i> Back</a>
+        <h2 class="text-xl font-black italic">CalcGrow<span class="text-yellow-400">.</span></h2>
     </nav>
 
     <main class="max-w-3xl mx-auto">
-        <div class="text-center mb-16">
-            <h1 class="text-4xl md:text-5xl font-black mb-4">Viral <span class="text-yellow-400">Hooks</span> Library</h1>
-            <p class="text-gray-400">Proven scripts to stop the scroll in the first 3 seconds.</p>
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-black mb-4">Viral <span class="text-yellow-400">Hook</span> Finder</h1>
+            <p class="text-gray-400">Stop guessing. Use proven hooks for Finance, Tech, Lifestyle, and More.</p>
         </div>
 
-        <h3 class="text-yellow-400 font-bold uppercase tracking-widest text-xs mb-6">Education & Study Vlogs (NEET Special)</h3>
-        <div class="hook-item">
-            <span class="text-sm md:text-base italic">"How I studied for 10 hours today without feeling tired..."</span>
-            <div class="copy-btn" onclick="copyHook(this)">Copy</div>
-        </div>
-        <div class="hook-item">
-            <span class="text-sm md:text-base italic">"Stop scrolling! This 1 minute tip will save your NEET prep..."</span>
-            <div class="copy-btn" onclick="copyHook(this)">Copy</div>
-        </div>
-        <div class="hook-item">
-            <span class="text-sm md:text-base italic">"3 mistakes I made in my first mock test that you should avoid..."</span>
-            <div class="copy-btn" onclick="copyHook(this)">Copy</div>
+        <div class="relative mb-10">
+            <i class="fas fa-search absolute right-4 top-4 text-gray-500"></i>
+            <input type="text" id="hookSearch" onkeyup="searchHooks()" placeholder="Search niche (e.g. Finance, Vlog, AI, Tech)..." class="search-input">
         </div>
 
-        <h3 class="text-indigo-400 font-bold uppercase tracking-widest text-xs mt-12 mb-6">General Viral Hooks</h3>
-        <div class="hook-item">
-            <span class="text-sm md:text-base italic">"I'm going to let you in on a secret that [Industry] doesn't want you to know..."</span>
-            <div class="copy-btn" onclick="copyHook(this)">Copy</div>
-        </div>
-        <div class="hook-item">
-            <span class="text-sm md:text-base italic">"If you want to [Goal] in 2026, stop doing this immediately..."</span>
-            <div class="copy-btn" onclick="copyHook(this)">Copy</div>
+        <div id="hookList">
+            <div class="hook-card" data-niche="finance money business">
+                <div>
+                    <span class="badge bg-green-500/20 text-green-400">Finance</span>
+                    <p class="text-gray-200 italic">"I analyzed 100 millionaires and they all do this one thing..."</p>
+                </div>
+                <button onclick="copyHook(this)" class="text-yellow-400 font-bold text-xs uppercase ml-4">Copy</button>
+            </div>
+
+            <div class="hook-card" data-niche="tech ai tools">
+                <div>
+                    <span class="badge bg-blue-500/20 text-blue-400">Tech / AI</span>
+                    <p class="text-gray-200 italic">"This AI tool feels illegal to know in 2026..."</p>
+                </div>
+                <button onclick="copyHook(this)" class="text-yellow-400 font-bold text-xs uppercase ml-4">Copy</button>
+            </div>
+
+            <div class="hook-card" data-niche="vlog lifestyle travel">
+                <div>
+                    <span class="badge bg-purple-500/20 text-purple-400">Lifestyle</span>
+                    <p class="text-gray-200 italic">"I spent 24 hours in [Location] and here's what happened..."</p>
+                </div>
+                <button onclick="copyHook(this)" class="text-yellow-400 font-bold text-xs uppercase ml-4">Copy</button>
+            </div>
+
+            <div class="hook-card" data-niche="growth motivation mindset">
+                <div>
+                    <span class="badge bg-red-500/20 text-red-400">Growth</span>
+                    <p class="text-gray-200 italic">"Stop scrolling if you want to fix your life in 30 days..."</p>
+                </div>
+                <button onclick="copyHook(this)" class="text-yellow-400 font-bold text-xs uppercase ml-4">Copy</button>
+            </div>
+
+             <div class="hook-card" data-niche="finance crypto wealth">
+                <div>
+                    <span class="badge bg-green-500/20 text-green-400">Finance</span>
+                    <p class="text-gray-200 italic">"Why 99% of investors will lose money this month..."</p>
+                </div>
+                <button onclick="copyHook(this)" class="text-yellow-400 font-bold text-xs uppercase ml-4">Copy</button>
+            </div>
         </div>
     </main>
 
     <script>
+        function searchHooks() {
+            let input = document.getElementById('hookSearch').value.toLowerCase();
+            let cards = document.getElementsByClassName('hook-card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                let niche = cards[i].getAttribute('data-niche');
+                if (niche.includes(input)) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
         function copyHook(btn) {
-            const text = btn.previousElementSibling.innerText;
+            const text = btn.previousElementSibling.querySelector('p').innerText;
             navigator.clipboard.writeText(text);
             const original = btn.innerText;
-            btn.innerText = "COPIED!";
-            btn.style.background = "#4ade80"; // Green color when copied
-            setTimeout(() => {
-                btn.innerText = original;
-                btn.style.background = "#fbbf24";
-            }, 1500);
+            btn.innerText = "COPIED";
+            setTimeout(() => btn.innerText = original, 1000);
         }
     </script>
 </body>
-</ht
-  ml>
+    
+</html>
